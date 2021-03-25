@@ -26,5 +26,15 @@ namespace Recharge_Mobile.Controllers
 
             return View();
         }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        public ActionResult Feedback()
+        {
+            return View();
+        }
     }
 }
