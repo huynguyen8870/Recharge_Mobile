@@ -31,8 +31,13 @@
     @RenderBody()
     @Html.Partial("_Footer")
 
-    @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)*@
+    <!-- Back To Top Button-->
+    <a class="scroll-to-top-btn" href="#"><i class="fe-icon-chevron-up"></i></a>
+    <!-- Backdrop-->
+    <div class="site-backdrop"></div>
+
+    @Scripts.Render("~/Content/js/vendor.min.js")
+    @Scripts.Render("~/Content/js/theme.min.js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>
