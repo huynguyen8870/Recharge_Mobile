@@ -1,12 +1,41 @@
-﻿
-<section class="container my-5">
-    <div class="bg-secondary px-3 py-5">
-        <div class="row justify-content-center">
-            <div class="col-xl-8 col-lg-10 pt-3 text-center">
-                <span class="d-block text-lg mb-2">About us</span>
-                <h2 class="h3 block-title mb-3">Support <span class='font-weight-light text-muted'>/</span> Prevention <span class='font-weight-light text-muted'>/</span> Management</h2>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+﻿@{
+    ViewBag.Title = "About Us";
+}
+
+<!-- Hero-->
+<section class="bg-parallax bg-secondary py-5 mb-5">
+    <div class="bg-parallax-img" data-parallax="{&quot;y&quot; : 100}">
+        <img src="~/Content/img/pages/about-hero-bg.png" alt="Parallax Background" />
+    </div>
+    <div class="container bg-parallax-content py-5 my-3 text-center">
+        <h1 class="pb-4">RechargeX<span class='d-block h2 font-weight-normal text-muted mt-3'>Mobile recharge: send credit, data and paid bill to any phone</span></h1><a class="scroll-to btn btn-gradient" href="#services">Learn More</a>
+    </div>
+</section>
+<!-- Services-->
+<section class="container pt-3 pb-4 mb-5" data-offset-top="110" id="services">
+    <h2 class="h3 block-title text-center mb-3">What We Offer<small>Is to be your reliable partner in following areas</small></h2>
+    <div class="row">
+        <div class="col-lg-4 col-sm-6">
+            <div class="icon-box text-center mx-auto">
+                <div class="icon-box-icon"><i class="fe-icon-smartphone"></i></div>
+                <h3 class="icon-box-title">Send Credit</h3>
+                <p class="icon-box-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p><a class="icon-box-link" href="services.html">Learn more<i class="fe-icon-arrow-right"></i></a>
             </div>
         </div>
+        <div class="col-lg-4 col-sm-6">
+            <div class="icon-box text-center mx-auto">
+                <div class="icon-box-icon"><i class="fe-icon-database"></i></div>
+                <h3 class="icon-box-title">Send Data</h3>
+                <p class="icon-box-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p><a class="icon-box-link" href="services.html">Learn more<i class="fe-icon-arrow-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+            <div class="icon-box text-center mx-auto">
+                <div class="icon-box-icon"><i class="fe-icon-target"></i></div>
+                <h3 class="icon-box-title">Paid Bill</h3>
+                <p class="icon-box-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p><a class="icon-box-link" href="services.html">Learn more<i class="fe-icon-arrow-right"></i></a>
+            </div>
+        </div>
+        
     </div>
 </section>
