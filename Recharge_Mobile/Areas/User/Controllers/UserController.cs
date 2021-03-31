@@ -8,22 +8,6 @@ namespace Recharge_Mobile.Areas.User.Controllers
 {
     public class UserController : Controller
     {
-        //public Areas.User.Models.Views.AccountModelView AccountModelView()
-        //{
-        //    Models.Views.AccountModelView accountModelView = new Models.Views.AccountModelView()
-        //    {
-        //        CustomerId = 1,
-        //        PhoneNumber = 0123456789,
-        //        Password = "abcxyz123",
-        //        FirstName = "Huy",
-        //        LastName = "Nguyen",
-        //        Email = "abc@gmail.com",
-        //        Address = "abc abc xyz",
-        //        Status = "Active"
-        //    };
-        //    return accountModelView;
-        //}
-
         // GET: User/Login
         public ActionResult TransactionList()
         {
@@ -54,7 +38,7 @@ namespace Recharge_Mobile.Areas.User.Controllers
         }
 
         // GET: User/Login/Details/5
-        public ActionResult AccountProfile()
+        public ActionResult AccountSetting()
         {
             Models.Views.AccountModelView accountModelView = new Models.Views.AccountModelView()
             {
@@ -80,7 +64,7 @@ namespace Recharge_Mobile.Areas.User.Controllers
                 TimeRemain = 12800,
                 EndTime = DateTime.Now,
                 SPTimeRemain = DateTime.Now,
-                DebitAmount = -1000,
+                DebitAmount = 1000,
                 TimeToPay = DateTime.Now
             };
             return View(customerRechargeModelView);

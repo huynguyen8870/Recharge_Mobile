@@ -120,6 +120,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Recharge\Controllers\RechargeController.cs" />
+    <Compile Include="Areas\Recharge\RechargeAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\Models\Views\AccountModelView.cs" />
     <Compile Include="Areas\User\Models\Views\CustomerRechargeModelView.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Views\FeedbackModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,8 +148,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\User\Views\User\TransactionList.cshtml" />
-    <Content Include="Areas\User\Views\User\AccountProfile.cshtml" />
+    <Content Include="Areas\User\Views\User\AccountSetting.cshtml" />
     <Content Include="Areas\User\Views\User\AccountDetail.cshtml" />
+    <Content Include="Areas\Recharge\Views\web.config" />
+    <Content Include="Areas\Recharge\Views\Recharge\RechageDetail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -176,13 +181,14 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\FeedbackSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Recharge\Data\" />
+    <Folder Include="Areas\Recharge\Views\Shared\" />
     <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Views\Login\" />
     <Folder Include="Areas\User\Views\Shared\" />
-    <Folder Include="Models\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

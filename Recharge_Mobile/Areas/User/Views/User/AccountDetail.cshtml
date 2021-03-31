@@ -3,7 +3,7 @@
     ViewBag.Title = "AccountDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{ TimeSpan timeRemain = TimeSpan.FromSeconds(Model.TimeRemain); }
 <!-- Page Title-->
 <div class="page-title d-flex" aria-label="Page title" style="background-image: @Url.Content("../Content/img/page-title/shop-pattern.jpg"); ">
     <div class="container text-left align-self-center">
@@ -22,8 +22,8 @@
                     </div>
                     <div class="author-card-details">
                         <h5 class="author-card-name text-lg"></h5>
-                        <span class="author-card-position">Time Remain: @Model.TimeRemain </span>
-                        <span class="author-card-position">Debit Amount: $@Model.DebitAmount </span>
+                        <span class="author-card-position">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss") </span>
+                        <span class="author-card-position">Debit Amount: -$@Model.DebitAmount </span>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </a>
-                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
+                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-edit text-muted"></i>Profile Settings</a>
                     <a class="list-group-item" href="account-wishlist.html">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -53,40 +53,20 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-fn">Phone Number: @Model.PhoneNumber </label>
-                    </div>
-                </div>
-                @{ TimeSpan timeRemain = TimeSpan.FromSeconds(Model.TimeRemain); }
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-ln">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss")</label>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-email">Expire: @Model.EndTime</label>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-email">Special Recharge: @Model.EndTime</label>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <hr class="mt-2 mb-3">
-                    <div class="form-group">
-                        <label for="account-phone">Debit Amount: $ @Model.DebitAmount</label>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="account-phone">Expire: @Model.TimeToPay </label>
-                    </div>
-                </div>
-            </form>
+            <div class="jumbotron">
+                <h3>Main Balance</h3>
+                <hr class="mt-2 mb-3">
+                <label for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
+                <label for="account-email">Special Recharge: @Model.EndTime</label><br/>
+                <label for="account-ln">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss")</label><br />
+                <label for="account-email">Expire: @Model.EndTime</label>
+            </div>
+            <div class="jumbotron">
+                <h3>Debit Balance</h3>
+                <hr class="mt-2 mb-3">
+                <label for="account-phone">Debit Amount: -$@Model.DebitAmount</label><br />
+                <label for="account-phone">Expire: @Model.TimeToPay </label>
+            </div>
         </div>
     </div>
 </div>
