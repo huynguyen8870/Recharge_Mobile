@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Recharge_Mobile.Areas.User.Models.Views.TransactionModelView>
 @{
     ViewBag.Title = "Transaction List";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,40 +30,6 @@
                         <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$910.00</span>
                     </div>
                 </div>
-                <!-- Item-->
-                <div class="cart-item d-md-flex justify-content-between pr-2">
-                    <div class="px-3 my-3">
-                        <div class="cart-item-label d-none d-mb-block">Product</div><a class="cart-item-product" href="shop-single.html">
-                            <div class="cart-item-product-thumb"><img src="img/shop/cart/02.jpg" alt="Product"></div>
-                            <div class="cart-item-product-info">
-                                <h4 class="cart-item-product-title">Apple iPhone X 256 GB Space Gray</h4><span><strong>Memory:</strong> 256GB</span><span><strong>Color:</strong> Space Gray</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Quantity</div><span class="text-xl font-weight-medium">1</span>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$1,450.00</span>
-                    </div>
-                </div>
-                <!-- Item-->
-                <div class="cart-item d-md-flex justify-content-between pr-2">
-                    <div class="px-3 my-3">
-                        <div class="cart-item-label d-none d-mb-block">Product</div><a class="cart-item-product" href="shop-single.html">
-                            <div class="cart-item-product-thumb"><img src="img/shop/cart/03.jpg" alt="Product"></div>
-                            <div class="cart-item-product-info">
-                                <h4 class="cart-item-product-title">HP LaserJet Pro Laser Printer</h4><span><strong>Type:</strong> Laser</span><span><strong>Color:</strong> White</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Quantity</div><span class="text-xl font-weight-medium">1</span>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$188.50</span>
-                    </div>
-                </div>
             </div>
             <div class="modal-footer flex-wrap justify-content-between">
                 <div class="px-2 py-1"><span class="text-muted">Subtotal:&nbsp;</span><span class="font-weight-medium">$2,548.50</span></div>
@@ -77,17 +43,7 @@
 <!-- Page Title-->
 <div class="page-title d-flex" aria-label="Page title" style="background-image: url(~/Content/img/page-title/shop-pattern.jpg);">
     <div class="container text-left align-self-center">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
-                </li>
-                <li class="breadcrumb-item">
-                    <a href="account-orders.html">Account</a>
-                </li>
-            </ol>
-        </nav>
-        <h1 class="page-title-heading">My Orders</h1>
+        <h1 class="page-title-heading">Transaction List</h1>
     </div>
 </div>
 <!-- Page Content-->
@@ -132,11 +88,11 @@
                 </nav>
             </div>
         </div>
-        <!-- Orders Table-->
+        <!-- Transaction Table-->
         <div class="col-lg-8 pb-5">
             <div class="d-flex justify-content-end pb-3">
                 <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
+                    <label class="text-muted mr-3" for="order-sort">Sort Transaction</label>
                     <select class="form-control" id="order-sort">
                         <option>All</option>
                         <option>Delivered</option>
@@ -150,49 +106,40 @@
                 <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Order #</th>
+                            <th>Transaction #</th>
+                            <th>Name</th>
                             <th>Date Purchased</th>
                             <th>Status</th>
-                            <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach(var item in Model){
                         <tr>
+                            <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
+                            <td>@item.TypeRecharge</td>
+                            <td>@item.DateTime</td>
+                            @*@switch (item.Status)
+                            {
+                                case "Success":
+                                    <td><span class="badge badge-success m-0">Success</span></td>
+                                    break;
+                                case "Cancel":
+                                    <td><span class="badge badge-danger m-0">Cancel</span></td>
+                                    break;
+                                case "Waiting":
+                                    <td><span class="badge badge-warning m-0">Waiting</span></td>
+                                    break;
+                            }*@
+                            <td><span class="badge badge-danger m-0">@item.Status</span></td>
+                        </tr>
+                         };
+                        
+                        @*<tr>
                             <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
                             <td>August 08, 2017</td>
                             <td><span class="badge badge-danger m-0">Canceled</span></td>
                             <td><span>$760.50</span></td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">34VB5540K83</a></td>
-                            <td>July 21, 2017</td>
-                            <td><span class="badge badge-info m-0">In Progress</span></td>
-                            <td>$315.20</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">112P45A90V2</a></td>
-                            <td>June 15, 2017</td>
-                            <td><span class="badge badge-warning m-0">Delayed</span></td>
-                            <td>$1,264.00</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">28BA67U0981</a></td>
-                            <td>May 19, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$198.35</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">502TR872W2</a></td>
-                            <td>April 04, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$2,133.90</td>
-                        </tr>
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">47H76G09F33</a></td>
-                            <td>March 30, 2017</td>
-                            <td><span class="badge badge-success m-0">Delivered</span></td>
-                            <td>$86.40</td>
-                        </tr>
+                        </tr>*@
                     </tbody>
                 </table>
             </div>

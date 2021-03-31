@@ -122,6 +122,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\Models\Views\AccountModelView.cs" />
+    <Compile Include="Areas\User\Models\Views\CustomerRechargeModelView.cs" />
+    <Compile Include="Areas\User\Models\Views\DebitTransaction.cs" />
     <Compile Include="Areas\User\Models\Views\TransactionModelView.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -144,6 +146,7 @@
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\User\Views\User\TransactionList.cshtml" />
     <Content Include="Areas\User\Views\User\AccountProfile.cshtml" />
+    <Content Include="Areas\User\Views\User\AccountDetail.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

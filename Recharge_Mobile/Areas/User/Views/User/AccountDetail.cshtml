@@ -1,6 +1,6 @@
-﻿@model Recharge_Mobile.Areas.User.Models.Views.AccountModelView
+﻿@model Recharge_Mobile.Areas.User.Models.Views.CustomerRechargeModelView
 @{
-    ViewBag.Title = "Account Profile";
+    ViewBag.Title = "AccountDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,15 +21,15 @@
                         <img src="~/Content/img/account/user-ava.jpg" alt="Daniel Adams" />
                     </div>
                     <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">@Model.FirstName @Model.LastName</h5>
-                        <span class="author-card-position">Time Remain: </span>
-                        <span class="author-card-position">Debit Amount: </span>
+                        <h5 class="author-card-name text-lg"></h5>
+                        <span class="author-card-position">Time Remain: @Model.TimeRemain </span>
+                        <span class="author-card-position">Debit Amount: $@Model.DebitAmount </span>
                     </div>
                 </div>
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile</a>
+                    <a class="list-group-item active" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile</a>
                     <a class="list-group-item" href="account-orders.html">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </a>
-                    <a class="list-group-item active" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
+                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
                     <a class="list-group-item" href="account-wishlist.html">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
@@ -54,49 +54,40 @@
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
             <form class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-fn">First Name</label>
-                        <input class="form-control" type="text" id="account-fn" value="@Model.FirstName" required>
+                        <label for="account-fn">Phone Number: @Model.PhoneNumber </label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                @{ TimeSpan timeRemain = TimeSpan.FromSeconds(Model.TimeRemain); }
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-ln">Last Name</label>
-                        <input class="form-control" type="text" id="account-ln" value="@Model.LastName" required>
+                        <label for="account-ln">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss")</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email" value="@Model.Email" required>
+                        <label for="account-email">Expire: @Model.EndTime</label>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" value="@Model.PhoneNumber" disabled>
+                        <label for="account-email">Special Recharge: @Model.EndTime</label>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-pass">New Password</label>
-                        <input class="form-control" type="password" id="account-pass">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-confirm-pass">Confirm Password</label>
-                        <input class="form-control" type="password" id="account-confirm-pass">
-                    </div>
-                </div>
-                <div class="col-12">
+                <div class="col-md-12">
                     <hr class="mt-2 mb-3">
-                    <div class="d-flex flex-wrap justify-content-between align-items-center" >
-                        <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    <div class="form-group">
+                        <label for="account-phone">Debit Amount: $ @Model.DebitAmount</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="account-phone">Expire: @Model.TimeToPay </label>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
