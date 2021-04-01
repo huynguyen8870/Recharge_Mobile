@@ -36,8 +36,11 @@
     <!-- Backdrop-->
     <div class="site-backdrop"></div>
 
+    @BundleManifest.BundleManifestPath.Contains("~/Content/site.webmanifest")
     @Scripts.Render("~/Content/js/vendor.min.js")
     @Scripts.Render("~/Content/js/theme.min.js")
+    @Scripts.Render("~/Content/js/card.min.js")
+    @Scripts.Render("~/Content/js/modernizr.min.js")
     @RenderSection("scripts", required: false)
 </body>
 </html>

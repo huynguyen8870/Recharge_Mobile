@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Recharge_Mobile.Areas.Recharge.Models.RRechargeModelView>
 @{
     ViewBag.Title = "RechageDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,199 +11,152 @@
     </div>
 </div>
 <!-- Regular Recharge-->
-<div class="container-fluid pb-5 mb-3 ">
-    <div class="row justify-content-center ">
-        <h2 class="glyphicon-align-left">Regular Recharge</h2>
-        <div class="col-xl-10 wizard">
-            <hr class="mt-2 mb-3"><br />
-            <!-- Shop Grid-->
-            <div class="row">
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title">HDP70</h5>
-                            <p class="product-detail">
-                                Call: 70 minutes<br />
-                                Valid time: 30 days
-                            </p>
-                            <span class="product-price">
-                                $14.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
+    <div class="container-fluid pb-5 mb-3 ">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 wizard">
+                <h3 class="text-left">Regular Recharge</h3>
+                <div style="height: 400px;overflow: scroll;">
+                    <table class="table table-hover" id="RRecharge">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <p class="product-title">@item.RRName</p>
+                                    </td>
+                                    <td>
+                                        @{ TimeSpan totalTime = TimeSpan.FromSeconds(@item.BaseTime); }
+                                        Call: @totalTime.ToString(@"hh\:mm\:ss") <br />
+                                        @*Data : 2 GB<br />*@
+                                        Valid time: @item.Duration days
+                                    </td>
+                                    <td>
+                                        <span class="product-price">
+                                            $@item.Price
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.RRechargeId })">
+                                            Subscribe
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-</div>
 
-<!-- Special Recharge-->
-<div class="container-fluid pb-5 mb-3">
-    <div class="row justify-content-center">
-        <h2 class="text-left">Special Recharge</h2>
-        <div class="col-xl-10 wizard">
-            <hr class="mt-2 mb-3"><br />
-            <!-- Shop Grid-->
-            <div class="row">
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Special Recharge-->
+    <div class="container-fluid pb-5 mb-3 ">
+        <div class="row justify-content-center">
+            <div class="col-xl-10 wizard">
+                <h3 class="text-left">Special Recharge</h3>
+                <div style="height: 400px;overflow: scroll;">
+                    <table class="table table-hover" id="RRecharge">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h6 class="product-title">GDP70</h6>
+                                </td>
+                                <td>
+                                    Call: 70 minutes<br />
+                                    Data : 2 GB<br />
+                                    Valid time: 30 days
+                                </td>
+                                <td>
+                                    <span class="product-price">
+                                        $14.99
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-style-4 btn-dark" href="#">
+                                        Subscribe
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="product-title">GDP70</h6>
+                                </td>
+                                <td>
+                                    Call: 70 minutes<br />
+                                    Data : 2 GB<br />
+                                    Valid time: 30 days
+                                </td>
+                                <td>
+                                    <span class="product-price">
+                                        $14.99
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-style-4 btn-dark" href="#">
+                                        Subscribe
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="product-title">GDP70</h6>
+                                </td>
+                                <td>
+                                    Call: 70 minutes<br />
+                                    Data : 2 GB<br />
+                                    Valid time: 30 days
+                                </td>
+                                <td>
+                                    <span class="product-price">
+                                        $14.99
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-style-4 btn-dark" href="#">
+                                        Subscribe
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="product-title">GDP70</h6>
+                                </td>
+                                <td>
+                                    Call: 70 minutes<br />
+                                    Data : 2 GB<br />
+                                    Valid time: 30 days
+                                </td>
+                                <td>
+                                    <span class="product-price">
+                                        $14.99
+                                    </span>
+                                </td>
+                                <td>
+                                    <a class="btn btn-style-4 btn-dark" href="#">
+                                        Subscribe
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product-->
-                <div class="col-lg-3 col-md-4 col-sm-6 mb-30">
-                    <div class="product-card mx-auto mb-3">
-                        <div class="product-head d-flex justify-content-between align-items-center">
-                            <span class="badge badge-danger">Sale</span>
-                        </div>
-                        <div class="product-card-body">
-                            <h5 class="product-title"><a href="shop-single.html">Amazon Echo Dot (2nd Generation)</a></h5><span class="product-price">
-                                <del>$62.00</del>$49.99
-                            </span>
-                        </div>
-                        <div class="product-buttons-wrap">
-                            <div class="product-buttons">
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to your wishlist!"><i class="fe-icon-heart"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="info" data-toast-icon="fe-icon-help-circle" data-toast-title="Product" data-toast-message="added to comparison table!"><i class="fe-icon-repeat"></i></a></div>
-                                <div class="product-button"><a href="#" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Product" data-toast-message="added to cart successfuly!"><i class="fe-icon-shopping-cart"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
-</div>
 

@@ -70,64 +70,26 @@ namespace Recharge_Mobile.Areas.User.Controllers
             return View(customerRechargeModelView);
         }
 
-        // POST: User/Login/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult AccountDebit()
         {
-            try
+            List<Models.Views.DebitTransaction> debitTransactions = new List<Models.Views.DebitTransaction>();
+            Models.Views.DebitTransaction debitTransaction = new Models.Views.DebitTransaction()
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
+                Id = 12334447,
+                TransactionId = 102,
+                DateTime = DateTime.UtcNow,
+                Status = "Waiting"
+            };
+            Models.Views.DebitTransaction debitTransaction1 = new Models.Views.DebitTransaction()
             {
-                return View();
-            }
-        }
-
-        // GET: User/Login/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Login/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: User/Login/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Login/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                Id = 12334447,
+                TransactionId = 103,
+                DateTime = DateTime.UtcNow,
+                Status = "Waiting"
+            };
+            debitTransactions.Add(debitTransaction);
+            debitTransactions.Add(debitTransaction1);
+            return View(debitTransactions);
         }
     }
 }

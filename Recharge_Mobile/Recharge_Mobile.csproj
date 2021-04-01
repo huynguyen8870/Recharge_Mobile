@@ -121,6 +121,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Recharge\Controllers\RechargeController.cs" />
+    <Compile Include="Areas\Recharge\Models\RRechargeModelView.cs" />
+    <Compile Include="Areas\Recharge\Models\SRechargeModelView.cs" />
     <Compile Include="Areas\Recharge\RechargeAreaRegistration.cs" />
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\Models\Views\AccountModelView.cs" />
@@ -152,6 +154,10 @@
     <Content Include="Areas\User\Views\User\AccountDetail.cshtml" />
     <Content Include="Areas\Recharge\Views\web.config" />
     <Content Include="Areas\Recharge\Views\Recharge\RechageDetail.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutPayment.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutReview.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutComplete.cshtml" />
+    <Content Include="Areas\User\Views\User\AccountDebit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
