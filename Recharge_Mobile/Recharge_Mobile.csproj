@@ -120,13 +120,45 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\AdminArea\AdminAreaAreaRegistration.cs" />
+    <Compile Include="Areas\AdminArea\Controllers\AdminController.cs" />
+    <Compile Include="Areas\AdminArea\Models\AdminDAO.cs" />
+    <Compile Include="Areas\AdminArea\Models\AdminVM.cs" />
+    <Compile Include="Areas\RechargeArea\Controllers\RegularRechargeController.cs" />
+    <Compile Include="Areas\RechargeArea\Controllers\SpecialRechargeController.cs" />
+    <Compile Include="Areas\RechargeArea\Models\RegularRechargeDAO.cs" />
+    <Compile Include="Areas\RechargeArea\Models\RegularRechargeVM.cs" />
+    <Compile Include="Areas\RechargeArea\Models\SpecialRechargeDAO.cs" />
+    <Compile Include="Areas\RechargeArea\Models\SpecialRechargeVM.cs" />
+    <Compile Include="Areas\RechargeArea\RechargeAreaAreaRegistration.cs" />
+    <Compile Include="Areas\Recharge\Controllers\RechargeController.cs" />
+    <Compile Include="Areas\Recharge\Models\RRechargeModelView.cs" />
+    <Compile Include="Areas\Recharge\Models\SRechargeModelView.cs" />
+    <Compile Include="Areas\Recharge\RechargeAreaRegistration.cs" />
+    <Compile Include="Areas\User\Controllers\UserController.cs" />
+    <Compile Include="Areas\User\Models\Views\AccountModelView.cs" />
+    <Compile Include="Areas\User\Models\Views\CustomerRechargeModelView.cs" />
+    <Compile Include="Areas\User\Models\Views\DebitTransaction.cs" />
+    <Compile Include="Areas\User\Models\Views\TransactionModelView.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Views\FeedbackModelView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutComplete.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutPayment.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\CheckoutReview.cshtml" />
+    <Content Include="Areas\Recharge\Views\Recharge\RechageDetail.cshtml" />
+    <Content Include="Areas\Recharge\Views\web.config" />
+    <Content Include="Areas\User\Views\User\AccountDebit.cshtml" />
+    <Content Include="Areas\User\Views\User\AccountDetail.cshtml" />
+    <Content Include="Areas\User\Views\User\AccountSetting.cshtml" />
+    <Content Include="Areas\User\Views\User\TransactionList.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -137,6 +169,14 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\AdminArea\Views\web.config" />
+    <Content Include="Areas\RechargeArea\Views\RegularRecharge\CreateRegularRecharge.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\RegularRecharge\EditRR.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\RegularRecharge\ViewRRList.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\SpecialRecharge\CreateSpecialRecharge.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\SpecialRecharge\EditSR.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\SpecialRecharge\ViewSRList.cshtml" />
+    <Content Include="Areas\RechargeArea\Views\web.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -166,10 +206,14 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Home\Feedback.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\FeedbackSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Areas\Recharge\Data\" />
+    <Folder Include="Areas\Recharge\Views\Shared\" />
+    <Folder Include="Areas\User\Data\" />
+    <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
