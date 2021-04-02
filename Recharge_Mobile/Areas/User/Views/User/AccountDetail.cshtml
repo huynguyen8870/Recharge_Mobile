@@ -21,16 +21,16 @@
                         <img src="~/Content/img/account/user-ava.jpg" alt="Daniel Adams" />
                     </div>
                     <div class="author-card-details">
-                        <h5 class="author-card-name text-lg"></h5>
-                        <span class="author-card-position">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss") </span>
-                        <span class="author-card-position">Debit Amount: -$@Model.DebitAmount </span>
+                        <h5 class="author-card-name text-lg">@*@Model.FirstName @Model.LastName*@</h5>
+                        <span class="author-card-position">Time Remain: </span>
+                        <span class="author-card-position">Debit Amount: </span>
                     </div>
                 </div>
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item active" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile</a>
-                    <a class="list-group-item" href="account-orders.html">
+                    <a class="list-group-item active" href="@Url.Action("AccountDetail","User")"><i class="fe-icon-user text-muted"></i>Profile</a>
+                    <a class="list-group-item" href="@Url.Action("TransactionList","User")">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
@@ -38,16 +38,15 @@
                             </div>
                         </div>
                     </a>
-                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-edit text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item" href="account-wishlist.html">
+                    <a class="list-group-item" href="@Url.Action("AccountSetting","User")"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
+                    <a class="list-group-item" href="@Url.Action("AccountDebit","User")">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fe-icon-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Debit</div>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Debit Transaction</div>
                             </div>
                         </div>
                     </a>
-
                 </nav>
             </div>
         </div>
@@ -57,7 +56,7 @@
                 <h3>Main Balance</h3>
                 <hr class="mt-2 mb-3">
                 <label for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
-                <label for="account-email">Special Recharge: @Model.EndTime</label><br/>
+                <label for="account-email">Special Recharge: @Model.EndTime</label><br />
                 <label for="account-ln">Time Remain: @timeRemain.ToString(@"hh\:mm\:ss")</label><br />
                 <label for="account-email">Expire: @Model.EndTime</label>
             </div>
