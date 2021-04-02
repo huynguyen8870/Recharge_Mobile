@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Recharge_Mobile.Areas.RechargeArea.Models.SpecialRechargeVM>
+
+@{
+    ViewBag.Title = "ViewRRList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewRRList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SRName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>Actions</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SRName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditSR", new { id=item.SRechargeId }) |
+            @Html.ActionLink("Activate", "ActivateSR", new { id = item.SRechargeId }) |
+            @Html.ActionLink("Deactivate", "DeactivateSR", new { id = item.SRechargeId })
+        </td>
+    </tr>
+}
+
+</table>

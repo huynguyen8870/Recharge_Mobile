@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Recharge_Mobile.Areas.RechargeArea.Models.RegularRechargeVM>
+
+@{
+    ViewBag.Title = "ViewRRList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewRRList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RRName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasteTimeMinute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BonusTimeMinute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalTimeMinute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            Actions
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RRName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasteTimeMinute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BonusTimeMinute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalTimeMinute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditRR", new { id=item.RRechargeId }) |
+            @Html.ActionLink("Activate", "ActivateRR", new { id = item.RRechargeId }) |
+            @Html.ActionLink("Deactive", "DeactivateRR", new { id = item.RRechargeId })
+        </td>
+    </tr>
+}
+
+</table>
