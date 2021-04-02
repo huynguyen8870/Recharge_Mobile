@@ -1,0 +1,102 @@
+﻿@model Recharge_Mobile.Areas.User.Models.Views.AccountModelView
+@{
+    ViewBag.Title = "Account Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Title-->
+<div class="page-title d-flex" aria-label="Page title" style="background-image: @Url.Content("../Content/img/page-title/shop-pattern.jpg"); ">
+    <div class="container text-left align-self-center">
+        <h1 class="page-title-heading">Profile Settings</h1>
+    </div>
+</div>
+<!-- Page Content-->
+<div class="container mb-4">
+    <div class="row">
+        <div class="col-lg-4 pb-5">
+            <!-- Account Sidebar-->
+            <div class="author-card pb-3">
+                <div class="author-card-profile">
+                    <div class="author-card-avatar">
+                        <img src="~/Content/img/account/user-ava.jpg" alt="Daniel Adams" />
+                    </div>
+                    <div class="author-card-details">
+                        <h5 class="author-card-name text-lg">@Model.FirstName @Model.LastName</h5>
+                        <span class="author-card-position">Time Remain: </span>
+                        <span class="author-card-position">Debit Amount: </span>
+                    </div>
+                </div>
+            </div>
+            <div class="wizard">
+                <nav class="list-group list-group-flush">
+                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile</a>
+                    <a class="list-group-item" href="account-orders.html">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Transaction List</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="list-group-item active" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
+                    <a class="list-group-item" href="account-wishlist.html">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <i class="fe-icon-tag mr-1 text-muted"></i>
+                                <div class="d-inline-block font-weight-medium text-uppercase">Debit</div>
+                            </div>
+                        </div>
+                    </a>
+
+                </nav>
+            </div>
+        </div>
+        <!-- Profile Settings-->
+        <div class="col-lg-8 pb-5">
+            <form class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-fn">First Name</label>
+                        <input class="form-control" type="text" id="account-fn" value="@Model.FirstName" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-ln">Last Name</label>
+                        <input class="form-control" type="text" id="account-ln" value="@Model.LastName" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-email">E-mail Address</label>
+                        <input class="form-control" type="email" id="account-email" value="@Model.Email" required>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-phone">Phone Number</label>
+                        <input class="form-control" type="text" id="account-phone" value="@Model.PhoneNumber" disabled>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-pass">New Password</label>
+                        <input class="form-control" type="password" id="account-pass">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-confirm-pass">Confirm Password</label>
+                        <input class="form-control" type="password" id="account-confirm-pass">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr class="mt-2 mb-3">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center" >
+                        <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
