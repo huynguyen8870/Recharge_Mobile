@@ -29,8 +29,8 @@
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile</a>
-                    <a class="list-group-item" href="account-orders.html">
+                    <a class="list-group-item" href="@Url.Action("AccountDetail","User")"><i class="fe-icon-user text-muted"></i>Profile</a>
+                    <a class="list-group-item" href="@Url.Action("TransactionList","User")">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
@@ -38,8 +38,8 @@
                             </div>
                         </div>
                     </a>
-                    <a class="list-group-item" href="account-profile.html"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item active" href="account-wishlist.html">
+                    <a class="list-group-item" href="@Url.Action("AccountSetting","User")"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
+                    <a class="list-group-item active" href="@Url.Action("AccountDebit","User")">
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <i class="fe-icon-tag mr-1 text-muted"></i>
@@ -82,17 +82,17 @@
                                 <td>@item.DateTime</td>
                                 <td>$10</td>
                                 @*@switch (item.Status)
-                            {
-                                case "Success":
-                                    <td><span class="badge badge-success m-0">Success</span></td>
-                                    break;
-                                case "Cancel":
-                                    <td><span class="badge badge-danger m-0">Cancel</span></td>
-                                    break;
-                                case "Waiting":
-                                    <td><span class="badge badge-warning m-0">Waiting</span></td>
-                                    break;
-                            }*@
+                                {
+                                    case "Success":
+                                        <td><span class="badge badge-success m-0">Success</span></td>
+                                        break;
+                                    case "Cancel":
+                                        <td><span class="badge badge-danger m-0">Cancel</span></td>
+                                        break;
+                                    case "Waiting":
+                                        <td><span class="badge badge-warning m-0">Waiting</span></td>
+                                        break;
+                                }*@
                                 <td><span class="badge badge-danger m-0">@item.Status</span></td>
                                 <td>
                                     <a class="btn btn-style-4 btn-dark btn-sm" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.TransactionId })">
@@ -101,20 +101,13 @@
                                 </td>
                             </tr>
                         }
-
-                        @*<tr>
-                        <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
-                        <td>August 08, 2017</td>
-                        <td><span class="badge badge-danger m-0">Canceled</span></td>
-                        <td><span>$760.50</span></td>
-                    </tr>*@
                     </tbody>
                 </table>
             </div>
             <div class="col-12">
                 <hr class="mt-2 mb-3">
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
-                    <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                    <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Pay All</button>
                 </div>
             </div>
         </div>
