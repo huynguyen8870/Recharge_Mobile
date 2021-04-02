@@ -5,19 +5,19 @@ using System.Web;
 
 namespace Recharge_Mobile.Areas.User.Models.Views
 {
-    public class DebitTransaction
+    public class DebitTransactionModelView
     {
         public int Id { get; set; }
         public int TransactionId { get; set; }
         public DateTime DateTime { get; set; }
         public string Status { get; set; }
 
-        public DebitTransaction()
+        public DebitTransactionModelView()
         {
 
         }
 
-        public DebitTransaction(int id, int transactionId, DateTime dateTime, string status)
+        public DebitTransactionModelView(int id, int transactionId, DateTime dateTime, string status)
         {
             Id = id;
             TransactionId = transactionId;

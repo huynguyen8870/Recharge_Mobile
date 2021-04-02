@@ -72,15 +72,15 @@ namespace Recharge_Mobile.Areas.User.Controllers
 
         public ActionResult AccountDebit()
         {
-            List<Models.Views.DebitTransaction> debitTransactions = new List<Models.Views.DebitTransaction>();
-            Models.Views.DebitTransaction debitTransaction = new Models.Views.DebitTransaction()
+            List<Models.Views.DebitTransactionModelView> debitTransactions = new List<Models.Views.DebitTransactionModelView>();
+            Models.Views.DebitTransactionModelView debitTransaction = new Models.Views.DebitTransactionModelView()
             {
                 Id = 12334447,
                 TransactionId = 102,
                 DateTime = DateTime.UtcNow,
                 Status = "Waiting"
             };
-            Models.Views.DebitTransaction debitTransaction1 = new Models.Views.DebitTransaction()
+            Models.Views.DebitTransactionModelView debitTransaction1 = new Models.Views.DebitTransactionModelView()
             {
                 Id = 12334447,
                 TransactionId = 103,
