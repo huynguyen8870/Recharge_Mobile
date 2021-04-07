@@ -114,7 +114,7 @@
                         @foreach(var item in Model){
                         <tr>
                             <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
-                            <td>@item.TypeRecharge</td>
+                            <td>@item.PaymentMethod</td>
                             <td>@item.DateTime</td>
                             @*@switch (item.Status)
                             {
