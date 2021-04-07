@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Recharge_Mobile.Areas.AdminArea.Models.TransactionAdminVM>
+
+@{
+    ViewBag.Title = "TransactionList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TransactionList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypeRecharge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RRechargeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SRechargeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TypePacket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RechargeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransactionId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypeRecharge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RRechargeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SRechargeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TypePacket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RechargeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

@@ -41,7 +41,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
         [StringLength(50, ErrorMessage = "max length = 50 characters!")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "please enter last name!")]
         public string LastName { get; set; }
-        [RegularExpression("([0-9]{10,20})", ErrorMessage = "phone number must have 10-20 numbers!")]
+        [RegularExpression("([0-9]{10})", ErrorMessage = "phone number must have 10 numbers!")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "please enter phone number!")]
         public string PhoneNumber { get; set; }
         [StringLength(100, ErrorMessage = "max length = 100 characters!")]

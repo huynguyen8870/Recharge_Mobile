@@ -8,9 +8,9 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
 {
     public class RegularRechargeDAO
     {
-        static RechargeMobileEntities entities;
+        RechargeMobileEntities entities;
 
-        public static void CreateItem(RegularRechargeVM vm)
+        public void CreateItem(RegularRechargeVM vm)
         {
             entities = new RechargeMobileEntities();
             RegularRecharge newItem = new RegularRecharge()
@@ -28,7 +28,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             entities.SaveChanges();
         }
 
-        public static IList<RegularRechargeVM> GetList()
+        public IList<RegularRechargeVM> GetList()
         {
             entities = new RechargeMobileEntities();
             var listRaw = entities.RegularRecharges.ToList();
@@ -47,7 +47,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             return list;
         }
 
-        public static IList<RegularRechargeVM> GetListActive()
+        public IList<RegularRechargeVM> GetListActive()
         {
             entities = new RechargeMobileEntities();
             var listRaw = entities.RegularRecharges.Where(d => d.Status == "Active").ToList();
@@ -66,7 +66,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             return list;
         }
 
-        public static RegularRechargeVM GetItemById(int id)
+        public RegularRechargeVM GetItemById(int id)
         {
             entities = new RechargeMobileEntities();
             var itemRaw = entities.RegularRecharges.Where(d => d.RRechargeId == id).FirstOrDefault();
@@ -85,7 +85,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             return item;
         }
 
-        public static void EditItem(RegularRechargeVM vm)
+        public void EditItem(RegularRechargeVM vm)
         {
             entities = new RechargeMobileEntities();
             var item = entities.RegularRecharges.Where(d => d.RRechargeId == vm.RRechargeId).FirstOrDefault();
@@ -99,7 +99,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             entities.SaveChanges();
         }
 
-        public static void ActivateItem(int id)
+        public void ActivateItem(int id)
         {
             entities = new RechargeMobileEntities();
             var item = entities.RegularRecharges.Where(d => d.RRechargeId == id).FirstOrDefault();
@@ -107,7 +107,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Models
             entities.SaveChanges();
         }
 
-        public static void DeactivateItem(int id)
+        public void DeactivateItem(int id)
         {
             entities = new RechargeMobileEntities();
             var item = entities.RegularRecharges.Where(d => d.RRechargeId == id).FirstOrDefault();

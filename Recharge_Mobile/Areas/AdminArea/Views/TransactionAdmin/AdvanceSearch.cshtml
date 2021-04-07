@@ -1,0 +1,192 @@
+﻿@model Recharge_Mobile.Areas.AdminArea.Models.AdvanceSearchVM
+@using Recharge_Mobile.Areas.AdminArea.Models
+
+@{
+    ViewBag.Title = "AdvanceSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdvanceSearch</h2>
+
+
+@using (Html.BeginForm("AdvanceSearch", "TransactionAdmin", new { area = "AdminArea" }))
+{
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="form-horizontal">
+        <h4>AdvanceSearchVM</h4>
+        <hr />
+
+        <table class="table">
+            <tr>
+                <td>Request Date from</td>
+                <td><input type="date" name="DateFrom" id="DateFrom" value="@Model.DateFrom.ToString("yyyy-MM-dd")" /></td>
+                <td>Request Date to</td>
+                <td><input type="date" name="DateTo" id="DateTo" value="@Model.DateTo.ToString("yyyy-MM-dd")" /></td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td><input type="text" pattern="[0-9]{3,10}" title="3-10 numbers" name="PhoneNumber" id="PhoneNumber" value="@Model.PhoneNumber" /></td>
+                <td>Recharge Type</td>
+                <td>
+                    <select name="RechargeType" id="RchargeType">
+                        @if (Model.RechargeType == "None")
+                        {
+                            <option value="None" selected>--Select--</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Special">Special</option>
+                        }
+                        else if (Model.RechargeType == "Regular")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Regular" selected>Regular</option>
+                            <option value="Special">Special</option>
+                        }
+                        else if (Model.RechargeType == "Special")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Regular">Regular</option>
+                            <option value="Special" selected>Special</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Payment Method</td>
+                <td>
+                    <select name="PaymentMethod" id="PaymentMethod">
+                        @if (Model.PaymentMethod == "None")
+                        {
+                            <option value="None" selected>--Select--</option>
+                            <option value="Paypal">Paypal</option>
+                            <option value="Debit">Debit</option>
+                        }
+                        else if (Model.PaymentMethod == "Paypal")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Paypal" selected>Paypal</option>
+                            <option value="Debit">Debit</option>
+                        }
+                        else if (Model.PaymentMethod == "Debit")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Paypal">Paypal</option>
+                            <option value="Debit" selected>Debit</option>
+                        }
+                    </select>
+                </td>
+                <td>Status</td>
+                <td>
+                    <select name="Status" id="Status">
+                        @if (Model.Status == "None")
+                        {
+                            <option value="None" selected>--Select--</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid">Unpaid</option>
+                        }
+                        else if (Model.Status == "Paid")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Paid" selected>Paid</option>
+                            <option value="Unpaid">Unpaid</option>
+                        }
+                        else if (Model.Status == "Unpaid")
+                        {
+                            <option value="None">--Select--</option>
+                            <option value="Paid">Paid</option>
+                            <option value="Unpaid" selected>Unpaid</option>
+                        }
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="submit" value="Search" /></td>
+            </tr>
+        </table>
+    </div>
+}
+@if (ViewBag.SearchResultList != null)
+{
+    if (((IList<TransactionAdminVM>)(ViewBag.SearchResultList)).Count() >= 1)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    TransactionId
+                </th>
+                <th>
+                    PhoneNumber
+                </th>
+                <th>
+                    TypeRecharge
+                </th>
+                <th>
+                    RRechargeId
+                </th>
+                <th>
+                    SRechargeId
+                </th>
+                <th>
+                    TypePacket
+                </th>
+                <th>
+                    RechargeName
+                </th>
+                <th>
+                    Price
+                </th>
+                <th>
+                    DateTime
+                </th>
+                <th>
+                    Status
+                </th>
+            </tr>
+
+            @foreach (TransactionAdminVM item in (IList<TransactionAdminVM>)(ViewBag.SearchResultList))
+            {
+                <tr>
+                    <td>
+                        @item.TransactionId
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+                    <td>
+                        @item.PaymentMethod
+                    </td>
+                    <td>
+                        @item.RRechargeId
+                    </td>
+                    <td>
+                        @item.SRechargeId
+                    </td>
+                    <td>
+                        @item.RechargeType
+                    </td>
+                    <td>
+                        @item.RechargeName
+                    </td>
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.DateTime)
+                    </td>
+                    <td>
+                        @item.Status
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <h3 class="alert-warning">No result found!</h3>
+    }
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
