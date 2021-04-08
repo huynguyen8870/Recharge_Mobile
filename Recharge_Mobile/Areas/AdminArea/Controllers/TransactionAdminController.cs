@@ -63,7 +63,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
                     return View(vm);
                 }
                 transactionAdminDAO = new TransactionAdminDAO();
-                ViewBag.SearchResultList = transactionAdminDAO.AdvanceSearch(vm);
+                ViewBag.SearchResultList = transactionAdminDAO.AdvanceSearch(vm).Item1;
+                ViewBag.TotalAmount = transactionAdminDAO.AdvanceSearch(vm).Item2;
                 return View(vm);
             }
             return View(vm);

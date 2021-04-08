@@ -96,10 +96,9 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             return Tuple.Create(list, totalAmount);
         }
 
-        public IList<TransactionAdminVM> AdvanceSearch(AdvanceSearchVM vm)
+        public Tuple<List<TransactionAdminVM>, decimal> AdvanceSearch(AdvanceSearchVM vm)
         {
-            entities = new RechargeMobileEntities();
-            List<TransactionAdminVM> list = new List<TransactionAdminVM>();
+            entities = new RechargeMobileEntities();           
             var listTrans = entities.Transactions.OrderBy(d => d.DateTime).ToList();
             var listTransByTime = listTrans.Where(d => d.DateTime >= vm.DateFrom.Date && d.DateTime < vm.DateTo.Date.AddDays(1)).ToList();
 
@@ -155,6 +154,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                 listTransByTimeTypePaymentStausPhone = listTransByTimeTypePaymentStaus.ToList();
             }
 
+            List<TransactionAdminVM> list = new List<TransactionAdminVM>();
+            decimal totalAmount = 0;
             foreach (Transaction t in listTransByTimeTypePaymentStausPhone)
             {
                 string typePacket;
@@ -187,9 +188,10 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     DateTime = t.DateTime,
                     Status = t.Status
                 };
+                totalAmount += price;
                 list.Add(item);
             }
-            return list;
+            return Tuple.Create(list,totalAmount);
         }
     }
 }

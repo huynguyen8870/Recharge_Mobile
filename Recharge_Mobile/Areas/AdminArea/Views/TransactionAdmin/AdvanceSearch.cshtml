@@ -109,6 +109,7 @@
 {
     if (((IList<TransactionAdminVM>)(ViewBag.SearchResultList)).Count() >= 1)
     {
+        <div>Total Amount Purchase: $@ViewBag.TotalAmount</div>
         <table class="table">
             <tr>
                 <th>
@@ -171,7 +172,7 @@
                         @item.Price
                     </td>
                     <td>
-                        @item.DateTime)
+                        @item.DateTime
                     </td>
                     <td>
                         @item.Status
