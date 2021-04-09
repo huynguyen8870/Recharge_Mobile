@@ -55,6 +55,9 @@
             @Html.DisplayNameFor(model => model.DateTime)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.PostPayment)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
         <th></th>
@@ -89,6 +92,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostPayment)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Status)

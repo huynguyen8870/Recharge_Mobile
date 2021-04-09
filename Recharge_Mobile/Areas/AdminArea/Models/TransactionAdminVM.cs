@@ -13,7 +13,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
         }
 
         public TransactionAdminVM(int transactionId, string phoneNumber, string paymentMethod, int rRechargeId,
-            int sRechargeId, string rechargeType, string rechargeName, decimal price, DateTime dateTime, string status)
+            int sRechargeId, string rechargeType, string rechargeName, decimal price, DateTime dateTime, string postPayment, string status)
         {
             TransactionId = transactionId;
             PhoneNumber = phoneNumber;
@@ -24,6 +24,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             RechargeName = rechargeName;
             Price = price;
             DateTime = dateTime;
+            PostPayment = postPayment;
             Status = status;
         }
 
@@ -36,6 +37,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
         public string RechargeName { get; set; }
         public decimal Price { get; set; }
         public DateTime DateTime { get; set; }
+        public string PostPayment { get; set; }
         public string Status { get; set; }
     }
 }

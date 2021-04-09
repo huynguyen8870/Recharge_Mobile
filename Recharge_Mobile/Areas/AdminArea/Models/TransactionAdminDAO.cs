@@ -19,6 +19,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                 string typePacket;
                 string rechargeName;
                 decimal price;
+                string postPayment = "";
+
                 if (t.RRechargeId >= 1)
                 {
                     var recharge = entities.RegularRecharges.Where(d => d.RRechargeId == t.RRechargeId).FirstOrDefault();
@@ -33,6 +35,24 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     rechargeName = recharge.SRName;
                     price = recharge.Price;
                 }
+
+                if(t.PaymentMethod == "Debit")
+                {
+                    if (t.Status == "Unpaid")
+                    {
+                        postPayment = "N/A";
+                    }
+                    else if (t.Status == "Paid")
+                    {
+                        postPayment = entities.DebitTransactions.Where(d => d.TransactionId == t.TransactionId).FirstOrDefault().DateTime.ToString();
+                    }
+                    
+                }
+                else
+                {
+                    postPayment = "-";
+                }
+
                 TransactionAdminVM item = new TransactionAdminVM()
                 {
                     TransactionId = t.TransactionId,
@@ -44,6 +64,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     RechargeName = rechargeName,
                     Price = price,
                     DateTime = t.DateTime,
+                    PostPayment = postPayment,
                     Status = t.Status
                 };
                 list.Add(item);
@@ -63,6 +84,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                 string typePacket;
                 string rechargeName;
                 decimal price;
+                string postPayment = "";
+
                 if (t.RRechargeId >= 1)
                 {
                     var recharge = entities.RegularRecharges.Where(d => d.RRechargeId == t.RRechargeId).FirstOrDefault();
@@ -77,6 +100,24 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     rechargeName = recharge.SRName;
                     price = recharge.Price;
                 }
+
+                if (t.PaymentMethod == "Debit")
+                {
+                    if (t.Status == "Unpaid")
+                    {
+                        postPayment = "N/A";
+                    }
+                    else if (t.Status == "Paid")
+                    {
+                        postPayment = entities.DebitTransactions.Where(d => d.TransactionId == t.TransactionId).FirstOrDefault().DateTime.ToString();
+                    }
+
+                }
+                else
+                {
+                    postPayment = "-";
+                }
+
                 TransactionAdminVM item = new TransactionAdminVM()
                 {
                     TransactionId = t.TransactionId,
@@ -88,6 +129,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     RechargeName = rechargeName,
                     Price = price,
                     DateTime = t.DateTime,
+                    PostPayment = postPayment,
                     Status = t.Status
                 };
                 totalAmount += price;
@@ -161,6 +203,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                 string typePacket;
                 string rechargeName;
                 decimal price;
+                string postPayment = "";
+
                 if (t.RRechargeId >= 1)
                 {
                     var recharge = entities.RegularRecharges.Where(d => d.RRechargeId == t.RRechargeId).FirstOrDefault();
@@ -175,6 +219,24 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     rechargeName = recharge.SRName;
                     price = recharge.Price;
                 }
+
+                if (t.PaymentMethod == "Debit")
+                {
+                    if (t.Status == "Unpaid")
+                    {
+                        postPayment = "N/A";
+                    }
+                    else if (t.Status == "Paid")
+                    {
+                        postPayment = entities.DebitTransactions.Where(d => d.TransactionId == t.TransactionId).FirstOrDefault().DateTime.ToString();
+                    }
+
+                }
+                else
+                {
+                    postPayment = "-";
+                }
+
                 TransactionAdminVM item = new TransactionAdminVM()
                 {
                     TransactionId = t.TransactionId,
@@ -186,6 +248,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     RechargeName = rechargeName,
                     Price = price,
                     DateTime = t.DateTime,
+                    PostPayment = postPayment,
                     Status = t.Status
                 };
                 totalAmount += price;
