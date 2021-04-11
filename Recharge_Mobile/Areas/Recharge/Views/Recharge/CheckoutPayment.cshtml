@@ -31,7 +31,8 @@
                                 <div class="card-body px-0">
                                     <p>We accept following credit cards:&nbsp;&nbsp;<img class="d-inline-block align-middle" src="~/Content/img/credit-cards.png" style="width: 120px;" alt="Cerdit Cards"></p>
                                     <div class="card-wrapper"></div>
-                                    <form class="interactive-credit-card row">
+                                    @using (Html.BeginForm("CheckoutPayment", "Recharge", FormMethod.Post, new { @class = "interactive-credit-card row" }))
+                                    {
                                         <div class="form-group col-sm-6">
                                             <input class="form-control" type="text" name="number" placeholder="Card Number" required>
                                         </div>
@@ -39,7 +40,7 @@
                                             <input class="form-control" type="text" name="name" placeholder="Full Name" required>
                                         </div>
                                         <div class="form-group col-sm-3">
-                                            <input class="form-control" type="text" name="expiry" placeholder="MM/YY" required>
+                                            <input class="form-control" type="text" name="expire" placeholder="MM/YY" required>
                                         </div>
                                         <div class="form-group col-sm-3">
                                             <input class="form-control" type="text" name="cvc" placeholder="CVC" required>
@@ -47,7 +48,7 @@
                                         <div class="col-sm-6">
                                             <button class="btn btn-primary btn-block mt-0" type="submit">Submit</button>
                                         </div>
-                                    </form>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -58,7 +59,8 @@
                             <div class="collapse" id="paypal" data-parent="#accordion" role="tabpanel">
                                 <div class="card-body px-0">
                                     <p><strong>PayPal</strong> - the safer, easier way to pay</p>
-                                    <form class="row" method="post">
+                                    @using (Html.BeginForm("PaypalPayment", "Recharge", FormMethod.Post, new { @class = "row" }))
+                                    {
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <input class="form-control" type="email" placeholder="E-mail" required>
@@ -75,13 +77,22 @@
                                                 <button class="btn btn-primary btn-sm" type="submit">Log In</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="wizard-footer d-flex justify-content-between"><a class="btn btn-secondary my-2" href="checkout-shipping.html"><i class="fe-icon-arrow-left"></i><span class="d-none d-sm-inline-block">Back</span></a><a class="btn btn-primary my-2" href="checkout-review.html"><span class="d-none d-sm-inline-block">Continue</span><i class="fe-icon-arrow-right"></i></a></div>
+                <div class="wizard-footer d-flex justify-content-between">
+                    <a class="btn btn-secondary my-2" href="@Url.Action("RechargeDetail", "Recharge", new { Area = "Recharge" })">
+                        <i class="fe-icon-arrow-left"></i>
+                        <span class="d-none d-sm-inline-block">Back</span>
+                    </a>
+                    <a class="btn btn-primary my-2" href="@Url.Action("CheckoutReview", "Recharge", new { Area = "Recharge" })">
+                        <span class="d-none d-sm-inline-block">Continue</span>
+                        <i class="fe-icon-arrow-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
         <!-- Sidebar-->

@@ -30,12 +30,12 @@
                             {
                                 <tr>
                                     <td>
-                                        <p class="product-title">@item.RRName</p>
+                                        <p class="product-title"><strong>@item.RRName</strong></p>
                                     </td>
                                     <td>
-                                        @{ TimeSpan totalTime = TimeSpan.FromSeconds(@item.BaseTime); }
-                                        Call: @totalTime.ToString(@"hh\:mm\:ss") <br />
-                                        @*Data : 2 GB<br />*@
+                                        @*@{ TimeSpan totalTime = TimeSpan.FromSeconds(@item.BaseTime); }
+                                        @totalTime.ToString(@"hh\:mm\:ss")*@
+                                        Call: @item.BaseTime minutes <br />
                                         Valid time: @item.Duration days
                                     </td>
                                     <td>
@@ -73,66 +73,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <h6 class="product-title">GDP70</h6>
-                                </td>
-                                <td>
-                                    Call: 70 minutes<br />
-                                    Data : 2 GB<br />
-                                    Valid time: 30 days
-                                </td>
-                                <td>
-                                    <span class="product-price">
-                                        $14.99
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="btn btn-style-4 btn-dark" href="#">
-                                        Subscribe
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6 class="product-title">GDP70</h6>
-                                </td>
-                                <td>
-                                    Call: 70 minutes<br />
-                                    Data : 2 GB<br />
-                                    Valid time: 30 days
-                                </td>
-                                <td>
-                                    <span class="product-price">
-                                        $14.99
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="btn btn-style-4 btn-dark" href="#">
-                                        Subscribe
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h6 class="product-title">GDP70</h6>
-                                </td>
-                                <td>
-                                    Call: 70 minutes<br />
-                                    Data : 2 GB<br />
-                                    Valid time: 30 days
-                                </td>
-                                <td>
-                                    <span class="product-price">
-                                        $14.99
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="btn btn-style-4 btn-dark" href="#">
-                                        Subscribe
-                                    </a>
-                                </td>
-                            </tr>
                             <tr>
                                 <td>
                                     <h6 class="product-title">GDP70</h6>

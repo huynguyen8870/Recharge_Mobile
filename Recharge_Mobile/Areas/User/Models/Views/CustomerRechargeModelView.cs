@@ -8,10 +8,10 @@ namespace Recharge_Mobile.Areas.User.Models.Views
     public class CustomerRechargeModelView
     {
         public int Id { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public long TimeRemain { get; set; }
-        public DateTime EndTime { get; set; }
-        public DateTime SPTimeRemain { get; set; }
+        public DateTime RegularTime { get; set; }
+        public DateTime SpecialTime { get; set; }
         public decimal DebitAmount { get; set; }
         public DateTime TimeToPay { get; set; }
 
@@ -20,13 +20,13 @@ namespace Recharge_Mobile.Areas.User.Models.Views
 
         }
 
-        public CustomerRechargeModelView(int id, int phoneNumber, long timeRemain, DateTime endTime, DateTime sPTimeRemain, decimal debitAmount, DateTime timeToPay)
+        public CustomerRechargeModelView(int id, string phoneNumber, long timeRemain, DateTime regularTime, DateTime specialTime, decimal debitAmount, DateTime timeToPay)
         {
             Id = id;
             PhoneNumber = phoneNumber;
             TimeRemain = timeRemain;
-            EndTime = endTime;
-            SPTimeRemain = sPTimeRemain;
+            RegularTime = regularTime;
+            SpecialTime = specialTime;
             DebitAmount = debitAmount;
             TimeToPay = timeToPay;
         }

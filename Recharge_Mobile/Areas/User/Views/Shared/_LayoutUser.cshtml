@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - RechargeX</title>
+    <meta name="description" content="CreateX - Multipurpose Bootstrap Theme">
+    <meta name="keywords" content="multipurpose, portfolio, blog, shop, e-commerce, modern, flat style, responsive,  business, corporate, mobile, bootstrap 4, html5, css3, jquery, js, gallery, slider, touch, creative, clean">
+    <meta name="author" content="Createx Studio">
+    <!-- Viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon and Touch Icons-->
+    <link rel="apple-touch-icon" sizes="180x180" href="~/Content/icon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/Content/icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/Content/icon/favicon-16x16.png">
+    <link rel="manifest" href="~/Content/site.webmanifest">
+    <link rel="mask-icon" color="#343b43" href="safari-pinned-tab.svg">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Vendor Styles including: Font Icons, Plugins, etc.-->
+    <link rel="stylesheet" media="screen" href="~/Content/css/vendor.min.css">
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="~/Content/css/theme.min.css">
+    <!-- Modernizr-->
+    <script src="~/Content/js/modernizr.min.js"></script>
+    @*@Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")*@
+</head>
+<body>
+    @Html.Partial("_Header")
+    <!-- Page Title-->
+    <div class="page-title d-flex" aria-label="Page title" style="background-image: url(~/Content/img/page-title/shop-pattern.jpg);">
+        <div class="container text-left align-self-center">
+            <h1 class="page-title-heading">@ViewBag.Title</h1>
+        </div>
+    </div>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-lg-4 pb-5">
+                <!-- Account Sidebar-->
+                <div class="author-card pb-3">
+                    <div class="author-card-profile">
+                        <div class="author-card-avatar">
+                            <img src="~/Content/img/account/user-ava1.jpg" width="170" height="170" alt="Daniel Adams" />
+                        </div>
+                        <div class="author-card-details">
+                            <h5 class="author-card-name text-lg">@*@Model.FirstName @Model.LastName*@</h5>
+                            <span class="author-card-position">Time Remain: </span>
+                            <span class="author-card-position">Debit Amount: </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="wizard">
+                    <nav class="list-group list-group-flush">
+                        <a class="list-group-item" href="@Url.Action("AccountDetail","User")"><i class="fe-icon-user text-muted"></i>Profile</a>
+                        <a class="list-group-item" href="@Url.Action("TransactionList","User")">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Transaction List</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="@Url.Action("AccountDebit","User")">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <i class="fe-icon-tag mr-1 text-muted"></i>
+                                    <div class="d-inline-block font-weight-medium text-uppercase">Debit Transaction</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a class="list-group-item" href="@Url.Action("AccountSetting","User")"><i class="fe-icon-settings text-muted"></i>Profile Settings</a>
+                        <a class="list-group-item" href="@Url.Action("ChangePassword","User")"><i class="fe-icon-edit text-muted"></i>Change Password</a>
+                    </nav>
+                </div>
+            </div>
+            <!-- Page Content-->
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Partial("_Footer")
+
+    <!-- Back To Top Button-->
+    <a class="scroll-to-top-btn" href="#"><i class="fe-icon-chevron-up"></i></a>
+    <!-- Backdrop-->
+    <div class="site-backdrop"></div>
+
+    @BundleManifest.BundleManifestPath.Contains("~/Content/site.webmanifest")
+    @Scripts.Render("~/Content/js/vendor.min.js")
+    @Scripts.Render("~/Content/js/theme.min.js")
+    @Scripts.Render("~/Content/js/card.min.js")
+    @Scripts.Render("~/Content/js/modernizr.min.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

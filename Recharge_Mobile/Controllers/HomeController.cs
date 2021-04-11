@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recharge_Mobile.Areas.User.Models.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,18 +13,20 @@ namespace Recharge_Mobile.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult Index(string phonenumber)
+        {
+            Session["phonenumber"] = phonenumber;
+            return RedirectToAction("RechargeDetail", "Recharge", new { Area = "Recharge" });
+        }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -39,28 +42,19 @@ namespace Recharge_Mobile.Controllers
         [HttpPost]
         public ActionResult Feedback(string GuestName, string GuestEmail, string GuestPhone, string Title, string Detail)
         {
-            try
+            Models.Views.FeedbackModelView feedbackModelView = new Models.Views.FeedbackModelView()
             {
-                if (ModelState.IsValid)
-                {
-                    Models.Views.FeedbackModelView feedbackModelView = new Models.Views.FeedbackModelView();
-                    feedbackModelView.GuestName = GuestName;
-                    feedbackModelView.GuestEmail = GuestEmail;
-                    feedbackModelView.GuestPhone = GuestPhone;
-                    feedbackModelView.Title = Title;
-                    feedbackModelView.Detail = Detail;
-
-                    return View("Index");
-                }
-                else
-                {
-                    return View();
-                }
-            }
-            catch
-            {
-                return View();
-            }
+                GuestName = GuestName,
+                GuestEmail = GuestEmail,
+                GuestPhone = GuestPhone,
+                Title = Title,
+                Detail = Detail,
+                Role = "Guest",
+                Status = "Waiting"
+            };
+            Models.DAO.FeedbackDAO feedbackDAO = new Models.DAO.FeedbackDAO();
+            feedbackDAO.Feedback(feedbackModelView);
+            return View("FeedbackSuccess");
         }
 
         public ActionResult FeedbackSuccess()

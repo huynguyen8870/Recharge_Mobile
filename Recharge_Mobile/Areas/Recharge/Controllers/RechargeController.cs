@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Recharge_Mobile.Areas.Recharge.Models;
+using Recharge_Mobile.Models.DAO;
+using Recharge_Mobile.Areas.User.Models.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Recharge_Mobile.Areas.Recharge.Models.DAO;
 
 namespace Recharge_Mobile.Areas.Recharge.Controllers
 {
@@ -10,63 +14,54 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
     {
       
         // GET: Recharge/ReCharge
-        public ActionResult RechageDetail()
+        public ActionResult RechargeDetail()
         {
-            List<Models.RRechargeModelView> rRechargeModelViews = new List<Models.RRechargeModelView>();
-            Models.RRechargeModelView rRechargeModelView = new Models.RRechargeModelView()
-            {
-                RRechargeId = 100,
-                RRName = "ABC10",
-                BaseTime = 3600,
-                BonusTime = 0,
-                TotalTime = 3600,
-                Price = 14,
-                Duration = 10,
-                Description = "",
-                Status = "Active"
-            };
-            Models.RRechargeModelView rRechargeModelView1 = new Models.RRechargeModelView()
-            {
-                RRechargeId = 101,
-                RRName = "DEF10",
-                BaseTime = 12800,
-                BonusTime = 0,
-                TotalTime = 12800,
-                Price = 20,
-                Duration = 30,
-                Description = "",
-                Status = "Active"
-            };
-            rRechargeModelViews.Add(rRechargeModelView1);
-            rRechargeModelViews.Add(rRechargeModelView);
-            return View(rRechargeModelViews);
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            var RRList = rechargeDAO.RRechargeList();
+            return View(RRList);
         }
 
         public ActionResult CheckoutPayment(int id)
         {
-            int RechargeId = id;
-            Models.RRechargeModelView rRechargeModelView = new Models.RRechargeModelView()
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            var rechargeInfo = rechargeDAO.RRechargeById(id);
+            Session["rechargeInfo"] = rechargeInfo;
+            return View(rechargeInfo);
+        }
+        [HttpPost]
+        public ActionResult CheckoutPayment(string number, string name, string expire, string cvc)
+        {
+            var rechargeInfor = Session["rechargeInfor"] as RRechargeModelView;
+            TransactionModelView transaction = new TransactionModelView()
             {
-                RRechargeId = 100,
-                RRName = "ABC10",
-                BaseTime = 3600,
-                BonusTime = 0,
-                TotalTime = 3600,
-                Price = 14,
-                Duration = 10,
-                Description = "",
-                Status = "Active"
+                PhoneNumber = Session["phonenumber"].ToString(),
+                PaymentMethod = "Visa",
+                RRechargeId = rechargeInfor.RRechargeId,
+                SRechargeId = -1,
+                DateTime = DateTime.Now,
+                Status = "Success"
             };
-            return View(rRechargeModelView);
+            Session["transactionInfo"] = transaction;
+            Session["phonenumber"] = null;
+            Session["rechargeInfo"] = null;
+            return RedirectToAction("CheckoutReview");
         }
 
         public ActionResult CheckoutReview()
         {
-            return View();
+            var transaction = Session["transactionInfo"] as TransactionModelView;
+            int id = transaction.RRechargeId;
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            var rechargeInfo = rechargeDAO.RRechargeById(id);
+            return View(rechargeInfo);
         }
 
         public ActionResult CheckoutComplete()
         {
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            var transaction = Session["transactionInfo"] as TransactionModelView;
+            rechargeDAO.CheckoutComplete(transaction);
+            Session["transactionInfo"] = null;
             return View();
         }
     }

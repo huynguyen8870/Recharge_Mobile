@@ -1,122 +1,42 @@
 ﻿@model IEnumerable<Recharge_Mobile.Areas.User.Models.Views.TransactionModelView>
 @{
     ViewBag.Title = "Transaction List";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
 }
 
-<!-- Order Details-->
-<div class="modal fade" id="order-details">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Order No - 34VB5540K83</h4>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <div class="modal-body pb-0">
-                <!-- Item-->
-                <div class="cart-item d-md-flex justify-content-between pr-2">
-                    <div class="px-3 my-3">
-                        <div class="cart-item-label d-none d-mb-block">Product</div><a class="cart-item-product" href="shop-single.html">
-                            <div class="cart-item-product-thumb"><img src="img/shop/cart/01.jpg" alt="Product"></div>
-                            <div class="cart-item-product-info">
-                                <h4 class="cart-item-product-title">Canon EOS M50 Mirrorless Camera</h4><span><strong>Type:</strong> Mirrorless</span><span><strong>Color:</strong> Black</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Quantity</div><span class="text-xl font-weight-medium">1</span>
-                    </div>
-                    <div class="px-3 my-3 text-center">
-                        <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$910.00</span>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer flex-wrap justify-content-between">
-                <div class="px-2 py-1"><span class="text-muted">Subtotal:&nbsp;</span><span class="font-weight-medium">$2,548.50</span></div>
-                <div class="px-2 py-1"><span class="text-muted">Shipping:&nbsp;</span><span class="font-weight-medium">$26.50</span></div>
-                <div class="px-2 py-1"><span class="text-muted">Tax:&nbsp;</span><span class="font-weight-medium">$9.72</span></div>
-                <div class="px-2 py-1"><span class="text-muted">Total:&nbsp;</span><span class="text-lg font-weight-medium">$2,584.72</span></div>
-            </div>
+
+<!-- Transaction Table-->
+<div class="col-lg-8 pb-5">
+    <div class="d-flex justify-content-end pb-3">
+        <div class="form-inline">
+            <label class="text-muted mr-3" for="order-sort">Sort Transaction</label>
+            <select class="form-control" id="order-sort">
+                <option>All</option>
+                <option>Delivered</option>
+                <option>In Progress</option>
+                <option>Delayed</option>
+                <option>Canceled</option>
+            </select>
         </div>
     </div>
-</div>
-<!-- Page Title-->
-<div class="page-title d-flex" aria-label="Page title" style="background-image: url(~/Content/img/page-title/shop-pattern.jpg);">
-    <div class="container text-left align-self-center">
-        <h1 class="page-title-heading">Transaction List</h1>
-    </div>
-</div>
-<!-- Page Content-->
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-lg-4 pb-5">
-            <!-- Account Sidebar-->
-            <div class="author-card pb-3">
-                <div class="author-card-profile">
-                    <div class="author-card-avatar">
-                        <img src="~/Content/img/account/user-ava.jpg" alt="Daniel Adams" />
-                    </div>
-                    <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">@*@Model.FirstName @Model.LastName*@</h5>
-                        <span class="author-card-position">Time Remain: </span>
-                        <span class="author-card-position">Debit Amount: </span>
-                    </div>
-                </div>
-            </div>
-            <div class="wizard">
-                <nav class="list-group list-group-flush">
-                    <a class="list-group-item" href="@Url.Action("AccountDetail","User")"><i class="fe-icon-user text-muted"></i>Profile</a>
-                    <a class="list-group-item active" href="@Url.Action("TransactionList","User")">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Transaction List</div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="list-group-item" href="@Url.Action("AccountSetting","User")"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item" href="@Url.Action("AccountDebit","User")">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fe-icon-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Debit Transaction</div>
-                            </div>
-                        </div>
-                    </a>
-                </nav>
-            </div>
-        </div>
-        <!-- Transaction Table-->
-        <div class="col-lg-8 pb-5">
-            <div class="d-flex justify-content-end pb-3">
-                <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Transaction</label>
-                    <select class="form-control" id="order-sort">
-                        <option>All</option>
-                        <option>Delivered</option>
-                        <option>In Progress</option>
-                        <option>Delayed</option>
-                        <option>Canceled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>Transaction #</th>
-                            <th>Name</th>
-                            <th>Date Purchased</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(var item in Model){
-                        <tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
-                            <td>@item.PaymentMethod</td>
-                            <td>@item.DateTime</td>
-                            @*@switch (item.Status)
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Transaction #</th>
+                    <th>Name</th>
+                    <th>Date Purchased</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
+                        <td>@item.PaymentMethod</td>
+                        <td>@item.DateTime</td>
+                        @*@switch (item.Status)
                             {
                                 case "Success":
                                     <td><span class="badge badge-success m-0">Success</span></td>
@@ -128,20 +48,18 @@
                                     <td><span class="badge badge-warning m-0">Waiting</span></td>
                                     break;
                             }*@
-                            <td><span class="badge badge-danger m-0">@item.Status</span></td>
-                        </tr>
-                         }
-                        
-                        @*<tr>
-                            <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
-                            <td>August 08, 2017</td>
-                            <td><span class="badge badge-danger m-0">Canceled</span></td>
-                            <td><span>$760.50</span></td>
-                        </tr>*@
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        <td><span class="badge badge-danger m-0">@item.Status</span></td>
+                    </tr>
+                }
+
+                @*<tr>
+                        <td><a class="navi-link" href="#order-details" data-toggle="modal">78A643CD409</a></td>
+                        <td>August 08, 2017</td>
+                        <td><span class="badge badge-danger m-0">Canceled</span></td>
+                        <td><span>$760.50</span></td>
+                    </tr>*@
+            </tbody>
+        </table>
     </div>
 </div>
 

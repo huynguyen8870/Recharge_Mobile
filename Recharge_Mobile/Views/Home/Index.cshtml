@@ -8,8 +8,11 @@
             <div class="col-xl-8 col-lg-10 pt-3 text-center">
                 <h2 class="h3 block-title mb-3">Recharge Mobile </h2>
                 <p class="text-muted">Mobile recharge: send credit, data and paid bill to any phone</p>
-                <input type="text" class="form-control" id="phonenumber" placeholder="Enter your phone number" /> <br />
-                <a href="#" type="submit" class="btn btn-gradient ml-3 d-none d-xl-inline-block">Start Recharge</a>
+                @using (Html.BeginForm())
+                {
+                    <input type="text" class="form-control" name="phonenumber" placeholder="Enter your phone number" /> <br />
+                    <button type="submit" class="btn btn-gradient ml-3 d-none d-xl-inline-block">Start Recharge</button>
+                }
             </div>
         </div>
     </div>
@@ -22,7 +25,13 @@
             <a class="card" href="#">
                 <div class="card-body text-center">
                     <h3 class="card-title pt-1">What is Recharge?</h3>
-                    <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></span>
+                    <p class="card-text text-sm">
+                        No matter how many borders you cross, thanks to Recharge’s fast and safe service, you’ll easily stay in touch with one another.
+                        Recharge yours or someone else’s call credit or data 24/7 in over 140 countries.
+                        Depending on the product you choose, we’ll directly send the credit to your phone or as a recharge code by email.
+                        We make sure you’ll always stay connected.
+                    </p>
+                    <span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></span>
                 </div>
             </a>
         </div>
@@ -38,7 +47,10 @@
             <a class="card" href="#">
                 <div class="card-body text-center">
                     <h3 class="card-title pt-1">Make safe and secure payments</h3>
-                    <p class="card-text text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p><span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></span>
+                    <p class="card-text text-sm">
+                        We make sure the information you give is secured
+                    </p>
+                    <span class="text-sm text-uppercase font-weight-bold">Learn More&nbsp;<i class="fe-icon-arrow-right"></i></span>
                 </div>
             </a>
         </div>

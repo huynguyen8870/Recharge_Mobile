@@ -9,6 +9,13 @@ namespace Recharge_Mobile.Areas.User.Controllers
 {
     public class UserController : Controller
     {
+        public ActionResult AccountDetail()
+        {
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var accountDetail = userDAO.AccountDetail("0123456789");
+            return View(accountDetail);
+        }
+
         // GET: User/Login/Details/5
         public ActionResult AccountSetting()
         {
@@ -17,14 +24,50 @@ namespace Recharge_Mobile.Areas.User.Controllers
             return View(accountInfor);
         }
         [HttpPost]
-        //public ActionResult AccountSetting()
-        //{
+        public ActionResult AccountSetting(string firstname, string lastname, string email, string address)
+        {
+            AccountModelView accountModelView = new AccountModelView()
+            {
+                CustomerId = 1,
+                FirstName = firstname,
+                LastName = lastname,
+                Email = email,
+                Address = address
+            };
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            userDAO.AccountChange(accountModelView);
+            return View();
+        }
 
-        //}
 
         public ActionResult ChangePassword()
         {
             return View();
+        }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpassword, string newpassword, string repassword)
+        {
+            //Check password
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var AccountPass = userDAO.AccountPassword("0123456789");
+            if(oldpassword != AccountPass)
+            {
+                TempData["oldpassword"] = "Wrong Password!";
+                return View();
+            } else
+            {
+                //Check confirm password
+                if (newpassword != repassword)
+                {
+                    TempData["repassword"] = "Confirm password have to same as above!";
+                    return View();
+                } else
+                {
+                    TempData["success"] = "Your password had been change!";
+                    userDAO.PasswordChange("0123456789", newpassword);
+                    return View();
+                }
+            }
         }
 
         public ActionResult TransactionList()
@@ -34,42 +77,13 @@ namespace Recharge_Mobile.Areas.User.Controllers
             return View(TransList);
         }
 
-        // GET: User/Login/Create
-        public ActionResult AccountDetail()
-        {
-            Models.Views.CustomerRechargeModelView customerRechargeModelView = new Models.Views.CustomerRechargeModelView()
-            {
-                Id = 100,
-                PhoneNumber = 0123456789,
-                TimeRemain = 12800,
-                EndTime = DateTime.Now,
-                SPTimeRemain = DateTime.Now,
-                DebitAmount = 1000,
-                TimeToPay = DateTime.Now
-            };
-            return View(customerRechargeModelView);
-        }
 
         public ActionResult AccountDebit()
         {
-            List<Models.Views.DebitTransactionModelView> debitTransactions = new List<Models.Views.DebitTransactionModelView>();
-            Models.Views.DebitTransactionModelView debitTransaction = new Models.Views.DebitTransactionModelView()
-            {
-                Id = 12334447,
-                TransactionId = 102,
-                DateTime = DateTime.UtcNow,
-                Status = "Waiting"
-            };
-            Models.Views.DebitTransactionModelView debitTransaction1 = new Models.Views.DebitTransactionModelView()
-            {
-                Id = 12334447,
-                TransactionId = 103,
-                DateTime = DateTime.UtcNow,
-                Status = "Waiting"
-            };
-            debitTransactions.Add(debitTransaction);
-            debitTransactions.Add(debitTransaction1);
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var debitTransactions = userDAO.DebitTransactionList("0123456789");
             return View(debitTransactions);
         }
+
     }
 }

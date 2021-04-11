@@ -16,10 +16,10 @@
     <div class="wizard pb-3">
         <div class="wizard-body pt-2 text-center">
             <h3 class="h4 pb-3">Thank you for your order!</h3>
-            <p class="mb-2">Your order has been placed and will be processed as soon as possible.</p>
+            @*<p class="mb-2">Your order has been placed and will be processed as soon as possible.</p>*@
             <p class="mb-2">Make sure you make note of your order number, which is <strong>34VB5540K83.</strong></p>
-            <p>You will be receiving an email shortly with confirmation of your order. <u>You can now:</u></p>
-            <a class="btn btn-secondary mt-3 mr-3" href="shop-boxed-ls.html">Go Back  Shopping</a>
+            <p>You will be receiving an email shortly with confirmation of your order.</p>
+            <a class="btn btn-secondary mt-3 mr-3" href="@Url.Action("RechargeDetail","Recharge", new { Area = "Recharge" })">Go Back  Shopping</a>
         </div>
     </div>
 </div>

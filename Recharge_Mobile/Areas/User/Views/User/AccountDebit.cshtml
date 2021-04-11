@@ -1,115 +1,67 @@
-﻿@model IEnumerable<Recharge_Mobile.Areas.User.Models.Views.DebitTransactionModelView>
+﻿@model IEnumerable<Recharge_Mobile.Areas.User.Models.Views.TransactionModelView>
 @{
-    ViewBag.Title = "AccountDebit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Debit Transaction";
+    Layout = "~/Areas/User/Views/Shared/_LayoutUser.cshtml";
 }
 
-<!-- Page Title-->
-<div class="page-title d-flex" aria-label="Page title" style="background-image: @Url.Content("../Content/img/page-title/shop-pattern.jpg"); ">
-    <div class="container text-left align-self-center">
-        <h1 class="page-title-heading">Debit Transaction</h1>
-    </div>
-</div>
-<!-- Page Content-->
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-lg-4 pb-5">
-            <!-- Account Sidebar-->
-            <div class="author-card pb-3">
-                <div class="author-card-profile">
-                    <div class="author-card-avatar">
-                        <img src="~/Content/img/account/user-ava.jpg" alt="Daniel Adams" />
-                    </div>
-                    <div class="author-card-details">
-                        <h5 class="author-card-name text-lg">@*@Model.FirstName @Model.LastName*@</h5>
-                        <span class="author-card-position">Time Remain: </span>
-                        <span class="author-card-position">Debit Amount: </span>
-                    </div>
-                </div>
-            </div>
-            <div class="wizard">
-                <nav class="list-group list-group-flush">
-                    <a class="list-group-item" href="@Url.Action("AccountDetail","User")"><i class="fe-icon-user text-muted"></i>Profile</a>
-                    <a class="list-group-item" href="@Url.Action("TransactionList","User")">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fe-icon-shopping-bag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Transaction List</div>
-                            </div>
-                        </div>
-                    </a>
-                    <a class="list-group-item" href="@Url.Action("AccountSetting","User")"><i class="fe-icon-user text-muted"></i>Profile Settings</a>
-                    <a class="list-group-item active" href="@Url.Action("AccountDebit","User")">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <i class="fe-icon-tag mr-1 text-muted"></i>
-                                <div class="d-inline-block font-weight-medium text-uppercase">Debit Transaction</div>
-                            </div>
-                        </div>
-                    </a>
-                </nav>
-            </div>
+<!-- Debit Table-->
+<div class="col-lg-8 pb-5">
+    <div class="d-flex justify-content-end pb-3">
+        <div class="form-inline">
+            <label class="text-muted mr-3" for="order-sort">Sort Transaction</label>
+            <select class="form-control" id="order-sort">
+                <option>Complete</option>
+                <option>Waiting</option>
+            </select>
         </div>
-        <!-- Debit Table-->
-        <div class="col-lg-8 pb-5">
-            <div class="d-flex justify-content-end pb-3">
-                <div class="form-inline">
-                    <label class="text-muted mr-3" for="order-sort">Sort Transaction</label>
-                    <select class="form-control" id="order-sort">
-                        <option>Complete</option>
-                        <option>Waiting</option>
-                    </select>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                        <tr>
-                            <th>Transaction #</th>
-                            <th>Package</th>
-                            <th>Date Purchased</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
-                                <td>@item.TransactionId</td>
-                                <td>@item.DateTime</td>
-                                <td>$10</td>
-                                @*@switch (item.Status)
-                                {
-                                    case "Success":
-                                        <td><span class="badge badge-success m-0">Success</span></td>
-                                        break;
-                                    case "Cancel":
-                                        <td><span class="badge badge-danger m-0">Cancel</span></td>
-                                        break;
-                                    case "Waiting":
-                                        <td><span class="badge badge-warning m-0">Waiting</span></td>
-                                        break;
-                                }*@
-                                <td><span class="badge badge-danger m-0">@item.Status</span></td>
-                                <td>
-                                    <a class="btn btn-style-4 btn-dark btn-sm" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.TransactionId })">
-                                        Pay
-                                    </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-12">
-                <hr class="mt-2 mb-3">
-                <div class="d-flex flex-wrap justify-content-between align-items-center">
-                    <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Pay All</button>
-                </div>
-            </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Transaction #</th>
+                    <th>Package</th>
+                    <th>Date Purchased</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
+                        <td>@item.RRecharge</td>
+                        <td>@item.DateTime</td>
+                        <td>$10</td>
+                        @*@switch (item.Status)
+                            {
+                                case "Success":
+                                    <td><span class="badge badge-success m-0">Success</span></td>
+                                    break;
+                                case "Cancel":
+                                    <td><span class="badge badge-danger m-0">Cancel</span></td>
+                                    break;
+                                case "Waiting":
+                                    <td><span class="badge badge-warning m-0">Waiting</span></td>
+                                    break;
+                            }*@
+                        <td><span class="badge badge-danger m-0">@item.Status</span></td>
+                        <td>
+                            <a class="btn btn-style-4 btn-dark btn-sm" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.TransactionId })">
+                                Pay
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-12">
+        <hr class="mt-2 mb-3">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <button class="btn btn-primary" type="button" data-toast data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Pay All</button>
         </div>
     </div>
 </div>
