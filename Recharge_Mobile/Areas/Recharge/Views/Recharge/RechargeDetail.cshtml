@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Recharge_Mobile.Areas.Recharge.Models.RRechargeModelView>
+﻿@using Recharge_Mobile.Areas.Recharge.Models
 @{
     ViewBag.Title = "RechageDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -26,7 +26,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
+                            @foreach (var item in (IList<RRechargeModelView>)(ViewBag.RRList))
                             {
                                 <tr>
                                     <td>
@@ -73,26 +73,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <h6 class="product-title">GDP70</h6>
-                                </td>
-                                <td>
-                                    Call: 70 minutes<br />
-                                    Data : 2 GB<br />
-                                    Valid time: 30 days
-                                </td>
-                                <td>
-                                    <span class="product-price">
-                                        $14.99
-                                    </span>
-                                </td>
-                                <td>
-                                    <a class="btn btn-style-4 btn-dark" href="#">
-                                        Subscribe
-                                    </a>
-                                </td>
-                            </tr>
+                            @foreach (var item in (IList<SRechargeModelView>)(ViewBag.SRList))
+                            {
+                                <tr>
+                                    <td>
+                                        <p class="product-title"><strong>@item.SRName</strong></p>
+                                    </td>
+                                    <td>
+                                        @*@{ TimeSpan totalTime = TimeSpan.FromSeconds(@item.BaseTime); }
+                                           @totalTime.ToString(@"hh\:mm\:ss")*@
+                                        Duration: @item.Duration days
+                                    </td>
+                                    <td>
+                                        <span class="product-price">
+                                            $@item.Price
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.SRechargeId })">
+                                            Subscribe
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

@@ -1,0 +1,81 @@
+﻿<header class="navbar-wrapper navbar-sticky">
+    <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="index.html"><img src="~/Content/img/logo/logo-dark.png" alt="CreateX" /></a></div>
+    <div class="d-table-cell w-100 align-middle pl-md-3">
+        <div class="navbar-top d-none d-lg-flex justify-content-between align-items-center">
+            <div>
+                <a class="navbar-link mr-3" href="tel:+8418001779"><i class="fe-icon-phone"></i>+84 1800 1779</a>
+                <a class="navbar-link mr-3" href="mailto:rechargeX@example.com"><i class="fe-icon-mail"></i>rechargeX@example.com</a>
+                <a class="social-btn sb-style-3 sb-twitter" href="#"><i class="socicon-twitter"></i></a>
+                <a class="social-btn sb-style-3 sb-facebook" href="#"><i class="socicon-facebook"></i></a>
+                <a class="social-btn sb-style-3 sb-pinterest" href="#"><i class="socicon-pinterest"></i></a>
+                <a class="social-btn sb-style-3 sb-instagram" href="#"><i class="socicon-instagram"></i></a>
+            </div>
+            <div>
+                <ul class="list-inline mb-0">
+                    <li class="dropdown-toggle mr-2">
+                        <a class="navbar-link" href="account-login.html"><i class="fe-icon-user"></i>Login or Create account</a>
+                        <div class="dropdown-menu right-aligned p-3 text-center" style="min-width: 200px;">
+                            <p class="text-sm opacity-70">Sign in to your account or register new one to have full control over your orders, receive bonuses and more.</p>
+                            <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Login","Account")">Sign In</a>
+                            <p class="text-sm text-muted mt-3 mb-0">New customer? <a href='@Url.Action("Register","Account")'>Register</a></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar justify-content-end justify-content-lg-between">
+            <!-- Search-->
+            <form class="search-box" method="get">
+                <input type="text" id="site-search" placeholder="Type A or C to see suggestions"><span class="search-close"><i class="fe-icon-x"></i></span>
+            </form>
+            <!-- Main Menu-->
+            <ul class="navbar-nav d-none d-block">
+                <!-- Home-->
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("")"><span class="fa fa-home"></span> Home</a>
+                </li>
+                <!-- Transaction-->
+                <li class="nav-item dropdown-toggle">
+                    <a class="nav-link" href="@Url.Action("TransactionList","TransactionAdmin")"><span class="fa fa-align-left"></span> Transaction</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            @Html.ActionLink("View Transaction", "TransactionList", "TransactionAdmin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Search By Date", "TransactionListByDate", "TransactionAdmin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Advanced Search", "AdvanceSearch", "TransactionAdmin")
+                        </li>
+                    </ul>
+                </li>
+                <!--Customer-->
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("CustomerList","AdminCustomer")"><span class="fa fa-calendar-plus-o"></span> Customer</a>
+                </li>
+                <!-- Admin-->
+                <li class="nav-item dropdown-toggle">
+                    <a class="nav-link" href="{{ url('/show-categories') }}"><span class="fa fa-align-left"></span> Admin</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Create Admin", "CreateAdmin", "Admin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Admin Information", "AdminInformation", "Admin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Admin List", "ViewAdminList", "Admin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Change Password", "ChangePassword", "Admin")
+                        </li>
+                    </ul>
+                </li>
+                <!-- User-->
+                <!--<li class="nav-item">
+                    <a class="nav-link" href="~/Admin/Account/ViewUser"><span class="fa fa-user-o"></span> User</a>
+                </li>-->
+            </ul>
+        </div>
+    </div>
+</header>

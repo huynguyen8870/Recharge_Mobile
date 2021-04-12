@@ -18,7 +18,10 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
         {
             RechargeDAO rechargeDAO = new RechargeDAO();
             var RRList = rechargeDAO.RRechargeList();
-            return View(RRList);
+            var SRList = rechargeDAO.SRechargeList();
+            ViewBag.RRlist = RRList;
+            ViewBag.SRList = SRList;
+            return View();
         }
 
         public ActionResult CheckoutPayment(int id)
