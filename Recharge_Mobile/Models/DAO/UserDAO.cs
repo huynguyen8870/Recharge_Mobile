@@ -19,10 +19,10 @@ namespace Recharge_Mobile.Areas.User.Models.DAO
             {
                 PhoneNumber = Account.PhoneNumber,
                 TimeRemain = Convert.ToInt64(Account.TimeRemain),
-                RegularTime = Account.RegularTime ?? DateTime.Now,
-                SpecialTime = Account.SpecialTime ?? DateTime.Now,
-                DebitAmount = Account.DebitAmount ?? 0,
-                TimeToPay = Account.TimeToPay ?? DateTime.Now
+                RegularTime = Account.RegularTime,
+                SpecialTime = Account.SpecialTime,
+                DebitAmount = Account.DebitAmount,
+                TimeToPay = Account.TimeToPay
             };
             return customerRechargeModelView;
         }
