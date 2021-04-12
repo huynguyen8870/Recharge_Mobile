@@ -8,10 +8,10 @@ namespace Recharge_Mobile.Areas.User.Models.Views
     public class TransactionModelView
     {
         public int TransactionId { get; set; }
-        public int PhoneNumber { get; set; }
-        public string TypeRecharge { get; set; }
-        public int RRecharge { get; set; }
-        public int SRecharge { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PaymentMethod { get; set; }
+        public int RRechargeId { get; set; }
+        public int SRechargeId { get; set; }
         public DateTime DateTime { get; set; }
         public string Status { get; set; }
 
@@ -20,13 +20,13 @@ namespace Recharge_Mobile.Areas.User.Models.Views
 
         }
 
-        public TransactionModelView(int transactionId, int phoneNumber, string typeRecharge, int rRecharge, int sRecharge, DateTime dateTime, string status)
+        public TransactionModelView(int transactionId, string phoneNumber, string paymentMethod, int rRechargeId, int sRechargeId, DateTime dateTime, string status)
         {
             TransactionId = transactionId;
             PhoneNumber = phoneNumber;
-            TypeRecharge = typeRecharge;
-            RRecharge = rRecharge;
-            SRecharge = sRecharge;
+            PaymentMethod = paymentMethod;
+            RRechargeId = rRechargeId;
+            SRechargeId = sRechargeId;
             DateTime = dateTime;
             Status = status;
         }

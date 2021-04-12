@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recharge_Mobile.Areas.User.Models.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,88 +9,81 @@ namespace Recharge_Mobile.Areas.User.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User/Login
-        public ActionResult TransactionList()
+        public ActionResult AccountDetail()
         {
-            List<Models.Views.TransactionModelView> transactionModelView = new List<Models.Views.TransactionModelView>();
-            Models.Views.TransactionModelView transactionModelView1 = new Models.Views.TransactionModelView()
-            {
-                TransactionId = 1,
-                PhoneNumber = 0123456789,
-                TypeRecharge = "RRecharge",
-                RRecharge = 10,
-                SRecharge = 0,
-                DateTime = DateTime.Now,
-                Status = "Success"
-            };
-            Models.Views.TransactionModelView transactionModelView2 = new Models.Views.TransactionModelView()
-            {
-                TransactionId =2,
-                PhoneNumber = 0123456789,
-                TypeRecharge = "RRecharge",
-                RRecharge = 10,
-                SRecharge = 0,
-                DateTime = DateTime.Now,
-                Status = "Cancle"
-            };
-            transactionModelView.Add(transactionModelView1);
-            transactionModelView.Add(transactionModelView2);
-            return View(transactionModelView);
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var accountDetail = userDAO.AccountDetail("0123456789");
+            return View(accountDetail);
         }
 
         // GET: User/Login/Details/5
         public ActionResult AccountSetting()
         {
-            Models.Views.AccountModelView accountModelView = new Models.Views.AccountModelView()
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var accountInfor = userDAO.AccountSetting(1);
+            return View(accountInfor);
+        }
+        [HttpPost]
+        public ActionResult AccountSetting(string firstname, string lastname, string email, string address)
+        {
+            AccountModelView accountModelView = new AccountModelView()
             {
                 CustomerId = 1,
-                PhoneNumber = 0123456789,
-                Password = "abcxyz123",
-                FirstName = "Huy",
-                LastName = "Nguyen",
-                Email = "abc@gmail.com",
-                Address = "abc abc xyz",
-                Status = "Active"
+                FirstName = firstname,
+                LastName = lastname,
+                Email = email,
+                Address = address
             };
-            return View(accountModelView);
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            userDAO.AccountChange(accountModelView);
+            return View();
         }
 
-        // GET: User/Login/Create
-        public ActionResult AccountDetail()
+
+        public ActionResult ChangePassword()
         {
-            Models.Views.CustomerRechargeModelView customerRechargeModelView = new Models.Views.CustomerRechargeModelView()
-            {
-                Id = 100,
-                PhoneNumber = 0123456789,
-                TimeRemain = 12800,
-                EndTime = DateTime.Now,
-                SPTimeRemain = DateTime.Now,
-                DebitAmount = 1000,
-                TimeToPay = DateTime.Now
-            };
-            return View(customerRechargeModelView);
+            return View();
         }
+        [HttpPost]
+        public ActionResult ChangePassword(string oldpassword, string newpassword, string repassword)
+        {
+            //Check password
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var AccountPass = userDAO.AccountPassword("0123456789");
+            if(oldpassword != AccountPass)
+            {
+                TempData["oldpassword"] = "Wrong Password!";
+                return View();
+            } else
+            {
+                //Check confirm password
+                if (newpassword != repassword)
+                {
+                    TempData["repassword"] = "Confirm password have to same as above!";
+                    return View();
+                } else
+                {
+                    TempData["success"] = "Your password had been change!";
+                    userDAO.PasswordChange("0123456789", newpassword);
+                    return View();
+                }
+            }
+        }
+
+        public ActionResult TransactionList()
+        {
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var TransList = userDAO.TransactionList("0123456789");
+            return View(TransList);
+        }
+
 
         public ActionResult AccountDebit()
         {
-            List<Models.Views.DebitTransaction> debitTransactions = new List<Models.Views.DebitTransaction>();
-            Models.Views.DebitTransaction debitTransaction = new Models.Views.DebitTransaction()
-            {
-                Id = 12334447,
-                TransactionId = 102,
-                DateTime = DateTime.UtcNow,
-                Status = "Waiting"
-            };
-            Models.Views.DebitTransaction debitTransaction1 = new Models.Views.DebitTransaction()
-            {
-                Id = 12334447,
-                TransactionId = 103,
-                DateTime = DateTime.UtcNow,
-                Status = "Waiting"
-            };
-            debitTransactions.Add(debitTransaction);
-            debitTransactions.Add(debitTransaction1);
+            Models.DAO.UserDAO userDAO = new Models.DAO.UserDAO();
+            var debitTransactions = userDAO.DebitTransactionList("0123456789");
             return View(debitTransactions);
         }
+
     }
 }
