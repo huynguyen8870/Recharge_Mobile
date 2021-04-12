@@ -9,6 +9,7 @@ namespace Recharge_Mobile.Areas.RechargeArea.Controllers
 {
     public class RegularRechargeController : Controller
     {
+        RegularRechargeDAO regularRechargeDAO;
         // GET: RechargeArea/RegularRecharge
         public ActionResult Index()
         {
@@ -26,7 +27,8 @@ namespace Recharge_Mobile.Areas.RechargeArea.Controllers
         {
             if (ModelState.IsValid)
             {
-                RegularRechargeDAO.CreateItem(vm);
+                regularRechargeDAO = new RegularRechargeDAO();
+                regularRechargeDAO.CreateItem(vm);
                 return RedirectToAction("CreateRegularRecharge");
             }
             return View(vm);
@@ -34,22 +36,25 @@ namespace Recharge_Mobile.Areas.RechargeArea.Controllers
 
         public ActionResult ViewRRList()
         {
-            var resultList = RegularRechargeDAO.GetList();
+            regularRechargeDAO = new RegularRechargeDAO();
+            var resultList = regularRechargeDAO.GetList();
             return View(resultList);
         }
 
         public ActionResult EditRR(int id)
         {
-            var result = RegularRechargeDAO.GetItemById(id);
+            regularRechargeDAO = new RegularRechargeDAO();
+            var result = regularRechargeDAO.GetItemById(id);
             return View(result);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult EditRR(RegularRechargeVM vm)
         {
+            regularRechargeDAO = new RegularRechargeDAO();
             if (ModelState.IsValid)
             {
-                RegularRechargeDAO.EditItem(vm);
+                regularRechargeDAO.EditItem(vm);
                 return RedirectToAction("ViewRRList");
             }
             return View(vm);
@@ -57,13 +62,15 @@ namespace Recharge_Mobile.Areas.RechargeArea.Controllers
 
         public ActionResult ActivateRR(int id)
         {
-            RegularRechargeDAO.ActivateItem(id);
+            regularRechargeDAO = new RegularRechargeDAO();
+            regularRechargeDAO.ActivateItem(id);
             return RedirectToAction("ViewRRList");
         }
 
         public ActionResult DeactivateRR(int id)
         {
-            RegularRechargeDAO.DeactivateItem(id);
+            regularRechargeDAO = new RegularRechargeDAO();
+            regularRechargeDAO.DeactivateItem(id);
             return RedirectToAction("ViewRRList");
         }
     }

@@ -1,0 +1,201 @@
+﻿@model Recharge_Mobile.Areas.AdminArea.Models.AdminCustomerDetailsVM
+@using Recharge_Mobile.Areas.AdminArea.Models
+
+@{
+    ViewBag.Title = "CustomerDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>CustomerDetails</h2>
+
+<div>
+    <h4>AdminCustomerDetailsVM</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeRemain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeRemain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegularTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegularTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TimeToPay)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeToPay)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Busy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Busy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lock)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lock)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>
+
+@if (ViewBag.CustomerTransactions != null && ((List<TransactionAdminVM>)(ViewBag.CustomerTransactions)).Count() >= 1)
+{
+<table class="table">
+    <tr>
+        <th>
+            TransactionId
+        </th>
+        <th>
+            PhoneNumber
+        </th>
+        <th>
+            TypeRecharge
+        </th>
+        <th>
+            RRechargeId
+        </th>
+        <th>
+            SRechargeId
+        </th>
+        <th>
+            TypePacket
+        </th>
+        <th>
+            RechargeName
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            DateTime
+        </th>
+        <th>
+            PostPayment
+        </th>
+        <th>
+            Status
+        </th>
+    </tr>
+
+    @foreach (TransactionAdminVM item in (List<TransactionAdminVM>)(ViewBag.CustomerTransactions))
+    {
+        <tr>
+            <td>
+                @item.TransactionId
+            </td>
+            <td>
+                @item.PhoneNumber
+            </td>
+            <td>
+                @item.PaymentMethod
+            </td>
+            <td>
+                @item.RRechargeId
+            </td>
+            <td>
+                @item.SRechargeId
+            </td>
+            <td>
+                @item.RechargeType
+            </td>
+            <td>
+                @item.RechargeName
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @item.DateTime
+            </td>
+            <td>
+                @item.PostPayment
+            </td>
+            <td>
+                @item.Status
+            </td>
+        </tr>
+    }
+</table>
+}
+

@@ -1,0 +1,128 @@
+﻿@model IEnumerable<Recharge_Mobile.Areas.AdminArea.Models.TransactionAdminVM>
+
+@{
+    ViewBag.Title = "TransactionListByDate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TransactionListByDate</h2>
+
+@using (Html.BeginForm("TransactionListByDate", "TransactionAdmin", new { area = "AdminArea" }))
+{
+    if (ViewBag.daycheck != null)
+    {
+        <input type="date" id="checkdate" name="checkdate" value="@ViewBag.daycheck.ToString("yyyy-MM-dd")" onchange="this.form.submit()">
+    }
+    else
+    {
+        <input type="date" id="checkdate" name="checkdate" value="@DateTime.Now.ToString("yyyy-MM-dd")" onchange="this.form.submit()">
+    }
+}
+
+
+@*<span id="btnchange" class="btn btn-default">change</span>*@
+
+<p>
+    Total Amount: $@ViewBag.totalAmount
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TransactionId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMethod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RRechargeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SRechargeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RechargeType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RechargeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostPayment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TransactionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaymentMethod)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RRechargeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SRechargeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RechargeType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RechargeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostPayment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
+
+@section scripts {
+    @*<script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#btnchange").click(function () {
+                $.ajax({
+                    url: 'TransactionListByDate',
+                    method: "post",
+                    data: {
+                        CheckDate: $("#checkdate").val()
+                    },
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            });
+        });
+
+    </script>*@
+}

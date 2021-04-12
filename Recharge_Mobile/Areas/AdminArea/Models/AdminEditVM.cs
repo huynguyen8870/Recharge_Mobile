@@ -6,35 +6,24 @@ using System.Web;
 
 namespace Recharge_Mobile.Areas.AdminArea.Models
 {
-    public class AdminVM
+    public class AdminEditVM
     {
-        public AdminVM()
+        public AdminEditVM()
         {
 
         }
 
-        public AdminVM(int adminId, string username, string password, string firstName, string lastName,
-            string phoneNumber, string email, string address, string role, string status)
+        public AdminEditVM(int adminId, string firstName, string lastName,
+            string phoneNumber, string email, string address)
         {
-            AdminId = adminId;
-            Username = username;
-            Password = password;
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
             Email = email;
             Address = address;
-            Role = role;
-            Status = status;
         }
 
         public int AdminId { get; set; }
-        [StringLength(50, ErrorMessage = "max length = 50 characters!")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "please enter username!")]
-        public string Username { get; set; }
-        [StringLength(50, MinimumLength = 8, ErrorMessage = "password must have 8-50 characters!")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "please enter password!")]
-        public string Password { get; set; }
         [StringLength(50, ErrorMessage = "max length = 50 characters!")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "please enter first name!")]
         public string FirstName { get; set; }
@@ -50,9 +39,5 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
         [StringLength(500, ErrorMessage = "max length = 500 characters!")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "please enter address!")]
         public string Address { get; set; }
-        [StringLength(50, ErrorMessage = "max length = 50 characters!")]
-        public string Role { get; set; }
-        [StringLength(50, ErrorMessage = "max length = 50 characters!")]
-        public string Status { get; set; }
     }
 }

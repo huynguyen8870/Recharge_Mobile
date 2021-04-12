@@ -8,8 +8,8 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
 {
     public class AdminDAO
     {
-        static RechargeMobileEntities entities;
-        public static void CreateAdmin(AdminVM vm)
+        RechargeMobileEntities entities;
+        public void CreateAdmin(AdminVM vm)
         {
             entities = new RechargeMobileEntities();
             Admin item = new Admin()
@@ -25,10 +25,11 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                 Role = "Admin",
                 Status = "Active"
             };
+            entities.Admins.Add(item);
             entities.SaveChanges();
         }
 
-        public static IList<AdminVM> ListAdmin()
+        public IList<AdminVM> ListAdmin()
         {
             entities = new RechargeMobileEntities();
             var list = entities.Admins.Select(d => new AdminVM()
@@ -46,7 +47,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             return list;
         }
 
-        public static AdminVM GetAdminById(int id)
+        public AdminVM GetAdminById(int id)
         {
             entities = new RechargeMobileEntities();
             var item = entities.Admins.Where(d => d.AdminId == id).Select(d => new AdminVM()
@@ -64,7 +65,22 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             return item;
         }
 
-        public static void EditAdmin(AdminVM vm)
+        public AdminEditVM GetAdminEditById(int id)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.AdminId == id).Select(d => new AdminEditVM()
+            {
+                AdminId = d.AdminId,
+                FirstName = d.FirstName,
+                LastName = d.LastName,
+                PhoneNumber = d.PhoneNumber,
+                Email = d.Email,
+                Address = d.Address
+            }).FirstOrDefault();
+            return item;
+        }
+
+        public void EditAdmin(AdminEditVM vm)
         {
             entities = new RechargeMobileEntities();
             Admin item = entities.Admins.Where(d => d.AdminId == vm.AdminId).FirstOrDefault();
@@ -76,7 +92,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             entities.SaveChanges();
         }
 
-        public static void EditAdminPassword(int id, string newPassword)
+        public void EditAdminPassword(int id, string newPassword)
         {
             entities = new RechargeMobileEntities();
             Admin item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
@@ -84,7 +100,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             entities.SaveChanges();
         }
 
-        public static void ActivateItem(int id)
+        public void ActivateItem(int id)
         {
             entities = new RechargeMobileEntities();
             var item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
@@ -92,12 +108,45 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             entities.SaveChanges();
         }
 
-        public static void DeactivateItem(int id)
+        public void DeactivateItem(int id)
         {
             entities = new RechargeMobileEntities();
             var item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
             item.Status = "Inactive";
             entities.SaveChanges();
+        }
+
+        public Boolean CheckUsernameExist(string username)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.Username.ToLower() == username.ToLower()).FirstOrDefault();
+            if (item == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean CheckPhoneExist(string phone)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.PhoneNumber == phone).FirstOrDefault();
+            if (item == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean CheckEmailExist(string email)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.Email == email).FirstOrDefault();
+            if (item == null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
