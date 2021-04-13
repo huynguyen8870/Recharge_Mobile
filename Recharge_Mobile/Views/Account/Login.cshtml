@@ -16,6 +16,7 @@
         <div class="col-md-6 pb-5" style="margin: auto;">
             @using (Html.BeginForm("login", "Account", FormMethod.Post, new { @class = "needs-validation wizard" }))
             {
+
                 <form class="needs-validation wizard" novalidate>
                     <div class="wizard-body pt-2">
                         <div class="d-sm-flex justify-content-between pb-2"><a class="btn btn-secondary btn-sm btn-block my-2 mr-3" href="#"><i class="socicon-facebook"></i>&nbsp;Login</a><a class="btn btn-secondary btn-sm btn-block my-2 mr-3" href="#"><i class="socicon-twitter"></i>&nbsp;Login</a><a class="btn btn-secondary btn-sm btn-block my-2 mr-3" href="#"><i class="socicon-linkedin"></i>&nbsp;Login</a></div>
@@ -23,16 +24,17 @@
                         <h3 class="h5 pt-4 pb-2">Or using form below</h3>
                         <div class="input-group form-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="fe-icon-phone"></i></span></div>
-                            <input class="form-control" type="text" placeholder="Phone number" required
+                            <input class="form-control" type="text" placeholder="Phone number" required name="phonenumber"
                                    pattern="^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$"
                                    title="Not a valid phone number">
                             <div class="invalid-feedback">Please enter your phonenumber!</div>
                         </div>
                         <div class="input-group form-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="fe-icon-lock"></i></span></div>
-                            <input class="form-control" type="password" placeholder="Password" required>
+                            <input class="form-control" type="password" placeholder="Password" required name="password">
                             <div class="invalid-feedback">Please enter valid password!</div>
                         </div>
+                        <span class="text-danger text-left">@TempData["loginFail"]</span>
                         <div class="d-flex flex-wrap justify-content-between">
                             <div class="custom-control custom-checkbox">
                                 <input class="custom-control-input" type="checkbox" checked id="remember-me">
@@ -41,12 +43,11 @@
                         </div>
                     </div>
                     <div class="wizard-footer text-right">
-                        @TempData["loginFail"]
+
                         <button class="btn btn-primary" type="submit">Login</button>
                     </div>
                 </form>
             }
-
         </div>
     </div>
 </div>

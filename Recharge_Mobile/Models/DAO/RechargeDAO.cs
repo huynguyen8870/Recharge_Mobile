@@ -60,6 +60,19 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
             return RRecharge;
         }
 
+        public SRechargeModelView SRechargeById(int id)
+        {
+            entities = new RechargeMobileEntities();
+            var SRechargeRaw = entities.SpecialRecharges.Where(d => d.SRechargeId == id).FirstOrDefault();
+            SRechargeModelView SRecharge = new SRechargeModelView()
+            {
+                SRName = SRechargeRaw.SRName,
+                Duration = Convert.ToInt64(SRechargeRaw.Duration),
+                Price = SRechargeRaw.Price,
+            };
+            return SRecharge;
+        }
+
         public void CheckoutComplete(TransactionModelView transaction)
         {
             entities = new RechargeMobileEntities();
@@ -73,6 +86,49 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
                 Status = transaction.Status
             };
             entities.Transactions.Add(transactionEntity);
+            entities.SaveChanges();
+        }
+
+        public TransactionModelView TransactionById(int id)
+        {
+            string rechargename;
+            decimal price;
+
+            entities = new RechargeMobileEntities();
+            var trasactionRaw = entities.Transactions.Where(d => d.TransactionId == id).FirstOrDefault();
+            
+            if(trasactionRaw.RRechargeId > 0)
+            {
+                var recharge = entities.RegularRecharges.Where(d => d.RRechargeId == trasactionRaw.RRechargeId).FirstOrDefault();
+                rechargename = recharge.RRName;
+                price = recharge.Price;
+            } else
+            {
+                var recharge = entities.SpecialRecharges.Where(d => d.SRechargeId == trasactionRaw.SRechargeId).FirstOrDefault();
+                rechargename = recharge.SRName;
+                price = recharge.Price;
+            }
+
+            TransactionModelView transaction = new TransactionModelView()
+            {
+                TransactionId = trasactionRaw.TransactionId,
+                PhoneNumber = trasactionRaw.PhoneNumber,
+                PaymentMethod = trasactionRaw.PaymentMethod,
+                RRechargeId = trasactionRaw.RRechargeId,
+                SRechargeId = trasactionRaw.SRechargeId,
+                RechargeName = rechargename,
+                Price = price,
+                DateTime = trasactionRaw.DateTime,
+                Status = trasactionRaw.Status,
+            };
+            return transaction;
+        }
+
+        public void PaidTransaction(int id)
+        {
+            entities = new RechargeMobileEntities();
+            var transaction = entities.Transactions.Where(d => d.TransactionId == id).FirstOrDefault();
+            transaction.Status = "Paid";
             entities.SaveChanges();
         }
     }

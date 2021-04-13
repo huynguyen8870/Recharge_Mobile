@@ -30,7 +30,7 @@ namespace Recharge_Mobile.Areas.User.Models.DAO
         public List<TransactionModelView> TransactionList(string phonenumber)
         {
             entities = new RechargeMobileEntities();
-            var TransListRaw = entities.Transactions.Where(d => d.PhoneNumber == phonenumber && d.PaymentMethod != "Debit").ToList();
+            var TransListRaw = entities.Transactions.Where(d => d.PhoneNumber == phonenumber).ToList();
             var TransList = TransListRaw.Select(d => new TransactionModelView()
             {
                 TransactionId = d.TransactionId,
@@ -44,27 +44,51 @@ namespace Recharge_Mobile.Areas.User.Models.DAO
             return TransList;
         }
 
-        public List<TransactionModelView> DebitTransactionList(string phonenumber)
+        public IList<TransactionModelView> DebitTransactionList(string phonenumber)
         {
             entities = new RechargeMobileEntities();
-            var DebitListRaw = entities.Transactions.Where(d => d.PhoneNumber == phonenumber && d.PaymentMethod == "Debit").ToList();
-            var DebitList = DebitListRaw.Select(d => new TransactionModelView()
+
+
+
+            var DebitListRaw = entities.Transactions.Where(d => d.PhoneNumber.Equals(phonenumber) && d.PaymentMethod.Equals("Debit") && d.Status.Equals("Unpaid")).ToList();
+            List<TransactionModelView> Debitlist = new List<TransactionModelView>();
+            foreach(Transaction t in DebitListRaw)
             {
-                TransactionId = d.TransactionId,
-                PhoneNumber = d.PhoneNumber,
-                PaymentMethod = d.PaymentMethod,
-                RRechargeId = d.RRechargeId ?? 0,
-                SRechargeId = d.SRechargeId ?? 0,
-                DateTime = d.DateTime,
-                Status = d.Status
-            }).ToList();
-            return DebitList;
+                string rechargename;
+                decimal price;
+                if (t.RRechargeId > 0)
+                {
+                    var rechargeInfo = entities.RegularRecharges.Where(d => d.RRechargeId == t.RRechargeId).FirstOrDefault();
+                    rechargename = rechargeInfo.RRName;
+                    price = rechargeInfo.Price;
+                }
+                else
+                {
+                    var rechargeInfo = entities.SpecialRecharges.Where(d => d.SRechargeId == t.SRechargeId).FirstOrDefault();
+                    rechargename = rechargeInfo.SRName;
+                    price = rechargeInfo.Price;
+                }
+                TransactionModelView debit = new TransactionModelView()
+                {
+                    TransactionId = t.TransactionId,
+                    PhoneNumber = t.PhoneNumber,
+                    PaymentMethod = t.PaymentMethod,
+                    RRechargeId = t.RRechargeId,
+                    SRechargeId = t.SRechargeId,
+                    RechargeName = rechargename,
+                    Price = price,
+                    DateTime = t.DateTime,
+                    Status = t.Status
+                };
+                Debitlist.Add(debit);
+            }
+            return Debitlist;
         }
 
-        public AccountModelView AccountSetting(int Id)
+        public AccountModelView AccountSetting(string phonenumber)
         {
             entities = new RechargeMobileEntities();
-            var Account = entities.Customers.Where(d => d.CustomerId == Id).FirstOrDefault();
+            var Account = entities.Customers.Where(d => d.PhoneNumber.Equals(phonenumber)).FirstOrDefault();
             AccountModelView accountInfo = new AccountModelView()
             {
                 CustomerId = Account.CustomerId,
@@ -80,7 +104,7 @@ namespace Recharge_Mobile.Areas.User.Models.DAO
         public void AccountChange(AccountModelView accountModelView)
         {
             entities = new RechargeMobileEntities();
-            var Account = entities.Customers.Where(d => d.CustomerId == accountModelView.CustomerId).FirstOrDefault();
+            var Account = entities.Customers.Where(d => d.PhoneNumber == accountModelView.PhoneNumber).FirstOrDefault();
             Account.FirstName = accountModelView.FirstName;
             Account.LastName = accountModelView.LastName;
             Account.Email = accountModelView.Email;

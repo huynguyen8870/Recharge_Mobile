@@ -32,9 +32,9 @@
                 {
                     <tr>
                         <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
-                        <td>@item.RRecharge</td>
+                        <td>@item.RechargeName</td>
                         <td>@item.DateTime</td>
-                        <td>$10</td>
+                        <td>$@item.Price</td>
                         @*@switch (item.Status)
                             {
                                 case "Success":
@@ -49,7 +49,7 @@
                             }*@
                         <td><span class="badge badge-danger m-0">@item.Status</span></td>
                         <td>
-                            <a class="btn btn-style-4 btn-dark btn-sm" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.TransactionId })">
+                            <a class="btn btn-style-4 btn-dark btn-sm" href="@Url.Action("CheckoutTransaction","Recharge", new { Area = "Recharge" ,id = item.TransactionId })">
                                 Pay
                             </a>
                         </td>

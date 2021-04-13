@@ -24,22 +24,48 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
             return View();
         }
 
-        public ActionResult CheckoutPayment(int id)
+        public ActionResult RRreview(int id)
         {
             RechargeDAO rechargeDAO = new RechargeDAO();
             var rechargeInfo = rechargeDAO.RRechargeById(id);
-            Session["rechargeInfo"] = rechargeInfo;
-            return View(rechargeInfo);
+            Session["RRInfo"] = rechargeInfo;
+            return RedirectToAction("CheckoutPayment");
+        }
+
+        public ActionResult SRreview(int id)
+        {
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            var rechargeInfo = rechargeDAO.SRechargeById(id);
+            Session["SRInfo"] = rechargeInfo;
+            return RedirectToAction("CheckoutPayment");
+        }
+
+        public ActionResult CheckoutPayment()
+        {
+            if(Session["RRInfo"] != null)
+            {
+                var rechargeInfor = Session["RRInfo"] as RRechargeModelView;
+                ViewBag.PackerName = rechargeInfor.RRName;
+                ViewBag.Price = rechargeInfor.Price;
+                Session["RRInfo"] = null;
+            } else
+            {
+                var rechargeInfor = Session["SRInfo"] as SRechargeModelView;
+                ViewBag.PackerName = rechargeInfor.SRName;
+                ViewBag.Price = rechargeInfor.Price;
+                Session["SRInfo"] = null;
+            }
+            return View();
         }
         [HttpPost]
         public ActionResult CheckoutPayment(string number, string name, string expire, string cvc)
         {
-            var rechargeInfor = Session["rechargeInfor"] as RRechargeModelView;
+
             TransactionModelView transaction = new TransactionModelView()
             {
                 PhoneNumber = Session["phonenumber"].ToString(),
                 PaymentMethod = "Visa",
-                RRechargeId = rechargeInfor.RRechargeId,
+                RRechargeId = 3,
                 SRechargeId = -1,
                 DateTime = DateTime.Now,
                 Status = "Success"
@@ -53,7 +79,7 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
         public ActionResult CheckoutReview()
         {
             var transaction = Session["transactionInfo"] as TransactionModelView;
-            int id = transaction.RRechargeId;
+            int id = transaction.RRechargeId ?? 0;
             RechargeDAO rechargeDAO = new RechargeDAO();
             var rechargeInfo = rechargeDAO.RRechargeById(id);
             return View(rechargeInfo);
@@ -67,5 +93,33 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
             Session["transactionInfo"] = null;
             return View();
         }
+
+        public ActionResult CheckoutTransaction(int id)
+        {
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            TransactionModelView transaction = rechargeDAO.TransactionById(id);
+            Session["transactionInfo"] = transaction;
+            return View(transaction);
+        }
+        [HttpPost]
+        public ActionResult CheckoutTransaction(string number, string name, string expire, string cvc)
+        {
+            return RedirectToAction("TransactionReview");
+        }
+
+        public ActionResult TransactionReview()
+        {
+            TransactionModelView transaction = Session["transactionInfo"] as TransactionModelView;
+            return View(transaction);
+        }
+
+        public ActionResult TransactionComplete()
+        {
+            TransactionModelView transaction = Session["transactionInfo"] as TransactionModelView;
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            rechargeDAO.PaidTransaction(transaction.TransactionId);
+            return RedirectToAction("AccountDebit", "User", new { Area = "User" });
+        }
+
     }
 }

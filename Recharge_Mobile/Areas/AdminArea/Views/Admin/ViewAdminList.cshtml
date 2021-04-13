@@ -82,7 +82,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("AdminInfomation", "AdminInfomation", new { id = item.AdminId })
+                @*@Html.ActionLink("View", "AdminInfomation", new { id = item.AdminId }) |*@
+                @Html.ActionLink("Edit", "EditAdmin", new { id = item.AdminId }) |
+                @Html.ActionLink("Change Password", "ChangePassword", new { id = item.AdminId })
             </td>
         </tr>
     }

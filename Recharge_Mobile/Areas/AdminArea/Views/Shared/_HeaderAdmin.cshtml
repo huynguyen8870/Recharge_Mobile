@@ -49,6 +49,18 @@
                         </li>
                     </ul>
                 </li>
+                <!--Special Recharge-->
+                <li class="nav-item dropdown-toggle">
+                    <a class="nav-link" href="#"><span class="fa fa-align-left"></span> Recharge</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Regular Recharge", "ViewRRList", "RegularRecharge")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Special Recharge", "ViewSRList", "SpecialRecharge")
+                        </li>
+                    </ul>
+                </li>
                 <!--Customer-->
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("CustomerList","AdminCustomer")"><span class="fa fa-calendar-plus-o"></span> Customer</a>
@@ -73,8 +85,8 @@
                 </li>
                 <!-- User-->
                 <!--<li class="nav-item">
-                    <a class="nav-link" href="~/Admin/Account/ViewUser"><span class="fa fa-user-o"></span> User</a>
-                </li>-->
+        <a class="nav-link" href="~/Admin/Account/ViewUser"><span class="fa fa-user-o"></span> User</a>
+    </li>-->
             </ul>
         </div>
     </div>
