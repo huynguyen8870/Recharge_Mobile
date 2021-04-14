@@ -148,5 +148,55 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             }
             return true;
         }
+
+        public Boolean CheckPhoneExist(int id, string phone)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.PhoneNumber == phone).FirstOrDefault();
+            if (item == null)
+            {
+                return false;
+            }
+            if(item.AdminId == id)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean CheckEmailExist(int id, string email)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.Email == email).FirstOrDefault();
+            if (item == null)
+            {
+                return false;
+            }
+            if (item.AdminId == id)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public Boolean CheckCurrentPassword(int id, string pass)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
+            if(item.Password == pass)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void ChangePassword(int id, string pass)
+        {
+            entities = new RechargeMobileEntities();
+            var item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
+            item.Password = pass;
+            entities.SaveChanges();
+        }
+
     }
 }
