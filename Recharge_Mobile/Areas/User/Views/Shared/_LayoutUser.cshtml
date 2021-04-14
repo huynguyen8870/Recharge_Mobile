@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Recharge_Mobile.Areas.User.Models.Views
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -29,6 +30,9 @@
 <body>
     @Html.Partial("_Header")
     <!-- Page Title-->
+    @{ CustomerRechargeModelView currentUser = Session["accountInfo"] as CustomerRechargeModelView;
+        TimeSpan timeRemain = TimeSpan.FromSeconds(currentUser.TimeRemain);}
+
     <div class="page-title d-flex" aria-label="Page title" style="background-image: url(~/Content/img/page-title/shop-pattern.jpg);">
         <div class="container text-left align-self-center">
             <h1 class="page-title-heading">@ViewBag.Title</h1>
@@ -44,9 +48,9 @@
                             <img src="~/Content/img/account/user-ava1.jpg" width="170" height="170" alt="Daniel Adams" />
                         </div>
                         <div class="author-card-details">
-                            <h5 class="author-card-name text-lg">@*@Model.FirstName @Model.LastName*@</h5>
-                            <span class="author-card-position">Time Remain: </span>
-                            <span class="author-card-position">Debit Amount: </span>
+                            <h5 class="author-card-name text-lg">@currentUser.PhoneNumber</h5>
+                            <span class="author-card-position">Time Remain: @timeRemain </span>
+                            <span class="author-card-position">Debit Amount: -$@currentUser.DebitAmount </span>
                         </div>
                     </div>
                 </div>

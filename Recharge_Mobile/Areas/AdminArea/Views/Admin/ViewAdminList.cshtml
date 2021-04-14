@@ -2,15 +2,30 @@
 
 @{
     ViewBag.Title = "ViewAdminList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>ViewAdminList</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<h3 style="color: purple; text-align: center">Admin List</h3>
+<div class="container">
+    <div class="row mb-3">
+        <div class="col"></div>
+        <div class="col">
+            <div class="float-right">
+                <form action="{{ url("product/search") }}" method="post">
+                    <div>
+                        <i class="mr-2 fe-icon-search"></i>
+                        <input type="text" class="pl-3 pr-3"
+                               style="width: 240px;" name="query"
+                               onchange='this.form.submit()'
+                               placeholder="Type product code or name">
+                    </div>
+                    <noscript><input type="submit" value="Submit"></noscript>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Username)
@@ -39,36 +54,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Role)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.ActionLink("AdminInfomation", "AdminInfomation", new { id=item.AdminId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @*@Html.ActionLink("View", "AdminInfomation", new { id = item.AdminId }) |*@
+                @Html.ActionLink("Edit", "EditAdmin", new { id = item.AdminId }) |
+                @Html.ActionLink("Change Password", "ChangePassword", new { id = item.AdminId })
+            </td>
+        </tr>
+    }
 
 </table>

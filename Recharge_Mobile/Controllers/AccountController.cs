@@ -1,4 +1,5 @@
-﻿using Recharge_Mobile.Models.DAO;
+﻿using Recharge_Mobile.Areas.User.Models.DAO;
+using Recharge_Mobile.Models.DAO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,13 @@ namespace Recharge_Mobile.Controllers
             var account = accountDAO.Login(phonenumber, password);
             if (account == null)
             {
-                TempData["loginFail"] = "Wrong Password or Phone Number";
+                TempData["loginFail"] = "Wrong Password or Phone Number!";
                 return View("Login");
             } else
             {
-                Session["accountInfo"] = account;
+                UserDAO userDAO = new UserDAO();
+                var accountInfo = userDAO.AccountDetail(phonenumber);
+                Session["accountInfo"] = accountInfo;
                 return RedirectToAction("Index", "Home");
             }
         }
@@ -43,12 +46,18 @@ namespace Recharge_Mobile.Controllers
             if (password != repassword)
             {
                 TempData["invalid-password"] = "Repassword do not match!";
-                return View("Login");
+                return View("Register");
             } else
             {
                 accountDAO.Register(firstname, lastname, email, phonenumber, password);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
+        }
+
+        public ActionResult Logout()
+        {
+            Session["accountInfo"] = null;
+            return RedirectToAction("Index", "Home");
         }
     }
 }

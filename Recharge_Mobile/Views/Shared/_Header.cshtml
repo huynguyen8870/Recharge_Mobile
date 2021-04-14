@@ -1,5 +1,6 @@
-﻿<header class="navbar-wrapper navbar-sticky">
-    <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="index.html"><img src="~/Content/img/logo/logo-dark.png" alt="CreateX" /></a></div>
+﻿@using Recharge_Mobile.Areas.User.Models.Views
+<header class="navbar-wrapper navbar-sticky">
+    <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="@Url.Action("Index","Home")"><img src="~/Content/img/logo/logo-dark.png" alt="CreateX" /></a></div>
     <div class="d-table-cell w-100 align-middle pl-md-3">
         <div class="navbar-top d-none d-lg-flex justify-content-between align-items-center">
             <div>
@@ -11,15 +12,40 @@
                 <a class="social-btn sb-style-3 sb-instagram" href="#"><i class="socicon-instagram"></i></a>
             </div>
             <div>
+                @{CustomerRechargeModelView currentUser = Session["accountInfo"] as CustomerRechargeModelView; }
                 <ul class="list-inline mb-0">
-                    <li class="dropdown-toggle mr-2">
-                        <a class="navbar-link" href="account-login.html"><i class="fe-icon-user"></i>Login or Create account</a>
-                        <div class="dropdown-menu right-aligned p-3 text-center" style="min-width: 200px;">
-                            <p class="text-sm opacity-70">Sign in to your account or register new one to have full control over your orders, receive bonuses and more.</p>
-                            <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Login","Account")">Sign In</a>
-                            <p class="text-sm text-muted mt-3 mb-0">New customer? <a href='@Url.Action("Register","Account")'>Register</a></p>
-                        </div>
-                    </li>
+                    @if (currentUser != null)
+                    {
+                        <li class="dropdown-toggle mr-2">
+                            <a class="navbar-link text-bold" href="@Url.Action("Logout", "Home")">
+                                <i class="fe-icon-user"></i>Logout
+                            </a>
+                            <div class="dropdown-menu right-aligned p-3 text-center" style="min-width: 200px;">
+                                <a style="text-decoration: none;" href="@Url.Action("AccountDetail","User", new { Area = "User" })"><p class="text-bold"><i class="fe-icon-user"></i> @currentUser.PhoneNumber</p></a>
+                                <a style="text-decoration: none;" href="@Url.Action("AccountDetail","User", new { Area = "User" })">My Account</a><br /><br />
+                                <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Logout", "Account", new { Area = "" })">Logout</a>
+                            </div>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="navbar-link text-bold" href="@Url.Action("RegisterVendor", "Home")">
+                                <i class="fa-address-card-o"></i> Become a vendor??
+                            </a>
+                        </li>
+
+                        <li class="dropdown-toggle mr-2">
+                            <a class="navbar-link text-bold" href="@Url.Action("Login", "Account")">
+                                <i class="fe-icon-user"></i>Login or Register
+                            </a>
+                            <div class="dropdown-menu right-aligned p-3 text-center" style="min-width: 200px;">
+                                <p class="text-sm opacity-70">Login to your account or register new one to have full control over your orders, receive bonuses and more.</p>
+                                <a class="btn btn-primary btn-sm btn-block" href="@Url.Action("Login", "Account")">Login</a>
+                                <p class="text-sm text-muted mt-3 mb-0">New customer? <a href="@Url.Action("Register","Account")">Register</a></p>
+                            </div>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>

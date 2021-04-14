@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Recharge_Mobile.Areas.RechargeArea.Controllers
+namespace Recharge_Mobile.Areas.AdminArea.Controllers
 {
     public class RegularRechargeController : Controller
     {

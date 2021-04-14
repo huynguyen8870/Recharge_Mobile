@@ -14,15 +14,29 @@ namespace Recharge_Mobile.Models.DAO
         public AccountModelView Login(string phonenumber, string password)
         {
             entities = new RechargeMobileEntities();
-            var accountInfo = entities.Customers.Where(d => d.PhoneNumber == phonenumber && d.Password == password).FirstOrDefault();
-            AccountModelView account = new AccountModelView()
+            //var accountInfo = entities.Customers.Select(d => new AccountModelView() 
+            //{
+            //    CustomerId = d.CustomerId,
+            //    PhoneNumber = d.PhoneNumber,
+            //    FirstName = d.FirstName,
+            //    LastName = d.LastName
+            //}).Where(d => PhoneNumber.Equals(phonenumber) && d.Acc.Equals(password)).FirstOrDefault();
+            var account = entities.Customers.Where(d => d.PhoneNumber.Equals(phonenumber) && d.Password.Equals(password)).FirstOrDefault();
+            if(account != null)
             {
-                CustomerId = accountInfo.CustomerId,
-                PhoneNumber = accountInfo.PhoneNumber,
-                FirstName = accountInfo.FirstName,
-                LastName = accountInfo.LastName
-            };
-            return account;
+                AccountModelView accountInfo = new AccountModelView()
+                {
+                    CustomerId = account.CustomerId,
+                    PhoneNumber = account.PhoneNumber,
+                    FirstName = account.FirstName,
+                    LastName = account.LastName
+                };
+                return accountInfo;
+            } else
+            {
+                AccountModelView accountInfo = null;
+                return accountInfo;
+            }
         }
 
         public void Register(string firstname, string lastname, string email, string phonenumber, string password)
@@ -36,6 +50,7 @@ namespace Recharge_Mobile.Models.DAO
                 LastName = lastname,
                 Email = email,
                 Busy = "Off",
+                Lock = "Off",
                 Status = "Active"
             };
             entities.Customers.Add(customer);
