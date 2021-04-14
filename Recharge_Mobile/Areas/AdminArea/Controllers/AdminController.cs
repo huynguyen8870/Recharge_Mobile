@@ -92,12 +92,12 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
                 adminDAO = new AdminDAO();
                 bool checkError = false;
 
-                if (adminDAO.CheckPhoneExist(vm.PhoneNumber))
+                if (adminDAO.CheckPhoneExist(vm.AdminId, vm.PhoneNumber))
                 {
                     ModelState.AddModelError("PhoneExist", "This phone number has already used!");
                     checkError = true;
                 }
-                if (adminDAO.CheckEmailExist(vm.Email))
+                if (adminDAO.CheckEmailExist(vm.AdminId, vm.Email))
                 {
                     ModelState.AddModelError("MailExist", "This email has already used!");
                     checkError = true;
@@ -114,9 +114,19 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             return RedirectToAction("AdminInfomation");
         }
 
-        public ActionResult ChangePassword(int id)
+        public ActionResult ChangePassword()
         {
             return View();
+        }
+
+        public JsonResult CheckCurrentPassword(int id, string password)
+        {
+            adminDAO = new AdminDAO();
+            if (adminDAO.CheckCurrentPassword(id, password))
+            {
+                return Json(1);
+            }
+            return Json(0);
         }
     }
 }
