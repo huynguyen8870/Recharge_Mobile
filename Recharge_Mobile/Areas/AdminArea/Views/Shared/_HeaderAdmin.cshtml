@@ -38,11 +38,11 @@
                 <li class="nav-item dropdown-toggle">
                     <a class="nav-link" href="@Url.Action("TransactionList","TransactionAdmin")"><span class="fa fa-align-left"></span> Transaction</a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item">
+                        @*<li class="dropdown-item">
                             @Html.ActionLink("View Transaction", "TransactionList", "TransactionAdmin")
-                        </li>
+                        </li>*@
                         <li class="dropdown-item">
-                            @Html.ActionLink("Search By Date", "TransactionListByDate", "TransactionAdmin")
+                            @Html.ActionLink("Daily Report", "TransactionListByDate", "TransactionAdmin")
                         </li>
                         <li class="dropdown-item">
                             @Html.ActionLink("Advanced Search", "AdvanceSearch", "TransactionAdmin")
