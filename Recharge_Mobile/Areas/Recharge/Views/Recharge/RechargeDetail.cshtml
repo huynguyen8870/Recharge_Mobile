@@ -44,7 +44,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("RRreview","Recharge", new { id = item.RRechargeId })">
+                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.RRechargeId , status = "regular" })">
                                             Subscribe
                                         </a>
                                     </td>
@@ -90,7 +90,7 @@
                                         </span>
                                     </td>
                                     <td>
-                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("SRreview","Recharge", new { id = item.SRechargeId })">
+                                        <a class="btn btn-style-4 btn-dark" href="@Url.Action("CheckoutPayment","Recharge", new { id = item.SRechargeId, status = "special" })">
                                             Subscribe
                                         </a>
                                     </td>

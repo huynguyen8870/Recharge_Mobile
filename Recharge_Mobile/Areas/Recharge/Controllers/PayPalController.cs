@@ -17,8 +17,7 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
         private Payment CreatePayment(APIContext apiContext, string redirectUrl)
         {
             var lsItem = new ItemList() { items = new List<Item>() };
-            lsItem.items.Add(new Item { name = "Item 1", currency = "USD", price = "5", quantity = "1", sku = "sku" });
-            lsItem.items.Add(new Item { name = "Item 2", currency = "USD", price = "5", quantity = "2", sku = "sku" });
+            lsItem.items.Add(new Item { name = TempData["PackageName"].ToString(), currency = "USD", price = TempData["Price"].ToString(), quantity = "1", sku = "sku" });
 
             var payer = new Payer()
             {
@@ -34,8 +33,8 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
                 cancel_url = redirectUrl,
                 return_url = redirectUrl
             };
-            var detail = new Details() { tax = "1", shipping = "1", subtotal = "15" }; //subtotal: sum(price*quantity) if sum is incorrect, it will return an error 400.
-            var amount = new Amount() { currency = "USD", details = detail, total = "17" }; //total= tax + shipping + subtotal
+            var detail = new Details() { tax = "0", shipping = "0", subtotal = TempData["Price"].ToString() }; //subtotal: sum(price*quantity) if sum is incorrect, it will return an error 400.
+            var amount = new Amount() { currency = "USD", details = detail, total = TempData["Price"].ToString() }; //total= tax + shipping + subtotal
             var transList = new List<Transaction>();
             transList.Add(new Transaction
             {
@@ -103,12 +102,9 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
                 PaypalLogger.Log("Error: " + ex.Message);
                 return View("Failure");
             }
-            return View("Success");
+            return RedirectToAction("CheckoutPaypal", "Recharge", new { Area = "Recharge" });
         }
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+        
     }
 }

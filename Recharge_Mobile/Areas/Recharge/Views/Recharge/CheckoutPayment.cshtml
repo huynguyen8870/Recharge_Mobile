@@ -30,7 +30,7 @@
                                 <div class="card-body px-0">
                                     <p>We accept following credit cards:&nbsp;&nbsp;<img class="d-inline-block align-middle" src="~/Content/img/credit-cards.png" style="width: 120px;" alt="Cerdit Cards"></p>
                                     <div class="card-wrapper"></div>
-                                    @using (Html.BeginForm("CheckoutPayment", "Recharge", FormMethod.Post, new { @class = "interactive-credit-card row" }))
+                                    @using (Html.BeginForm("CheckoutPayment", "Recharge", FormMethod.Post, new { paymentMethod = "Visa", @class = "interactive-credit-card row" }))
                                     {
                                         <div class="form-group col-sm-6">
                                             <input class="form-control" type="text" name="number" placeholder="Card Number" required>
@@ -58,24 +58,24 @@
                             <div class="collapse" id="paypal" data-parent="#accordion" role="tabpanel">
                                 <div class="card-body px-0">
                                     <p><strong>PayPal</strong> - the safer, easier way to pay</p>
-                                    @using (Html.BeginForm("PaypalPayment", "Recharge", FormMethod.Post, new { @class = "row" }))
+                                    <a href="@Url.Action("PaymentWithPaypal", "PayPal", new { Area = "Recharge" })" class="btn btn-primary my-2 form-control">Login</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" role="tab">
+                                <h6><a class="collapsed pl-0" href="#debit" data-toggle="collapse"><i class="fe-icon-shopping-bag"></i>Pay with Debit</a></h6>
+                            </div>
+                            <div class="collapse" id="debit" data-parent="#accordion" role="tabpanel">
+                                <div class="card-body px-0">
+                                    <p><strong>Debit</strong> - use first, pay later</p>
+                                    @if (Session["accountInfo"] == null)
                                     {
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="email" placeholder="E-mail" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="password" placeholder="Password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                                <a class="navi-link" href="#">Forgot password?</a>
-                                                <button class="btn btn-primary btn-sm" type="submit">Log In</button>
-                                            </div>
-                                        </div>
+                                        <a href="@Url.Action("Login","Account", new { Area = "" })" class="btn btn-primary my-2 form-control">Login</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("CheckoutDebit","Recharge", new { Area = "Recharge" })" class="btn btn-primary my-2 form-control">Confirm</a>
                                     }
                                 </div>
                             </div>
@@ -111,8 +111,6 @@
                     <div>Tax:</div>
                     <div class="font-weight-medium">$0</div>
                 </div>
-                <input class="text" name="rrid" value="@ViewBag.RRID" />
-                <input class="text" name="srid" value="@ViewBag.SRID" />
                 <hr>
                 <div class="pt-3 text-right text-lg font-weight-medium">$@ViewBag.Price</div>
             </div>

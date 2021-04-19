@@ -5,10 +5,10 @@
     Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Regular Recharge List</h2><hr /><br />
+<h2 style="color: purple; text-align: center">Regular Recharge List</h2><hr /><br />
 
 <p>
-    @Html.ActionLink("Create New", "CreateRegularRecharge","RegularRecharge")
+    @Html.ActionLink("Create New", "CreateRegularRecharge", "RegularRecharge", new { @class = "btn btn-style-4 btn-dark" })
 </p>
 <table class="table table-hover">
     <tr>
@@ -69,7 +69,7 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditRR", new { id=item.RRechargeId }) |
+            @Html.ActionLink("Edit", "EditRR", new { id = item.RRechargeId }) |
             @Html.ActionLink("Activate", "ActivateRR", new { id = item.RRechargeId }) |
             @Html.ActionLink("Deactive", "DeactivateRR", new { id = item.RRechargeId })
         </td>

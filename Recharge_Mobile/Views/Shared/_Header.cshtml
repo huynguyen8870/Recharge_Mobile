@@ -1,6 +1,6 @@
 ﻿@using Recharge_Mobile.Areas.User.Models.Views
 <header class="navbar-wrapper navbar-sticky">
-    <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="@Url.Action("Index","Home")"><img src="~/Content/img/logo/logo-dark.png" alt="CreateX" /></a></div>
+    <div class="d-table-cell align-middle pr-md-3"><a class="navbar-brand mr-1" href="@Url.Action("Index","Home", new { Area = "" })"><img src="~/Content/img/logo/logo-dark.png" alt="CreateX" /></a></div>
     <div class="d-table-cell w-100 align-middle pl-md-3">
         <div class="navbar-top d-none d-lg-flex justify-content-between align-items-center">
             <div>
@@ -57,19 +57,19 @@
             <!-- Main Menu-->
             <ul class="navbar-nav d-none d-lg-block">
                 <!--Home-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home")">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Index","Home", new { Area = "" })">Home</a></li>
                 <!--Account-->
                 @*<li class="nav-item"><a class="nav-link" href="components.html">Account</a></li>*@
                 <!--Post Bill Payment-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("PostBill","Home")">Post Bill Payment</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("PostBill","Home", new { Area = "" })">Post Bill Payment</a></li>
                 <!--Site Map-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("SiteMap","Home")">Site Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("SiteMap","Home", new { Area = "" })">Site Map</a></li>
                 <!--FeedBack-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Feedback","Home")">Feedback</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Feedback","Home", new { Area = "" })">Feedback</a></li>
                 <!--About Us-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home", new { Area = "" })">About Us</a></li>
                 <!--Contact Us-->
-                <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home")">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact","Home", new { Area = "" })">Contact Us</a></li>
                 <!-- Customer Care-->
                 @*<li class="nav-item"><a class="nav-link" href="components.html">Customer Care</a></li>*@
             </ul>

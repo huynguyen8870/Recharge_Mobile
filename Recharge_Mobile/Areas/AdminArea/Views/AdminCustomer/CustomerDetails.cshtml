@@ -3,134 +3,49 @@
 
 @{
     ViewBag.Title = "CustomerDetails";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>CustomerDetails</h2>
-
-<div>
-    <h4>AdminCustomerDetailsVM</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CustomerId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeRemain)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeRemain)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.RegularTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.RegularTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SpecialTime)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SpecialTime)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeToPay)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeToPay)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Busy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Busy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Lock)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Lock)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-
-    </dl>
+<div class="jumbotron">
+    <h3>Information</h3>
+    <hr class="mt-2 mb-3">
+    <div class="row">
+        <label class="col-lg-6" for="account-fn">First Name: @Model.FirstName </label><br />
+        <label class="col-lg-6" for="account-fn">Last Name: @Model.LastName </label><br />
+        <label class="col-lg-6" for="account-fn">Email: @Model.Email </label><br />
+        <label class="col-lg-6" for="account-fn">Address: @Model.Address </label><br />
+        <label class="col-lg-6" for="account-fn">Lock: @Model.Lock </label><br />
+        <label class="col-lg-6" for="account-fn">Busy: @Model.Busy </label><br />
+        <label class="col-lg-6" for="account-fn">Status: @Model.Status </label>
+    </div>
 </div>
+<div class="jumbotron">
+    <h3>Main Balance</h3>
+    <hr class="mt-2 mb-3">
+    <div class="row">
+        <label class="col-lg-6" for="account-fn">Customer ID: @Model.CustomerId </label><br />
+        <label class="col-lg-6" for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
+        <label class="col-lg-6" for="account-fn">Time Remain (Minute): @Model.TimeRemain </label><br />
+        <label class="col-lg-6" for="account-fn">Regular Time: @Model.RegularTime </label><br />
+        <label class="col-lg-6" for="account-fn">Special Time: @Model.SpecialTime </label><br />
+        <label class="col-lg-6" for="account-fn">Time To Pay: @Model.TimeToPay </label>
+    </div>
+</div>
+
+
 
 @if (ViewBag.CustomerTransactions != null && ((List<TransactionAdminVM>)(ViewBag.CustomerTransactions)).Count() >= 1)
 {
-<table class="table">
+<table class="table table-striped">
     <tr>
         <th>
-            TransactionId
+            Transaction ID
         </th>
-        <th>
+        @*<th>
             PhoneNumber
-        </th>
+        </th>*@
         <th>
-            TypeRecharge
+            Type Recharge
         </th>
         <th>
             RRechargeId
@@ -139,19 +54,19 @@
             SRechargeId
         </th>
         <th>
-            TypePacket
+            Type Packet
         </th>
         <th>
-            RechargeName
+            Recharge Name
         </th>
         <th>
             Price
         </th>
         <th>
-            DateTime
+            Date
         </th>
         <th>
-            PostPayment
+            Post Payment
         </th>
         <th>
             Status
@@ -164,9 +79,9 @@
             <td>
                 @item.TransactionId
             </td>
-            <td>
+            @*<td>
                 @item.PhoneNumber
-            </td>
+            </td>*@
             <td>
                 @item.PaymentMethod
             </td>

@@ -70,7 +70,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             return View(listResult);
         }
 
-        public ActionResult AdminInfomation(int id)
+        public ActionResult AdminInformation(int id)
         {
             adminDAO = new AdminDAO();
             var result = adminDAO.GetAdminById(id);

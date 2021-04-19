@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Recharge_Mobile.Areas.Recharge.Models.DAO;
+using Recharge_Mobile.Areas.User.Models.DAO;
 
 namespace Recharge_Mobile.Areas.Recharge.Controllers
 {
@@ -24,72 +25,196 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
             return View();
         }
 
-        public ActionResult RRreview(int id)
+        public ActionResult CheckoutPayment(int id, string status)
         {
             RechargeDAO rechargeDAO = new RechargeDAO();
-            var rechargeInfo = rechargeDAO.RRechargeById(id);
-            Session["RRInfo"] = rechargeInfo;
-            return RedirectToAction("CheckoutPayment");
-        }
 
-        public ActionResult SRreview(int id)
-        {
-            RechargeDAO rechargeDAO = new RechargeDAO();
-            var rechargeInfo = rechargeDAO.SRechargeById(id);
-            Session["SRInfo"] = rechargeInfo;
-            return RedirectToAction("CheckoutPayment");
-        }
-
-        public ActionResult CheckoutPayment()
-        {
-            if(Session["RRInfo"] != null)
+            if (status == "regular")
             {
-                var rechargeInfor = Session["RRInfo"] as RRechargeModelView;
+                var rechargeInfor = rechargeDAO.RRechargeById(id);
                 ViewBag.PackerName = rechargeInfor.RRName;
                 ViewBag.Price = rechargeInfor.Price;
-                Session["RRInfo"] = null;
+                TempData["PackageName"] = rechargeInfor.RRName;
+                TempData["Price"] = rechargeInfor.Price;
             } else
             {
-                var rechargeInfor = Session["SRInfo"] as SRechargeModelView;
+                var rechargeInfor = rechargeDAO.SRechargeById(id);
                 ViewBag.PackerName = rechargeInfor.SRName;
                 ViewBag.Price = rechargeInfor.Price;
-                Session["SRInfo"] = null;
+                TempData["PackageName"] = rechargeInfor.SRName;
+                TempData["Price"] = rechargeInfor.Price;
             }
+
+            TempData["rechargeId"] = id;
+            TempData["rechargeType"] = status;
+            
             return View();
         }
         [HttpPost]
         public ActionResult CheckoutPayment(string number, string name, string expire, string cvc)
         {
+            string type = TempData["rechargeType"].ToString();
+            int rechargeId = Convert.ToInt32(TempData["rechargeId"].ToString());
+            decimal amount = decimal.Parse(TempData["Price"].ToString());
 
-            TransactionModelView transaction = new TransactionModelView()
+            if (type == "regular")
             {
-                PhoneNumber = Session["phonenumber"].ToString(),
-                PaymentMethod = "Visa",
-                RRechargeId = 3,
-                SRechargeId = -1,
-                DateTime = DateTime.Now,
-                Status = "Success"
-            };
-            Session["transactionInfo"] = transaction;
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = Session["phonenumber"].ToString(),
+                    PaymentMethod = "Visa",
+                    RRechargeId = rechargeId,
+                    SRechargeId = -1,
+                    DateTime = DateTime.Now,
+                    Status = "Success",
+                    Amount = amount
+                };
+                Session["transactionInfo"] = transaction;
+            } else
+            {
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = Session["phonenumber"].ToString(),
+                    PaymentMethod = "Visa",
+                    RRechargeId = -1,
+                    SRechargeId = rechargeId,
+                    DateTime = DateTime.Now,
+                    Status = "Success",
+                    Amount = amount
+                };
+                Session["transactionInfo"] = transaction;
+            }
+            
             Session["phonenumber"] = null;
             Session["rechargeInfo"] = null;
+            TempData["paymentMethod"] = "Credit Card";
             return RedirectToAction("CheckoutReview");
         }
+
+        public ActionResult CheckoutDebit()
+        {
+            string type = TempData["rechargeType"].ToString();
+            int rechargeId = Convert.ToInt32(TempData["rechargeId"].ToString());
+            decimal amount = decimal.Parse(TempData["Price"].ToString());
+
+            if (type.Equals("regular"))
+            {
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = ((CustomerRechargeModelView)Session["accountInfo"]).PhoneNumber,
+                    PaymentMethod = "Debit",
+                    RRechargeId = rechargeId,
+                    SRechargeId = -1,
+                    DateTime = DateTime.Now,
+                    Status = "Unpaid",
+                    Amount = amount
+                };
+
+                Session["transactionInfo"] = transaction;
+            }
+            else
+            {
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = ((CustomerRechargeModelView)Session["accountInfo"]).PhoneNumber,
+                    PaymentMethod = "Debit",
+                    RRechargeId = -1,
+                    SRechargeId = rechargeId,
+                    DateTime = DateTime.Now,
+                    Status = "Unpaid",
+                    Amount = amount
+                };
+                Session["transactionInfo"] = transaction;
+            }
+
+            Session["rechargeInfo"] = null;
+            TempData["paymentMethod"] = "Debit";
+            return RedirectToAction("CheckoutReview");
+        }
+
+        public ActionResult CheckoutPaypal()
+        {
+            string type = TempData["rechargeType"].ToString();
+            int rechargeId = Convert.ToInt32(TempData["rechargeId"].ToString());
+            decimal amount = decimal.Parse(TempData["Price"].ToString());
+            var accountNumber = ((CustomerRechargeModelView)Session["accountInfo"]).PhoneNumber ?? null;
+            string phonenumber;
+            if(accountNumber == null)
+            {
+                phonenumber = Session["phonenumber"].ToString();
+
+            } else
+            {
+                phonenumber = accountNumber ;
+            }
+
+            if (type.Equals("regular"))
+            {
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = phonenumber,
+                    PaymentMethod = "Paypal",
+                    RRechargeId = rechargeId,
+                    SRechargeId = -1,
+                    DateTime = DateTime.Now,
+                    Status = "Success",
+                    Amount = amount
+                };
+
+                Session["transactionInfo"] = transaction;
+            }
+            else
+            {
+                TransactionModelView transaction = new TransactionModelView()
+                {
+                    PhoneNumber = phonenumber,
+                    PaymentMethod = "Paypal",
+                    RRechargeId = -1,
+                    SRechargeId = rechargeId,
+                    DateTime = DateTime.Now,
+                    Status = "Success",
+                    Amount = amount
+                };
+                Session["transactionInfo"] = transaction;
+            }
+
+            Session["rechargeInfo"] = null;
+            TempData["paymentMethod"] = "Paypal";
+            return RedirectToAction("CheckoutReview");
+        }
+
 
         public ActionResult CheckoutReview()
         {
             var transaction = Session["transactionInfo"] as TransactionModelView;
-            int id = transaction.RRechargeId ?? 0;
+
             RechargeDAO rechargeDAO = new RechargeDAO();
-            var rechargeInfo = rechargeDAO.RRechargeById(id);
-            return View(rechargeInfo);
+            if (transaction.RRechargeId > 0)
+            {
+                var rechargeInfo = rechargeDAO.RRechargeById(transaction.RRechargeId ?? 0);
+                ViewBag.packageName = rechargeInfo.RRName;
+                ViewBag.packageTime = rechargeInfo.BaseTime;
+                ViewBag.packageDuration = rechargeInfo.Duration;
+                ViewBag.packagePrice = rechargeInfo.Price;
+                
+            } else
+            {
+                var rechargeInfo = rechargeDAO.SRechargeById(transaction.SRechargeId ?? 0);
+                ViewBag.packageName = rechargeInfo.SRName;
+                ViewBag.packageTime = 0;
+                ViewBag.packageDuration = rechargeInfo.Duration;
+                ViewBag.packagePrice = rechargeInfo.Price;
+            }
+            return View();
         }
 
         public ActionResult CheckoutComplete()
         {
             RechargeDAO rechargeDAO = new RechargeDAO();
             var transaction = Session["transactionInfo"] as TransactionModelView;
+
             rechargeDAO.CheckoutComplete(transaction);
+
             Session["transactionInfo"] = null;
             return View();
         }

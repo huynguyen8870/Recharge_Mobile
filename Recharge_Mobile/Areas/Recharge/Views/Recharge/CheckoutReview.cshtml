@@ -1,5 +1,4 @@
-﻿@model Recharge_Mobile.Areas.Recharge.Models.RRechargeModelView
-@{
+﻿@{
     ViewBag.Title = "CheckoutReview";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,27 +20,27 @@
                     <!-- Item-->
                     <div class="cart-item d-md-flex justify-content-between pr-2">
                         <div class="px-3 my-3">
-                            <a class="cart-item-product" href="shop-single.html">
+                            <div class="cart-item-product" href="shop-single.html">
                                 <div class="cart-item-product-info">
-                                    <h4 class="cart-item-product-title">@Model.RRName</h4>
-                                    <span><strong>Call:</strong> @(Model.BaseTime/60) minutes</span>
-                                    <span><strong>Valid:</strong> @Model.Duration days</span>
+                                    <h4 class="cart-item-product-title">@ViewBag.packageName</h4>
+                                    <span><strong>Call:</strong> @(ViewBag.packageTime / 60) minutes</span>
+                                    <span><strong>Valid:</strong> @ViewBag.packageDuration days</span>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                         <div class="px-3 my-3 text-center">
                             <div class="cart-item-label">Quantity</div><span class="text-xl font-weight-medium">1</span>
                         </div>
                         <div class="px-3 my-3 text-center">
-                            <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$@Model.Price</span>
+                            <div class="cart-item-label">Subtotal</div><span class="text-xl font-weight-medium">$@ViewBag.packagePrice</span>
                         </div>
                     </div>
-                    <div class="text-right pb-4"><span class="text-muted">Subtotal:</span><span class="text-xl font-weight-medium">&nbsp;$@Model.Price</span></div>
+                    <div class="text-right pb-4"><span class="text-muted">Subtotal:</span><span class="text-xl font-weight-medium">&nbsp;$@ViewBag.packagePrice</span></div>
                     <div class="row">
                         <div class="col-sm-6">
                             <h4 class="h6">Payment method:</h4>
                             <ul class="list-unstyled">
-                                <li><span class="text-muted">Credit Card:&nbsp;</span>**** **** **** 5300</li>
+                                <li><span class="text-muted">@TempData["paymentMethod"]&nbsp;</span></li>
                             </ul>
                         </div>
                     </div>
