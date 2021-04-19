@@ -231,7 +231,7 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
             // edit debitAmount in table CustomerRecharge
             string phonenumber = transaction.PhoneNumber;
             var customerRecharge = entities.CustomerRecharges.Where(d => d.PhoneNumber == phonenumber).FirstOrDefault();
-            customerRecharge.DebitAmount = customerRecharge.DebitAmount - (transaction.Amount ?? 0);
+            customerRecharge.DebitAmount = customerRecharge.DebitAmount - transaction.Amount;
 
             entities.SaveChanges();
         }
