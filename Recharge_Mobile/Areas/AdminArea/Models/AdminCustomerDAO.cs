@@ -99,7 +99,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
                     SRechargeId = t.SRechargeId,
                     RechargeType = typePacket,
                     RechargeName = rechargeName,
-                    Price = price,
+                    Amount = t.Amount,
                     DateTime = t.DateTime,
                     PostPayment = postPayment,
                     Status = t.Status

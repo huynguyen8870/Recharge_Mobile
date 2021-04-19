@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Title-->
+<div class="page-title d-flex" aria-label="Page title" style="background-image: Url(~/Content/img/page-title/shop-pattern.jpg);">
+    <div class="container text-left align-self-center">
+        <h1 class="page-title-heading">Login</h1>
+    </div>
+</div>
+<!-- Page Content-->
+<div class="container mb-3">
+    <div class="row">
+        <div class="col-md-6 pb-5" style="margin: auto;">
+            @using (Html.BeginForm("LoginAdmin", "Account", FormMethod.Post, new { @class = "needs-validation wizard" }))
+            {
+
+                <form class="needs-validation wizard" novalidate>
+                    <div class="wizard-body pt-2">
+                        <h3 class="h5 pt-4 pb-2">Admin Signin</h3>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fe-icon-phone"></i></span></div>
+                            <input class="form-control" type="text" placeholder="Username" required name="username">
+                            <div class="invalid-feedback">Please enter your username!</div>
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="fe-icon-lock"></i></span></div>
+                            <input class="form-control" type="password" placeholder="Password" required name="password">
+                            <div class="invalid-feedback">Please enter valid password!</div>
+                        </div>
+                        <span class="text-danger text-left">@TempData["loginFail"]</span>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <div class="custom-control custom-checkbox">
+                                <input class="custom-control-input" type="checkbox" checked id="remember-me">
+                                <label class="custom-control-label" for="remember-me">Remember me</label>
+                            </div><a class="navi-link" href="#">Forgot password?</a>
+                        </div>
+                    </div>
+                    <div class="wizard-footer text-right">
+
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </form>
+            }
+        </div>
+    </div>
+</div>
+
