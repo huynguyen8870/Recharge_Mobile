@@ -1,0 +1,18 @@
+﻿@model Recharge_Mobile.Areas.AdminArea.Models.AdminVM
+
+@{
+    ViewBag.Title = "AdminInfomation";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="jumbotron">
+    <h3>Admin Infomation</h3>
+    <hr /><br />
+    <label for="account-fn">Username: @Model.Username </label><br />
+    <label for="account-fn">First Name: @Model.FirstName </label><br />
+    <label for="account-fn">Last Name: @Model.LastName </label><br />
+    <label for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
+    <label for="account-fn">Email: @Model.Email </label><br />
+    <label for="account-fn">Address: @Model.Address </label><br />
+    <label for="account-fn">Role: @Model.Role </label><br />
+</div>

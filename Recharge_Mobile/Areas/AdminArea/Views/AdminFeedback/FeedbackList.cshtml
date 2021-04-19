@@ -2,57 +2,48 @@
 
 @{
     ViewBag.Title = "FeedbackList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/AdminArea/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>FeedbackList</h2>
+<br /><h3 style="color: purple; text-align: center">FeedbackList</h3>
 
-    @foreach (var item in Model)
-    {
-        <table style="margin-left:20%;">
-            @if (item.CustomerId == null)
-            {
-                <tr>
-                    <td style="width:200px;">Name: @item.GuestName</td>
-                    <td style="width:200px;">Phone: @item.GuestPhone</td>
-                    <td>Email: <a href="mailto:@item.GuestEmail?subject=RechargeX%20customer%20service">@item.GuestEmail</a></td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td style="width:200px;">Name: @item.CusLastName</td>
-                    <td style="width:200px;">Phone: @item.CusPhone</td>
-                    <td>Email: <a href="mailto:@item.CusEmail?subject=RechargeX%20customer%20service">@item.CusEmail</a></td>
-                </tr>
-            }
+@foreach (var item in Model)
+{
+    <div class="container">
+        <div class="blockquote comment mb-4">
+            <h6><strong>@item.Title</strong></h6>
+            <p>@item.Detail</p>
+            <div class="d-sm-flex justify-content-between align-items-center">
+                <div class="testimonial-footer">
+                    <div class="d-table-cell align-middle pl-2">
+                        <div class="blockquote-footer">
+                            @if (item.CustomerId == null)
+                            {
+                                <cite>@item.GuestName - @item.GuestPhone - <a href="mailto:@item.GuestEmail?subject=RechargeX%20customer%20service">@item.GuestEmail</a></cite>
+                            }
+                            else
+                            {
+                                <cite>@item.CusLastName - @item.CusPhone - <a href="mailto:@item.GuestEmail?subject=RechargeX%20customer%20service">@item.CusEmail</a></cite>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div><br /><hr /><br />
+            <div class="row">
+                @if (item.Status == "Disabled")
+                {
+                    <p class="col-6"><strong>Status:</strong> <span class="badge bg-danger">@item.Status</span></p>
+                    <div class="col-6">@Html.ActionLink("Enable", "EnableFeedback", new { id = item.FeedbackId })</div>
+                }
+                else
+                {
+                    <p class="col-6"><strong>Status:</strong> <span class="badge bg-success">@item.Status</span></p>
+                    <div class="col-6">@Html.ActionLink("Disable", "DisableFeedback", new { id = item.FeedbackId })</div>
+                }
+            </div>
+            
+        </div>
+    </div>
+}
 
-            <tr>
-                <td colspan="3">Title: @item.Title</td>
-            </tr>
-            <tr>
-                <td colspan="3">@item.Detail</td>
-            </tr>
-
-            @if (item.Status == "Disabled")
-            {
-                <tr>
-                    <td></td>
-                    <td>Status: @item.Status</td>
-                    <td>@Html.ActionLink("Enable", "EnableFeedback", new { id = item.FeedbackId })</td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td></td>
-                    <td>Status: @item.Status</td>
-                    <td>@Html.ActionLink("Disable", "DisableFeedback", new { id = item.FeedbackId })</td>
-                </tr>
-            }
-        </table>
-        <hr />
-        
-    }
-    
 

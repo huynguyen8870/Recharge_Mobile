@@ -14,13 +14,14 @@ namespace Recharge_Mobile.Areas.User.Models.Views
         public DateTime SpecialTime { get; set; }
         public decimal DebitAmount { get; set; }
         public DateTime TimeToPay { get; set; }
+        public string LinkAccount { get; set; }
 
         public CustomerRechargeModelView()
         {
 
         }
 
-        public CustomerRechargeModelView(int id, string phoneNumber, long timeRemain, DateTime regularTime, DateTime specialTime, decimal debitAmount, DateTime timeToPay)
+        public CustomerRechargeModelView(int id, string phoneNumber, long timeRemain, DateTime regularTime, DateTime specialTime, decimal debitAmount, DateTime timeToPay, string linkAccount)
         {
             Id = id;
             PhoneNumber = phoneNumber;
@@ -29,6 +30,7 @@ namespace Recharge_Mobile.Areas.User.Models.Views
             SpecialTime = specialTime;
             DebitAmount = debitAmount;
             TimeToPay = timeToPay;
+            LinkAccount = linkAccount;
         }
     }
 }

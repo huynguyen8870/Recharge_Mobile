@@ -55,7 +55,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             if (ModelState.IsValid)
             {
                 specialRechargeDAO.EditItem(vm);
-                return RedirectToAction("ViewRRList");
+                return RedirectToAction("ViewSRList");
             }
             return View(vm);
         }
@@ -64,14 +64,14 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
         {
             specialRechargeDAO = new SpecialRechargeDAO();
             specialRechargeDAO.ActivateItem(id);
-            return RedirectToAction("ViewRRList");
+            return RedirectToAction("ViewSRList");
         }
 
         public ActionResult DeactivateSR(int id)
         {
             specialRechargeDAO = new SpecialRechargeDAO();
             specialRechargeDAO.DeactivateItem(id);
-            return RedirectToAction("ViewRRList");
+            return RedirectToAction("ViewSRList");
         }
     }
 }

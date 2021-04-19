@@ -127,5 +127,41 @@ namespace Recharge_Mobile.Areas.User.Models.DAO
             Account.Password = newpassword;
             entities.SaveChanges();
         }
+
+        public CustomerRechargeModelView CheckPhonenumberInCustomerRecharge(string phonenumber)
+        {
+            entities = new RechargeMobileEntities();
+            var account = entities.CustomerRecharges.Where(d => d.PhoneNumber == phonenumber).FirstOrDefault();
+            if (account == null)
+            {
+                CustomerRechargeModelView customerRecharge = null;
+                return customerRecharge;
+            } else
+            {
+                CustomerRechargeModelView customerRecharge = new CustomerRechargeModelView()
+                {
+                    PhoneNumber = account.PhoneNumber,
+                    TimeRemain = Convert.ToInt64(account.TimeRemain),
+                    RegularTime = account.RegularTime,
+                    SpecialTime = account.SpecialTime,
+                    DebitAmount = account.DebitAmount,
+                    TimeToPay = account.TimeToPay,
+                    LinkAccount = account.LinkAccount,
+                };
+                return customerRecharge;
+            }
+        }
+
+        public void AddRechargeIntoCustomerRecharge(CustomerRechargeModelView customerRecharge)
+        {
+            entities = new RechargeMobileEntities();
+            var account = entities.CustomerRecharges.Where(d => d.PhoneNumber == customerRecharge.PhoneNumber).FirstOrDefault();
+            account.TimeRemain = customerRecharge.TimeRemain;
+            account.RegularTime = customerRecharge.RegularTime;
+            account.SpecialTime = customerRecharge.SpecialTime;
+            account.DebitAmount = customerRecharge.DebitAmount;
+            account.TimeToPay = customerRecharge.TimeToPay;
+            entities.SaveChanges();
+        }
     }
 }

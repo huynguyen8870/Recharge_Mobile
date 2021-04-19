@@ -19,6 +19,11 @@ namespace Recharge_Mobile.Controllers
             Session["phonenumber"] = phonenumber;
             return RedirectToAction("RechargeDetail", "Recharge", new { Area = "Recharge" });
         }
+        
+        public ActionResult SiteMap()
+        {
+            return View();
+        }
 
         public ActionResult About()
         {
