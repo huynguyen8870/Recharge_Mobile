@@ -1,4 +1,6 @@
-﻿using Recharge_Mobile.Areas.AdminArea.Models;
+﻿using CDStore.Models.Filters;
+using Recharge_Mobile.Areas.AdminArea.Models;
+using Recharge_Mobile.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Recharge_Mobile.Areas.AdminArea.Controllers
 {
+    [CAuthFilter(RoleName = "Admin")]
     public class AdminController : Controller
     {
         AdminDAO adminDAO;
@@ -58,7 +61,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
                     return View(vm);
                 }
                 adminDAO.CreateAdmin(vm);
-                return RedirectToAction("CreateAdmin");
+                return RedirectToAction("AdminInformation");
             }
             return View(vm);
         }
@@ -70,16 +73,21 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             return View(listResult);
         }
 
-        public ActionResult AdminInformation(int id)
+        public ActionResult AdminInformation()
         {
             adminDAO = new AdminDAO();
+            var user = Session["currentUser"] as AccountInfoVM;
+            //int id = user.id;
+            int id = 1;
             var result = adminDAO.GetAdminById(id);
             return View(result);
         }
 
-        public ActionResult EditAdmin(int id)
+        public ActionResult EditAdmin()
         {
             adminDAO = new AdminDAO();
+            var user = Session["currentUser"] as AccountInfoVM;
+            int id = user.id;
             var result = adminDAO.GetAdminEditById(id);
             return View(result);
         }
@@ -90,14 +98,16 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             if (ModelState.IsValid)
             {
                 adminDAO = new AdminDAO();
+                var user = Session["currentUser"] as AccountInfoVM;
+                int id = user.id;
                 bool checkError = false;
 
-                if (adminDAO.CheckPhoneExist(vm.AdminId, vm.PhoneNumber))
+                if (adminDAO.CheckPhoneExist(id, vm.PhoneNumber))
                 {
                     ModelState.AddModelError("PhoneExist", "This phone number has already used!");
                     checkError = true;
                 }
-                if (adminDAO.CheckEmailExist(vm.AdminId, vm.Email))
+                if (adminDAO.CheckEmailExist(id, vm.Email))
                 {
                     ModelState.AddModelError("MailExist", "This email has already used!");
                     checkError = true;
@@ -109,19 +119,31 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
                 }
 
                 adminDAO.EditAdmin(vm);
-                return RedirectToAction("ViewAdminList");
+                return RedirectToAction("AdminInformation");
             }
-            return RedirectToAction("AdminInfomation");
+            return View(vm);
         }
 
         public ActionResult ChangePassword()
         {
             return View();
         }
-
-        public JsonResult CheckCurrentPassword(int id, string password)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword(string NewPassword)
         {
             adminDAO = new AdminDAO();
+            var user = Session["currentUser"] as AccountInfoVM;
+            int id = user.id;
+            adminDAO.ChangePassword(id, NewPassword);
+            return RedirectToAction("AdminInformation");
+        }
+
+        public JsonResult CheckCurrentPassword(string password)
+        {
+            adminDAO = new AdminDAO();
+            var user = Session["currentUser"] as AccountInfoVM;
+            int id = 1;
             if (adminDAO.CheckCurrentPassword(id, password))
             {
                 return Json(1);

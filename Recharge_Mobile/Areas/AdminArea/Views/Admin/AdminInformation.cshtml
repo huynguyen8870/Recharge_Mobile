@@ -6,13 +6,64 @@
 }
 
 <div class="jumbotron">
-    <h3>Admin Infomation</h3>
+    <h3>My Infomation</h3>
     <hr /><br />
-    <label for="account-fn">Username: @Model.Username </label><br />
-    <label for="account-fn">First Name: @Model.FirstName </label><br />
-    <label for="account-fn">Last Name: @Model.LastName </label><br />
-    <label for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
-    <label for="account-fn">Email: @Model.Email </label><br />
-    <label for="account-fn">Address: @Model.Address </label><br />
-    <label for="account-fn">Role: @Model.Role </label><br />
+    <table>
+        <tr>
+            <td>
+                <label for="account-fn">Username: </label>
+            </td>
+            <td >@Model.Username</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">First Name:</label>
+            </td>
+            <td>@Model.FirstName</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">Last Name: </label>
+            </td>
+            <td>@Model.LastName</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">Phone Number: </label>
+            </td>
+            <td>@Model.PhoneNumber</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">Email: </label>
+            </td>
+            <td>@Model.Email</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">Address: </label>
+            </td>
+            <td>@Model.Address</td>
+        </tr>
+        <tr>
+            <td>
+                <label for="account-fn">Role: </label>
+            </td>
+            <td>@Model.Role</td>
+        </tr>
+        <tr>
+            <td>
+                <a href="@Url.Action("EditAdmin", "Admin" , new { Area="AdminArea" })">
+                    <input type="button" class="btn btn-primary"
+                           style="width:120px; margin-right: 20px" value="Update">
+                </a>
+            </td>
+            <td>
+                <a href="@Url.Action("ChangePassword", "Admin" , new { Area="AdminArea" })">
+                    <input type="button" class="btn btn-primary"
+                           style="width:200px; margin-right: 20px" value="Change Password">
+                </a>
+            </td>
+        </tr>
+    </table>
 </div>

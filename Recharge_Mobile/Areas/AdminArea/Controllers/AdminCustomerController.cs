@@ -1,4 +1,5 @@
-﻿using Recharge_Mobile.Areas.AdminArea.Models;
+﻿using CDStore.Models.Filters;
+using Recharge_Mobile.Areas.AdminArea.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Recharge_Mobile.Areas.AdminArea.Controllers
 {
+    [CAuthFilter(RoleName = "Admin")]
     public class AdminCustomerController : Controller
     {
         AdminCustomerDAO adminCustomerDAO;
@@ -21,6 +23,12 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             adminCustomerDAO = new AdminCustomerDAO();
             var resultList = adminCustomerDAO.GetCustomerList();
             return View(resultList);
+        }
+        public ActionResult CustomerListByPhone(string searchNumber)
+        {
+            adminCustomerDAO = new AdminCustomerDAO();
+            var resultList = adminCustomerDAO.GetCustomerListByPhone(searchNumber);
+            return View("CustomerList", resultList);
         }
 
         public ActionResult CustomerDetails(int id)

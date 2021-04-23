@@ -23,12 +23,16 @@
     <h3>Main Balance</h3>
     <hr class="mt-2 mb-3">
     <div class="row">
-        <label class="col-lg-6" for="account-fn">Customer ID: @Model.CustomerId </label><br />
+        @*<label class="col-lg-6" for="account-fn">Customer ID: @Model.CustomerId </label><br />*@
         <label class="col-lg-6" for="account-fn">Phone Number: @Model.PhoneNumber </label><br />
         <label class="col-lg-6" for="account-fn">Time Remain (Minute): @Model.TimeRemain </label><br />
         <label class="col-lg-6" for="account-fn">Regular Time: @Model.RegularTime </label><br />
         <label class="col-lg-6" for="account-fn">Special Time: @Model.SpecialTime </label><br />
-        <label class="col-lg-6" for="account-fn">Time To Pay: @Model.TimeToPay </label>
+        <label class="col-lg-6" for="account-fn">Debit Amount: $@Model.DebitAmount </label>
+        @if (Model.DebitAmount > 0)
+        {
+            <label class="col-lg-6" for="account-fn">Time To Pay: @Model.TimeToPay </label>
+        }
     </div>
 </div>
 
@@ -38,21 +42,21 @@
 {
 <table class="table table-striped">
     <tr>
-        <th>
+        @*<th>
             Transaction ID
-        </th>
+        </th>*@
         @*<th>
             PhoneNumber
         </th>*@
         <th>
             Type Recharge
         </th>
-        <th>
+        @*<th>
             RRechargeId
         </th>
         <th>
             SRechargeId
-        </th>
+        </th>*@
         <th>
             Type Packet
         </th>
@@ -76,21 +80,21 @@
     @foreach (TransactionAdminVM item in (List<TransactionAdminVM>)(ViewBag.CustomerTransactions))
     {
         <tr>
-            <td>
+            @*<td>
                 @item.TransactionId
-            </td>
+            </td>*@
             @*<td>
                 @item.PhoneNumber
             </td>*@
             <td>
                 @item.PaymentMethod
             </td>
-            <td>
+            @*<td>
                 @item.RRechargeId
             </td>
             <td>
                 @item.SRechargeId
-            </td>
+            </td>*@
             <td>
                 @item.RechargeType
             </td>
@@ -112,5 +116,8 @@
         </tr>
     }
 </table>
+
 }
+
+@Html.ActionLink("Back to customer list", "CustomerList", new {Area = "AdminArea"})
 

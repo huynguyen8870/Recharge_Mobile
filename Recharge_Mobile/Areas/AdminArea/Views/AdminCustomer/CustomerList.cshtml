@@ -11,30 +11,25 @@
         <div class="col"></div>
         <div class="col">
             <div class="float-right">
-                <form action="{{ url("product/search") }}" method="post">
-                    <div>
-                        <i class="mr-2 fe-icon-search"></i>
-                        <input type="text" class="pl-3 pr-3"
-                               style="width: 240px;" name="query"
-                               onchange='this.form.submit()'
-                               placeholder="Type product code or name">
-                    </div>
-                    <noscript><input type="submit" value="Submit"></noscript>
-                </form>
+                @using (Html.BeginForm("CustomerListByPhone", "AdminCustomer", new { area = "AdminArea" }))
+                {
+                    <input class="" type="text" id="searchNumber" name="searchNumber" placeholder="Search by phone" onchange="this.form.submit()">
+                }
             </div>
         </div>
     </div>
 </div>
 <table class="table table-hover">
     <tr>
+        <th style="display:none">id</th>
         <th>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
+            Phone Number
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            Last Name
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Email)

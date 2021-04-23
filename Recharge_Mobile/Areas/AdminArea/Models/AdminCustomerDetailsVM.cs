@@ -18,6 +18,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
         public int TimeRemain { get; set; }
         public DateTime RegularTime { get; set; }
         public DateTime SpecialTime { get; set; }
+        public decimal DebitAmount { get; set; }
         public DateTime TimeToPay { get; set; }
 
         public string FirstName { get; set; }

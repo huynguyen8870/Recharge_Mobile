@@ -27,6 +27,41 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             return list;
         }
 
+        public IList<AdminCustomerListVM> GetCustomerListByPhone(string phone)
+        {
+            entities = new RechargeMobileEntities();
+            if(phone == null)
+            {
+                var listAll = entities.Customers.Select(d => new AdminCustomerListVM()
+                {
+                    CustomerId = d.CustomerId,
+                    PhoneNumber = d.PhoneNumber,
+                    FirstName = d.FirstName,
+                    LastName = d.LastName,
+                    Email = d.Email,
+                    Address = d.Address,
+                    Busy = d.Busy,
+                    Lock = d.Lock,
+                    Status = d.Status
+                }).ToList();
+                return listAll;
+            }
+
+            var list = entities.Customers.Where(d => d.PhoneNumber.Contains(phone)).Select(d => new AdminCustomerListVM()
+            {
+                CustomerId = d.CustomerId,
+                PhoneNumber = d.PhoneNumber,
+                FirstName = d.FirstName,
+                LastName = d.LastName,
+                Email = d.Email,
+                Address = d.Address,
+                Busy = d.Busy,
+                Lock = d.Lock,
+                Status = d.Status
+            }).ToList();
+            return list;
+        }
+
         public Tuple<AdminCustomerDetailsVM, List<TransactionAdminVM>> GetCustomerDetails(int id)
         {
             entities = new RechargeMobileEntities();
@@ -47,6 +82,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             customerDetaits.TimeRemain = Decimal.ToInt32(customerRecharge.TimeRemain / 60);
             customerDetaits.RegularTime = customerDetaits.RegularTime;
             customerDetaits.SpecialTime = customerRecharge.SpecialTime;
+            customerDetaits.DebitAmount = customerRecharge.DebitAmount;
             customerDetaits.TimeToPay = customerRecharge.TimeToPay;
 
             List<TransactionAdminVM> list = new List<TransactionAdminVM>();

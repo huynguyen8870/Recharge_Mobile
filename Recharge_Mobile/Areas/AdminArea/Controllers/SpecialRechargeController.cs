@@ -1,4 +1,5 @@
-﻿using Recharge_Mobile.Areas.RechargeArea.Models;
+﻿using CDStore.Models.Filters;
+using Recharge_Mobile.Areas.RechargeArea.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace Recharge_Mobile.Areas.AdminArea.Controllers
 {
+    [CAuthFilter(RoleName = "Admin")]
     public class SpecialRechargeController : Controller
     {
         SpecialRechargeDAO specialRechargeDAO;
@@ -29,7 +31,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
             {
                 specialRechargeDAO = new SpecialRechargeDAO();
                 specialRechargeDAO.CreateItem(vm);
-                return RedirectToAction("CreateSpecialRecharge");
+                return RedirectToAction("ViewSRList");
             }
             return View(vm);
         }
