@@ -59,25 +59,7 @@
                             <div class="collapse" id="paypal" data-parent="#accordion" role="tabpanel">
                                 <div class="card-body px-0">
                                     <p><strong>PayPal</strong> - the safer, easier way to pay</p>
-                                    @using (Html.BeginForm("PaypalPayment", "Recharge", FormMethod.Post, new { @class = "row" }))
-                                    {
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="email" placeholder="E-mail" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <input class="form-control" type="password" placeholder="Password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="d-flex flex-wrap justify-content-between align-items-center">
-                                                <a class="navi-link" href="#">Forgot password?</a>
-                                                <button class="btn btn-primary btn-sm" type="submit">Log In</button>
-                                            </div>
-                                        </div>
-                                    }
+                                    <a href="@Url.Action("PaymentWithPaypal", "PayPal", new { Area = "Recharge" })" class="btn btn-primary my-2 form-control">Login</a>
                                 </div>
                             </div>
                         </div>
@@ -112,8 +94,6 @@
                     <div>Tax:</div>
                     <div class="font-weight-medium">$0</div>
                 </div>
-                <input class="text" name="rrid" value="@ViewBag.RRID" />
-                <input class="text" name="srid" value="@ViewBag.SRID" />
                 <hr>
                 <div class="pt-3 text-right text-lg font-weight-medium">$@Model.Price</div>
             </div>
