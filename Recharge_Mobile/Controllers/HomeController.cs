@@ -76,22 +76,44 @@ namespace Recharge_Mobile.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult PostBillPayment(string phone)
+        public ActionResult PostBillPayment(string phonenumber)
         {
             rechargeDAO = new RechargeDAO();
-            var result = rechargeDAO.GetListPostPaymentByPhone(phone);
-            var resultList = result.Item1;
-            ViewBag.TotalAmount = result.Item2;
+            var result = rechargeDAO.GetListPostPaymentByPhone(phonenumber);
+            var resultList = result.Item1.ToList();
+            TempData["TotalAmount"] = result.Item2;
+            TempData["phonenumber"] = phonenumber;
             return View(resultList);
         }
 
+
         public ActionResult PostBillTransaction()
         {
-            //paypal
+            TempData["PackageName"] = "";
+            TempData["Price"] = TempData["TotalAmount"];
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CardTransaction(string number, string name, string expire, string cvc)
+        {
             rechargeDAO = new RechargeDAO();
-            // lay sessin phone customer
-            rechargeDAO.PostBillTransactionOnSuccess("123");
-            return RedirectToAction("");
+            string phonenumber = TempData["phonenumber"].ToString();
+            rechargeDAO.PostBillTransactionOnSuccess(phonenumber);
+            return View("TransactionSuccess");
+        }
+
+        public ActionResult PaypalTransaction()
+        {
+            rechargeDAO = new RechargeDAO();
+            string phonenumber = TempData["phonenumber"].ToString();
+            rechargeDAO.PostBillTransactionOnSuccess(phonenumber);
+            return View("TransactionSuccess");
+        }
+
+        public ActionResult TransactionSuccess()
+        {
+            return View();
         }
     }
 }

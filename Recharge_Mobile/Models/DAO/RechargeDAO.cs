@@ -88,7 +88,8 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
                 SRechargeId = transaction.SRechargeId,
                 DateTime = transaction.DateTime,
                 Status = transaction.Status,
-                Amount = transaction.Amount
+                Amount = transaction.Amount,
+                PaypalId = transaction.PaypalID
             };
             entities.Transactions.Add(transactionEntity);
             entities.SaveChanges();

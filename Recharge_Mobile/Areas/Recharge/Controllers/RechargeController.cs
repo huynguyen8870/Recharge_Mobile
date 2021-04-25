@@ -8,6 +8,13 @@ using System.Web;
 using System.Web.Mvc;
 using Recharge_Mobile.Areas.Recharge.Models.DAO;
 using Recharge_Mobile.Areas.User.Models.DAO;
+using System.Data;
+using System.IO;
+using System.Text;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+using System.Web.UI;
 
 namespace Recharge_Mobile.Areas.Recharge.Controllers
 {
@@ -137,15 +144,15 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
             string type = TempData["rechargeType"].ToString();
             int rechargeId = Convert.ToInt32(TempData["rechargeId"].ToString());
             decimal amount = decimal.Parse(TempData["Price"].ToString());
-            var accountNumber = ((CustomerRechargeModelView)Session["accountInfo"]).PhoneNumber ?? null;
+            string paypalID = TempData["paymentID"].ToString();
             string phonenumber;
-            if(accountNumber == null)
+
+            if( Session["accountInfo"] == null)
             {
                 phonenumber = Session["phonenumber"].ToString();
-
             } else
             {
-                phonenumber = accountNumber ;
+                phonenumber = ((CustomerRechargeModelView)Session["accountInfo"]).PhoneNumber;
             }
 
             if (type.Equals("regular"))
@@ -158,7 +165,8 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
                     SRechargeId = -1,
                     DateTime = DateTime.Now,
                     Status = "Success",
-                    Amount = amount
+                    Amount = amount,
+                    PaypalID = paypalID
                 };
 
                 Session["transactionInfo"] = transaction;
@@ -173,7 +181,8 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
                     SRechargeId = rechargeId,
                     DateTime = DateTime.Now,
                     Status = "Success",
-                    Amount = amount
+                    Amount = amount,
+                    PaypalID = paypalID
                 };
                 Session["transactionInfo"] = transaction;
             }
@@ -246,5 +255,84 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
             return RedirectToAction("AccountDebit", "User", new { Area = "User" });
         }
 
+        public void GenerateInvoicePDF()
+        {
+            //Dummy data for Invoice (Bill).
+            string companyName = "RechargeX";
+            int orderNo = 2303;
+            string packagename;
+            //Get Transaction Information
+            TransactionModelView transaction = Session["transactionInfo"] as TransactionModelView;
+            RechargeDAO rechargeDAO = new RechargeDAO();
+            if (transaction.RRechargeId >0)
+            {
+                var rechargeInfor = rechargeDAO.RRechargeById(transaction.RRechargeId ?? 0);
+                packagename = rechargeInfor.RRName;
+            } else
+            {
+                var rechargeInfor = rechargeDAO.SRechargeById(transaction.SRechargeId ?? 0);
+                packagename = rechargeInfor.SRName;
+
+            }
+            using (StringWriter sw = new StringWriter())
+            {
+                using (HtmlTextWriter hw = new HtmlTextWriter(sw))
+                {
+                    StringBuilder sb = new StringBuilder();
+
+                    //Generate Invoice (Bill) Header.
+                    sb.Append("<table width='100%' cellspacing='0' cellpadding='2'>");
+                    sb.Append("<tr><td align='center' style='background-color: #18B5F0' colspan = '2'><b>Invoice</b></td></tr>");
+                    sb.Append("<tr><td colspan = '2'></td></tr>");
+                    sb.Append("<tr><td><b>Phone number: </b>");
+                    sb.Append(transaction.PhoneNumber);
+                    sb.Append("</td><td align = 'right'><b>Date: </b>");
+                    sb.Append(DateTime.Now);
+                    sb.Append(" </td></tr>");
+                    sb.Append("<tr><td><b>Company Name: </b>");
+                    sb.Append(companyName);
+                    sb.Append("</td><td align = 'right'><b>Payment Method: </b>");
+                    sb.Append(transaction.PaymentMethod);
+                    sb.Append("</td></tr>");
+                    sb.Append("</table>");
+                    sb.Append("<br />");
+
+                    //Generate Invoice (Bill) Items Grid.
+                    sb.Append("<table border = '1'>");
+                    sb.Append("<tr><td><b>Recharge Name</b></td>");
+                    sb.Append("<td><b>Quantity</b></td>");
+                    sb.Append("<td><b>Price</b></td></tr>");
+                    sb.Append("<tr>");
+                    sb.Append("<td>");
+                    sb.Append(packagename);
+                    sb.Append("</td>");
+                    sb.Append("<td>");
+                    sb.Append(1);
+                    sb.Append("</td>");
+                    sb.Append("<td>");
+                    sb.Append(transaction.Amount);
+                    sb.Append("</td>");
+                    sb.Append("<tr><td align = 'right' colspan = '2'> Total </td> ");
+                    sb.Append("<td align = 'right'>");
+                    sb.Append(transaction.Amount);
+                    sb.Append("</td>");
+                    sb.Append("</tr></table>");
+
+                    //Export HTML String as PDF.
+                    StringReader sr = new StringReader(sb.ToString());
+                    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 0f);
+                    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+                    pdfDoc.Open();
+                    htmlparser.Parse(sr);
+                    pdfDoc.Close();
+                    Response.ContentType = "application/pdf";
+                    Response.AddHeader("content-disposition", "attachment;filename=Invoice_" + orderNo + ".pdf");
+                    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    Response.Write(pdfDoc);
+                    Response.End();
+                }
+            }
+        }
     }
 }

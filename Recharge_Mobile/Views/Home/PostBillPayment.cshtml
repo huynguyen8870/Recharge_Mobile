@@ -1,8 +1,64 @@
-﻿
+﻿@model IEnumerable<Recharge_Mobile.Models.Views.PostPaymentModelView>
 @{
     ViewBag.Title = "PostBillPayment";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>PostBillPayment</h2>
+<section class="container my-5">
+    <div class="bg-secondary px-3 py-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 pt-3 text-center">
+                <h2 class="h3 block-title mb-3">Recharge Mobile </h2>
+                <p class="text-muted">Mobile recharge: send credit, data and paid bill to any phone</p>
+                @using (Html.BeginForm())
+                {
+                    <input type="text" class="form-control" name="phonenumber" placeholder="Enter your phone number" /> <br />
+                    <button type="submit" class="btn btn-gradient ml-3 d-none d-xl-inline-block">Check Post Bill</button>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="px-3 py-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-12 wizard">
+                <h3 class="text-left">Post Bill Payment</h3>
+                <div style="height: 400px;overflow: scroll;">
+                    <table class="table table-hover" id="RRecharge">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><a class="navi-link" href="#order-details" data-toggle="modal">@item.TransactionId</a></td>
+                                        <td>@item.DateTime</td>
+                                        <td>$@item.Amount</td>
+                                        <td><span class="badge badge-danger m-0">@item.Status</span></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="wizard-footer d-flex justify-content-between">
+                    <h6 class="d-none d-sm-inline-block">Total: $@ViewBag.TotalAmount</h6>
+                    <a class="btn btn-primary my-2" href="@Url.Action("PostBillTransaction", "Home", new { Area = "" })">
+                        <span class="d-none d-sm-inline-block">Pay All</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

@@ -46,11 +46,16 @@
                     </div>
                 </div>
                 <div class="wizard-footer d-flex justify-content-between">
-                <a class="btn btn-secondary my-2" href="@Url.Action("CheckoutPayment","Recharge", new { Area = "Recharge" })">
-                    <i class="fe-icon-arrow-left"></i>
-                    <span class="d-none d-sm-inline-block">Back</span>
-                </a>
-                <a class="btn btn-primary my-2" href="@Url.Action("CheckoutComplete","Recharge", new { Area = "Recharge" })">Complete Order</a></div>
+                    <a class="btn btn-secondary my-2" href="@Url.Action("CheckoutPayment","Recharge", new { Area = "Recharge" })">
+                        <i class="fe-icon-arrow-left"></i>
+                        <span class="d-none d-sm-inline-block">Back</span>
+                    </a>
+                    <a class="btn btn-info my-2" href="@Url.Action("GenerateInvoicePDF","Recharge", new { Area = "Recharge" })" runat="server">
+                        <i class="fe-icon-download"></i>
+                        <span class="d-none d-sm-inline-block">Invoice</span>
+                    </a>
+                    <a class="btn btn-primary my-2" href="@Url.Action("CheckoutComplete","Recharge", new { Area = "Recharge" })">Complete Order</a>
+                </div>
             </div>
         </div>
     </div>
