@@ -13,7 +13,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="~/Content/icon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="~/Content/icon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="~/Content/icon/favicon-16x16.png">
-    <link rel="manifest" href="~/Content/site.webmanifest">
     <link rel="mask-icon" color="#343b43" href="safari-pinned-tab.svg">
     <meta name="msapplication-TileColor" content="#603cba">
     <meta name="theme-color" content="#ffffff">
@@ -50,7 +49,7 @@
     <!-- Backdrop-->
     <!--<div class="site-backdrop"></div>-->
 
-    @BundleManifest.BundleManifestPath.Contains("~/Content/site.webmanifest")
+    @*@BundleManifest.BundleManifestPath.Contains("/Recharge_Mobile/Content/site.webmanifest")*@
     @Scripts.Render("~/Content/js/vendor.min.js")
     @Scripts.Render("~/Content/js/theme.min.js")
     @Scripts.Render("~/Content/js/card.min.js")

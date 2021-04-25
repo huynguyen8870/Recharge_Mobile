@@ -30,17 +30,28 @@
             </form>
             <!-- Main Menu-->
             <ul class="navbar-nav d-none d-block">
-                <!-- Home-->
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("")"><span class="fa fa-home"></span> Home</a>
+                <!-- Admin-->
+                <li class="nav-item dropdown-toggle">
+                    <a class="nav-link" href="#"><span class="fa fa-align-left"></span> Admin</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Create Admin", "CreateAdmin", "Admin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Admin Information", "AdminInformation", "Admin")
+                        </li>
+                        <li class="dropdown-item">
+                            @Html.ActionLink("Admin List", "ViewAdminList", "Admin")
+                        </li>
+                    </ul>
                 </li>
                 <!-- Transaction-->
                 <li class="nav-item dropdown-toggle">
-                    <a class="nav-link" href="@Url.Action("TransactionList","TransactionAdmin")"><span class="fa fa-align-left"></span> Transaction</a>
+                    <a class="nav-link" href="#"><span class="fa fa-align-left"></span> Transaction</a>
                     <ul class="dropdown-menu">
                         @*<li class="dropdown-item">
-                            @Html.ActionLink("View Transaction", "TransactionList", "TransactionAdmin")
-                        </li>*@
+                    @Html.ActionLink("View Transaction", "TransactionList", "TransactionAdmin")
+                </li>*@
                         <li class="dropdown-item">
                             @Html.ActionLink("Daily Report", "TransactionListByDate", "TransactionAdmin")
                         </li>
@@ -64,24 +75,6 @@
                 <!--Customer-->
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("CustomerList","AdminCustomer")"><span class="fa fa-calendar-plus-o"></span> Customer</a>
-                </li>
-                <!-- Admin-->
-                <li class="nav-item dropdown-toggle">
-                    <a class="nav-link" href="#"><span class="fa fa-align-left"></span> Admin</a>
-                    <ul class="dropdown-menu">
-                        <li class="dropdown-item">
-                            @Html.ActionLink("Create Admin", "CreateAdmin", "Admin")
-                        </li>
-                        <li class="dropdown-item">
-                            @Html.ActionLink("Admin Information", "AdminInformation", "Admin")
-                        </li>
-                        <li class="dropdown-item">
-                            @Html.ActionLink("Admin List", "ViewAdminList", "Admin")
-                        </li>
-                        <li class="dropdown-item">
-                            @Html.ActionLink("Change Password", "ChangePassword", "Admin")
-                        </li>
-                    </ul>
                 </li>
                 <!-- User-->
                 <li class="nav-item">

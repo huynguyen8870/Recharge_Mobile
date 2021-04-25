@@ -1,4 +1,5 @@
-﻿using Recharge_Mobile.Areas.User.Models.Views;
+﻿using Recharge_Mobile.Areas.Recharge.Models.DAO;
+using Recharge_Mobile.Areas.User.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Recharge_Mobile.Controllers
 {
     public class HomeController : Controller
     {
+        RechargeDAO rechargeDAO;
         public ActionResult Index()
         {
             return View();
@@ -20,6 +22,8 @@ namespace Recharge_Mobile.Controllers
             return RedirectToAction("RechargeDetail", "Recharge", new { Area = "Recharge" });
         }
         
+        
+
         public ActionResult SiteMap()
         {
             return View();
@@ -65,6 +69,29 @@ namespace Recharge_Mobile.Controllers
         public ActionResult FeedbackSuccess()
         {
             return View();
+        }
+
+        public ActionResult PostBillPayment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult PostBillPayment(string phone)
+        {
+            rechargeDAO = new RechargeDAO();
+            var result = rechargeDAO.GetListPostPaymentByPhone(phone);
+            var resultList = result.Item1;
+            ViewBag.TotalAmount = result.Item2;
+            return View(resultList);
+        }
+
+        public ActionResult PostBillTransaction()
+        {
+            //paypal
+            rechargeDAO = new RechargeDAO();
+            // lay sessin phone customer
+            rechargeDAO.PostBillTransactionOnSuccess("123");
+            return RedirectToAction("");
         }
     }
 }
