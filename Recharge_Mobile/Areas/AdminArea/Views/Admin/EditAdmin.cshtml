@@ -65,7 +65,9 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    <a href="@Url.Action("AdminInformation", "Admin" , new { Area="AdminArea" })">
+        Back to my Information
+    </a>
 </div>
 
 @section Scripts {

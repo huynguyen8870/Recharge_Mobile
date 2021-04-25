@@ -35,19 +35,10 @@
 <table class="table table-hover">
     <tr>
         <th>
-            Transaction ID
-        </th>
-        <th>
             Phonenumer
         </th>
         <th>
             Payment Method
-        </th>
-        <th>
-            Regular Recharge
-        </th>
-        <th>
-            Special Recharge
         </th>
         <th>
             Recharge Type
@@ -74,19 +65,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TransactionId)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PaymentMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RRechargeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SRechargeId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RechargeType)

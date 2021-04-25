@@ -77,8 +77,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
         {
             adminDAO = new AdminDAO();
             var user = Session["currentUser"] as AccountInfoVM;
-            //int id = user.id;
-            int id = 1;
+            int id = user.id;
             var result = adminDAO.GetAdminById(id);
             return View(result);
         }
@@ -118,7 +117,7 @@ namespace Recharge_Mobile.Areas.AdminArea.Controllers
                     return View(vm);
                 }
 
-                adminDAO.EditAdmin(vm);
+                adminDAO.EditAdmin(vm, id);
                 return RedirectToAction("AdminInformation");
             }
             return View(vm);

@@ -25,21 +25,20 @@
             Total Time (minutes)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            Price
         </th>
         <th>
             Duration (days)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Status)
+            Status
         </th>
         <th>
             Actions
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -57,7 +56,7 @@
             @Html.DisplayFor(modelItem => item.TotalTimeMinute)
         </td>
         <td>
-            $ @Html.DisplayFor(modelItem => item.Price)
+            $@Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DurationDay)
@@ -70,8 +69,14 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "EditRR", new { id = item.RRechargeId }) |
-            @Html.ActionLink("Activate", "ActivateRR", new { id = item.RRechargeId }) |
-            @Html.ActionLink("Deactive", "DeactivateRR", new { id = item.RRechargeId })
+            @if (item.Status == "Active")
+            {
+                @Html.ActionLink("Deactive", "DeactivateRR", new { id = item.RRechargeId })
+            }
+            else
+            {
+                @Html.ActionLink("Activate", "ActivateRR", new { id = item.RRechargeId })
+            }
         </td>
     </tr>
 }

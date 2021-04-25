@@ -46,7 +46,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Status)
         </th>
-        <th></th>
+        <th>Actions</th>
     </tr>
 
     @foreach (var item in Model)
@@ -81,8 +81,14 @@
             </td>
             <td>
                 @Html.ActionLink("Details", "CustomerDetails", new { id = item.CustomerId }) |
-                @Html.ActionLink("Activate", "ActivateCustomer", new { id = item.CustomerId }) |
-                @Html.ActionLink("Deactivate", "DeactivateCustomer", new { id = item.CustomerId })
+                @if (item.Status == "Active")
+                {
+                    @Html.ActionLink("Deactivate", "DeactivateCustomer", new { id = item.CustomerId })
+                }
+                else
+                {
+                    @Html.ActionLink("Activate", "ActivateCustomer", new { id = item.CustomerId })
+                }
             </td>
         </tr>
     }

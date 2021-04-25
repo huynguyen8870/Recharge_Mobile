@@ -33,19 +33,19 @@
                 <select class="custom-select form-control mb-2 mr-sm-2" name="RechargeType" id="RechargeType">
                     @if (Model.RechargeType == "None")
                     {
-                        <option value="None" selected>--Select--</option>
+                        <option value="None" selected>--All--</option>
                         <option value="Regular">Regular</option>
                         <option value="Special">Special</option>
                     }
                     else if (Model.RechargeType == "Regular")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Regular" selected>Regular</option>
                         <option value="Special">Special</option>
                     }
                     else if (Model.RechargeType == "Special")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Regular">Regular</option>
                         <option value="Special" selected>Special</option>
                     }
@@ -56,19 +56,19 @@
                 <select class="custom-select form-control mb-2 mr-sm-2" name="PaymentMethod" id="PaymentMethod">
                     @if (Model.PaymentMethod == "None")
                     {
-                        <option value="None" selected>--Select--</option>
+                        <option value="None" selected>--All--</option>
                         <option value="Paypal">Paypal</option>
                         <option value="Debit">Debit</option>
                     }
                     else if (Model.PaymentMethod == "Paypal")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Paypal" selected>Paypal</option>
                         <option value="Debit">Debit</option>
                     }
                     else if (Model.PaymentMethod == "Debit")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Paypal">Paypal</option>
                         <option value="Debit" selected>Debit</option>
                     }
@@ -79,19 +79,19 @@
                 <select class="custom-select form-control mb-2 mr-sm-2" name="Status" id="Status">
                     @if (Model.Status == "None")
                     {
-                        <option value="None" selected>--Select--</option>
+                        <option value="None" selected>--All--</option>
                         <option value="Paid">Paid</option>
                         <option value="Unpaid">Unpaid</option>
                     }
                     else if (Model.Status == "Paid")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Paid" selected>Paid</option>
                         <option value="Unpaid">Unpaid</option>
                     }
                     else if (Model.Status == "Unpaid")
                     {
-                        <option value="None">--Select--</option>
+                        <option value="None">--All--</option>
                         <option value="Paid">Paid</option>
                         <option value="Unpaid" selected>Unpaid</option>
                     }
@@ -112,19 +112,10 @@
             <table class="table table-hover">
                 <tr>
                     <th>
-                        Transaction Id
-                    </th>
-                    <th>
                         Phone Number
                     </th>
                     <th>
                         Type Recharge
-                    </th>
-                    <th>
-                        RRechargeId
-                    </th>
-                    <th>
-                        SRechargeId
                     </th>
                     <th>
                         Type Packet
@@ -150,19 +141,10 @@
                 {
                     <tr>
                         <td>
-                            @item.TransactionId
-                        </td>
-                        <td>
                             @item.PhoneNumber
                         </td>
                         <td>
                             @item.PaymentMethod
-                        </td>
-                        <td>
-                            @item.RRechargeId
-                        </td>
-                        <td>
-                            @item.SRechargeId
                         </td>
                         <td>
                             @item.RechargeType

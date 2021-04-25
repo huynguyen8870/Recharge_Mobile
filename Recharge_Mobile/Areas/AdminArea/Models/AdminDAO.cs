@@ -80,10 +80,10 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             return item;
         }
 
-        public void EditAdmin(AdminEditVM vm)
+        public void EditAdmin(AdminEditVM vm, int id)
         {
             entities = new RechargeMobileEntities();
-            Admin item = entities.Admins.Where(d => d.AdminId == vm.AdminId).FirstOrDefault();
+            Admin item = entities.Admins.Where(d => d.AdminId == id).FirstOrDefault();
             item.FirstName = vm.FirstName;
             item.LastName = vm.LastName;
             item.PhoneNumber = vm.PhoneNumber;
