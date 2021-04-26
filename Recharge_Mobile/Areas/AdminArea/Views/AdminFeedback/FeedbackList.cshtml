@@ -17,7 +17,7 @@
                 <div class="testimonial-footer">
                     <div class="d-table-cell align-middle pl-2">
                         <div class="blockquote-footer">
-                            @if (item.CustomerId == null)
+                            @if (item.CustomerId == null || item.CustomerId <= 0)
                             {
                                 <cite>@item.GuestName - @item.GuestPhone - <a href="mailto:@item.GuestEmail?subject=RechargeX%20customer%20service">@item.GuestEmail</a></cite>
                             }

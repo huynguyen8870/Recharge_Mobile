@@ -57,18 +57,28 @@
                     @if (Model.PaymentMethod == "None")
                     {
                         <option value="None" selected>--All--</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Paypal">Paypal</option>
+                        <option value="Debit">Debit</option>
+                    }
+                    else if (Model.PaymentMethod == "Credit Card")
+                    {
+                        <option value="None">--All--</option>
+                        <option value="Credit Card" selected>Credit Card</option>
                         <option value="Paypal">Paypal</option>
                         <option value="Debit">Debit</option>
                     }
                     else if (Model.PaymentMethod == "Paypal")
                     {
                         <option value="None">--All--</option>
+                        <option value="Credit Card">Credit Card</option>
                         <option value="Paypal" selected>Paypal</option>
                         <option value="Debit">Debit</option>
                     }
                     else if (Model.PaymentMethod == "Debit")
                     {
                         <option value="None">--All--</option>
+                        <option value="Credit Card">Credit Card</option>
                         <option value="Paypal">Paypal</option>
                         <option value="Debit" selected>Debit</option>
                     }

@@ -29,7 +29,7 @@ namespace CDStore.Models.Filters
                 filterContext.Result = new RedirectToRouteResult(
                new RouteValueDictionary
                {
-                    { "controller", "Home" },
+                    { "controller", "Account" },
                     { "action", "Login" },
                     { "area", ""}
                });
@@ -53,7 +53,7 @@ namespace CDStore.Models.Filters
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                     {
-                        { "controller", "Home" },
+                        { "controller", "Account" },
                         { "action", "Logout" },
                         { "area", ""}
                     });
@@ -70,8 +70,8 @@ namespace CDStore.Models.Filters
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary
                         {
                             { "controller", "Admin" },
-                            { "action", "Index" },
-                            { "area", ""}
+                            { "action", "AdminInformation" },
+                            { "area", "AdminArea"}
                         });
                     return;
                 }
