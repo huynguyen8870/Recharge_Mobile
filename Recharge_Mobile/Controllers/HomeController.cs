@@ -1,4 +1,5 @@
-﻿using Recharge_Mobile.Areas.User.Models.Views;
+﻿using Recharge_Mobile.Areas.Recharge.Models.DAO;
+using Recharge_Mobile.Areas.User.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Recharge_Mobile.Controllers
 {
     public class HomeController : Controller
     {
+        RechargeDAO rechargeDAO;
         public ActionResult Index()
         {
             return View();
@@ -20,6 +22,8 @@ namespace Recharge_Mobile.Controllers
             return RedirectToAction("RechargeDetail", "Recharge", new { Area = "Recharge" });
         }
         
+        
+
         public ActionResult SiteMap()
         {
             return View();
@@ -63,6 +67,51 @@ namespace Recharge_Mobile.Controllers
         }
 
         public ActionResult FeedbackSuccess()
+        {
+            return View();
+        }
+
+        public ActionResult PostBillPayment()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult PostBillPayment(string phonenumber)
+        {
+            rechargeDAO = new RechargeDAO();
+            var result = rechargeDAO.GetListPostPaymentByPhone(phonenumber);
+            var resultList = result.Item1.ToList();
+            TempData["TotalAmount"] = result.Item2;
+            TempData["phonenumber"] = phonenumber;
+            return View(resultList);
+        }
+
+
+        public ActionResult PostBillTransaction()
+        {
+            TempData["PackageName"] = "";
+            TempData["Price"] = TempData["TotalAmount"];
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CardTransaction(string number, string name, string expire, string cvc)
+        {
+            rechargeDAO = new RechargeDAO();
+            string phonenumber = TempData["phonenumber"].ToString();
+            rechargeDAO.PostBillTransactionOnSuccess(phonenumber);
+            return View("TransactionSuccess");
+        }
+
+        public ActionResult PaypalTransaction()
+        {
+            rechargeDAO = new RechargeDAO();
+            string phonenumber = TempData["phonenumber"].ToString();
+            rechargeDAO.PostBillTransactionOnSuccess(phonenumber);
+            return View("TransactionSuccess");
+        }
+
+        public ActionResult TransactionSuccess()
         {
             return View();
         }

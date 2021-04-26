@@ -1,6 +1,7 @@
 ﻿using Recharge_Mobile.Areas.User.Models.DAO;
 using Recharge_Mobile.Areas.User.Models.Views;
 using Recharge_Mobile.Models.Entities;
+using Recharge_Mobile.Models.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -87,7 +88,8 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
                 SRechargeId = transaction.SRechargeId,
                 DateTime = transaction.DateTime,
                 Status = transaction.Status,
-                Amount = transaction.Amount
+                Amount = transaction.Amount,
+                PaypalId = transaction.PaypalID
             };
             entities.Transactions.Add(transactionEntity);
             entities.SaveChanges();
@@ -234,6 +236,42 @@ namespace Recharge_Mobile.Areas.Recharge.Models.DAO
             customerRecharge.DebitAmount = customerRecharge.DebitAmount - transaction.Amount;
 
             entities.SaveChanges();
+        }
+
+        public Tuple<List<PostPaymentModelView>, decimal>  GetListPostPaymentByPhone(string phone)
+        {
+            entities = new RechargeMobileEntities();
+            var list = entities.Transactions.Where(d => d.PhoneNumber == phone && d.Status == "Unpaid").Select(d => new PostPaymentModelView()
+            {
+                TransactionId = d.TransactionId,
+                DateTime = d.DateTime,
+                Amount = d.Amount,
+                Status = d.Status
+            }).ToList();
+            decimal totalAmount = 0;
+            foreach(PostPaymentModelView item in list)
+            {
+                totalAmount += item.Amount;
+            }
+            return Tuple.Create(list, totalAmount);
+        }
+
+        public void PostBillTransactionOnSuccess(string phone)
+        {
+            entities = new RechargeMobileEntities();
+            var listUnpaid = entities.Transactions.Where(d => d.PhoneNumber == phone && d.Status == "Unpaid").ToList();
+            foreach(Transaction item in listUnpaid)
+            {
+                item.Status = "Paid";
+                DebitTransaction debit = new DebitTransaction()
+                {
+                    TransactionId = item.TransactionId,
+                    DateTime = DateTime.Now,
+                    //add payId
+                };
+                entities.SaveChanges();
+            }
+            
         }
     }
 }

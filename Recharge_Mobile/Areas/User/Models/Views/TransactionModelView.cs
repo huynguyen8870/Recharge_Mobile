@@ -17,13 +17,14 @@ namespace Recharge_Mobile.Areas.User.Models.Views
         public DateTime DateTime { get; set; }
         public string Status { get; set; }
         public decimal Amount { get; set; }
+        public string PaypalID { get; set; }
 
         public TransactionModelView()
         {
 
         }
 
-        public TransactionModelView(int transactionId, string phoneNumber, string paymentMethod, int? rRechargeId, int? sRechargeId, string rechargeName, decimal price, DateTime dateTime, string status, decimal amount)
+        public TransactionModelView(int transactionId, string phoneNumber, string paymentMethod, int? rRechargeId, int? sRechargeId, string rechargeName, decimal price, DateTime dateTime, string status, decimal amount, string paypalID)
         {
             TransactionId = transactionId;
             PhoneNumber = phoneNumber;
@@ -35,6 +36,7 @@ namespace Recharge_Mobile.Areas.User.Models.Views
             DateTime = dateTime;
             Status = status;
             Amount = amount;
+            PaypalID = paypalID;
         }
     }
 }

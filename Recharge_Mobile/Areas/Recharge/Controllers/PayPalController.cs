@@ -58,6 +58,7 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
         {
             var paymentExecute = new PaymentExecution() { payer_id = payerID };
             this.payment = new Payment() { id = paymentID };
+            TempData["paymentID"] = paymentID;
             return this.payment.Execute(apiContext, paymentExecute);
         }
         //create method
@@ -103,8 +104,8 @@ namespace Recharge_Mobile.Areas.Recharge.Controllers
                 return View("Failure");
             }
             return RedirectToAction("CheckoutPaypal", "Recharge", new { Area = "Recharge" });
+            //return RedirectToAction("Success", "PayPal", new { Area = "Recharge" });
         }
-
         
     }
 }
