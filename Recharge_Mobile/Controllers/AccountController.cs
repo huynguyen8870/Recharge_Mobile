@@ -101,7 +101,7 @@ namespace Recharge_Mobile.Controllers
                     Role = "Admin"
                 };
                 Session["currentUser"] = currentUser;
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("AdminInformation", "Admin", new { Area = "AdminArea" });
             }
         }
 

@@ -13,13 +13,13 @@
 <table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SRName)
+            Package Name
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DurationDay)
+            Duration (days)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
@@ -48,9 +48,15 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "EditSR", new { id=item.SRechargeId }) |
-            @Html.ActionLink("Activate", "ActivateSR", new { id = item.SRechargeId }) |
-            @Html.ActionLink("Deactivate", "DeactivateSR", new { id = item.SRechargeId })
+            @Html.ActionLink("Edit", "EditSR", new { id = item.SRechargeId }) |
+            @if (item.Status == "Active")
+            {
+                @Html.ActionLink("Deactivate", "DeactivateSR", new { id = item.SRechargeId })
+            }
+            else
+            {
+                @Html.ActionLink("Activate", "ActivateSR", new { id = item.SRechargeId })
+            }
         </td>
     </tr>
 }
