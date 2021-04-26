@@ -159,7 +159,11 @@ namespace Recharge_Mobile.Areas.AdminArea.Models
             }
 
             List<Transaction> listTransByTimeTypePayment = new List<Transaction>();
-            if (vm.PaymentMethod == "Paypal")
+            if (vm.PaymentMethod == "Credit Card")
+            {
+                listTransByTimeTypePayment = listTransByTimeType.Where(d => d.PaymentMethod == "Credit Card").ToList();
+            }
+            else if (vm.PaymentMethod == "Paypal")
             {
                 listTransByTimeTypePayment = listTransByTimeType.Where(d => d.PaymentMethod == "Paypal").ToList();
             }
